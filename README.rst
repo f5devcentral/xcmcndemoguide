@@ -236,8 +236,6 @@ Module 3: Back-end Service via Sites/Global Network (Layer 3) in Cloud C
 
 In this module we will connect back-end service via Sites/Global Network (Layer 3) in Cloud C - Azure VNET2 (or AWS VPC2), and activate Transactions Module for the app. 
 
-Service Mesh concept (TBD?)
-
 .. figure:: assets/layer-3.png
 
 First, we will create and configure Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
