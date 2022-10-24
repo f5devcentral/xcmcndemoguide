@@ -242,11 +242,17 @@ As soon as the DNS is updated, we can go to our website and see that a new modul
 Module 3: Back-end Service via Sites/Global Network (Layer 3) in Cloud C
 ************************************************************************
 
-In this module we will connect back-end service via Sites/Global Network (Layer 3) in Cloud C - Azure VNET2 (or AWS VPC2), and activate Transactions Module for the app. 
+In this module we will connect the Arcadia Core app (back-end service) to another apps service: The Transaction Module. We will use a different approach from the previous module, by using the Layer 3 connectivity via F5 Distributed Cloud Multi-Cloud Networking via Sites/Global Network.
+
+But first, we need to configure our last cloud provider (Cloud C) by following the `Terraform instructions <./terraform/cloud-c>`_. 
+
+If you have previously used AWS for Cloud A and Azure for Cloud B, we recommend that you choose Azure for Cloud C (the scripts will create another Resource Group / VNET in Azure). If you have access to just one provider, continue with the scripts for that provider and a different VPC or Resource Group / VNET will be created. 
+
+At the end of this module, we will have the following architecture for our app services:
 
 .. figure:: assets/layer-3.png
 
-First, we will create and configure Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
+Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
 
 .. figure:: assets/cloud_c_aws_1.png
 
