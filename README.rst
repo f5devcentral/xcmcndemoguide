@@ -161,9 +161,9 @@ But first, we need to configure our second cloud (Cloud B) by following the `Ter
 
 If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use Azure for Cloud B, since we already configured AWS for Cloud A. 
 
-If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./tree/main/terraform/cloud-b>` _, and the scripts will create a new independent AWS VPC or Azure Resource Group for the deployment of the Refer-a-Friend Widget. 
+If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./tree/main/terraform/cloud-b>`_, and the scripts will create a new independent AWS VPC or Azure Resource Group for the deployment of the Refer-a-Friend Widget. 
 
-The below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
+Below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
 
 .. figure:: assets/layer-7.png
 
