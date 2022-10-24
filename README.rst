@@ -155,7 +155,15 @@ Device information includes device type and browser type.
 Module 2: Back-end Service via HTTP LB (Layer 7) in Cloud B
 ***********************************************************
 
-In this module we will create an HTTP Load Balancer (layer 7) in Cloud B, Azure VNET1 (or AWS VPC1), deploy back-end via it, activate Refer-a-Friend Widget on our website which was inactive in Module 1, and see app IP Overlapping in clouds. 
+In this module we will connect the Refer-a-Friend Widget, which will be running in our Cloud B. We will create another HTTP Load Balancer (Layer 7), and make it available on the Arcadia Finance website, which was previously inactive in the step above. 
+
+But first, we need to configure our second cloud (Cloud B) by following the `Terraform instructions <./terraform/cloud-a>`_, where again you can choose a cloud provider. 
+
+If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use Azure for Cloud B, since we already configured AWS for Cloud A. 
+
+If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./tree/main/terraform/cloud-b>` _, and the scripts will create a new independent AWS VPC or Azure Resource Group for the deployment of the Refer-a-Friend Widget. 
+
+The below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
 
 .. figure:: assets/layer-7.png
 
