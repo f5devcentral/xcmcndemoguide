@@ -155,7 +155,15 @@ Device information includes device type and browser type.
 Module 2: Back-end Service via HTTP LB (Layer 7) in Cloud B
 ***********************************************************
 
-In this module we will create an HTTP Load Balancer (layer 7) in Cloud B, Azure VNET1 (or AWS VPC1), deploy back-end via it, activate Refer-a-Friend Widget on our website which was inactive in Module 1, and see app IP Overlapping in clouds. 
+In this module we will connect the Refer-a-Friend Widget, which will be running in our Cloud B. We will create another HTTP Load Balancer (Layer 7), and make it available on the Arcadia Finance website, which was previously inactive in the step above. 
+
+But first, we need to configure our second cloud (Cloud B) by following the `Terraform instructions <./terraform/cloud-b>`_, where again you can choose a cloud provider. 
+
+If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use Azure for Cloud B, since we already configured AWS for Cloud A. 
+
+If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./terraform/cloud-b>`_, and the scripts will create a new independent AWS VPC or Azure Resource Group for the deployment of the Refer-a-Friend Widget. 
+
+Below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
 
 .. figure:: assets/layer-7.png
 
@@ -234,11 +242,17 @@ As soon as the DNS is updated, we can go to our website and see that a new modul
 Module 3: Back-end Service via Sites/Global Network (Layer 3) in Cloud C
 ************************************************************************
 
-In this module we will connect back-end service via Sites/Global Network (Layer 3) in Cloud C - Azure VNET2 (or AWS VPC2), and activate Transactions Module for the app. 
+In this module we will connect the Arcadia Core app (back-end service) to another apps service: The Transaction Module. We will use a different approach from the previous module, by using the Layer 3 connectivity via F5 Distributed Cloud Multi-Cloud Networking via Sites/Global Network.
+
+But first, we need to configure our last cloud provider (Cloud C) by following the `Terraform instructions <./terraform/cloud-c>`_. 
+
+If you have previously used AWS for Cloud A and Azure for Cloud B, we recommend that you choose Azure for Cloud C (the scripts will create another Resource Group / VNET in Azure). If you have access to just one provider, continue with the scripts for that provider and a different VPC or Resource Group / VNET will be created. 
+
+At the end of this module, we will have the following architecture for our app services:
 
 .. figure:: assets/layer-3.png
 
-First, we will create and configure Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
+Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
 
 .. figure:: assets/cloud_c_aws_1.png
 
