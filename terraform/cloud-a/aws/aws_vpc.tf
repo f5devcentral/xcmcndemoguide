@@ -77,6 +77,12 @@ resource "aws_route_table_association" "public_routes" {
   route_table_id = aws_route_table.public.id
 }
 
+resource "aws_route_table_association" "private_routes" {
+  count          = length(var.aws_private_subnets_cidr)
+  subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
+  route_table_id = aws_route_table.public.id
+}
+
 resource "aws_security_group" "default" {
   name        = "${var.environment}-default-sg"
   description = "Default SG to alllow traffic from the VPC"

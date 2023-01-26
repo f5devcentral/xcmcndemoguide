@@ -20,7 +20,7 @@ resource "aws_network_interface" "private_nic" {
   security_groups = [aws_security_group.allow_http.id, aws_security_group.default.id]
 
   tags = {
-    Name        = "${var.environment}-private-mic"
+    Name        = "${var.environment}-private-nic"
     Environment = var.environment
   }
 }
