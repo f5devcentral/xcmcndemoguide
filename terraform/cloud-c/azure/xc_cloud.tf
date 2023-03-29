@@ -60,6 +60,17 @@ resource "volterra_azure_vnet_site" "azure_vnet_site" {
         vnet_name = azurerm_virtual_network.vnet.name
     }
   }
+
+  lifecycle {
+    ignore_changes = [labels]
+  }
+}
+
+resource "volterra_cloud_site_labels" "labels" {
+  name             = volterra_azure_vnet_site.azure_vnet_site.name
+  site_type        = "azure_vnet_site"
+  labels           = {}
+  ignore_on_delete = true
 }
 
 resource "volterra_tf_params_action" "action_apply" {
