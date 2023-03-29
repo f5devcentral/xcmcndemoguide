@@ -48,7 +48,19 @@ resource "volterra_aws_vpc_site" "aws_vpc_site" {
   depends_on = [
     aws_vpc.vpc
   ]
+
+  lifecycle {
+    ignore_changes = [labels]
+  }
 }
+
+resource "volterra_cloud_site_labels" "labels" {
+  name             = volterra_aws_vpc_site.aws_vpc_site.name
+  site_type        = "aws_vpc_site"
+  labels           = {}
+  ignore_on_delete = true
+}
+
 resource "volterra_tf_params_action" "action_apply" {
 	site_name = volterra_aws_vpc_site.aws_vpc_site.name
 	site_kind = "aws_vpc_site"
