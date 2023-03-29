@@ -22,16 +22,19 @@ Public Cloud (multi-cloud), Modules & Scripts
 The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds. These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases.
 
 * Cloud A: AWS
+
   - 1x VPC (10.0.0.0/16 CIDR)
   - 1x F5 XC Node
   - 1x Arcadia frontend app (EC2 instance)
 
 * Cloud B: AWS
+
   - 1x VNet (10.0.0.0/16 CIDR) - IP Overlap!!
   - 1x F5 XC Node
   - 1x Arcadia friends app (EC2 instance)
 
 * Cloud C: AWS
+
   - 1x VNet (192.168.0.0/16)
   - 1x F5 XC Node
   - 1x Arcadia money transfer app (EC2 instance)
