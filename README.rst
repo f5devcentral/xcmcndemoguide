@@ -19,28 +19,32 @@ The included link to a utility service provides some helpful tools to assist wit
 Public Cloud (multi-cloud), Modules & Scripts
 ##############################################
 
-The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds (rev. 1: Amazon AWS and Microsoft Azure, rev.2: adds Google GCP). 
+The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds. These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases.
 
-These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases. Here's a recommended selection of cloud providers for this guide, which will be used as a reference throughout:
+- Cloud A: AWS
+  - 1x VPC (10.0.0.0/16 CIDR)
+  - 1x F5 XC Node
+  - 1x Arcadia frontend app (EC2 instance)
+- Cloud B: AWS
+  - 1x VNet (10.0.0.0/16 CIDR) - IP Overlap!!
+  - 1x F5 XC Node
+  - 1x Arcadia friends app (EC2 instance)
+- Cloud C: AWS
+  - 1x VNet (192.168.0.0/16)
+  - 1x F5 XC Node
+  - 1x Arcadia money transfer app (EC2 instance)
 
-Cloud A: AWS
-Cloud B: Azure - VNET1
-Cloud C: Azure - VNET2
+Note: The lab for F5 TechXchange uses the F5 UDF environment and only has permissions into AWS public cloud. As a result, all resources deployed for F5 TechXchange 2023 will be deployed to AWS. However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
 
-Note that at a minimum only one public cloud is required (see Requirements), in which case you'd need to deploy app components in different virtual private clouds (VPCs) on AWS or VNETs on Azure.
-
-Cloud A: AWS VPC 1 (or Azure VNET 1)
-Cloud B: AWS VPC 2 (or Azure VNET 2) - simulating multi-cloud  
-Cloud C: AWS VPC 3 (or Azure VNET 3) - simulating multi-cloud 
-
-However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
+Cloud A: AWS VPC 1
+Cloud B: AWS VPC 2 - simulating multi-cloud with IP overlap
+Cloud C: AWS VPC 3 - simulating multi-cloud with global network transit layer 3
 
 Pre-requisites
 #################
 
-- F5 Distributed Cloud Account (trial is sufficient for most modules)
+- F5 UDF Blueprint = TBD
 - A Web browser to access the F5 Distributed Cloud console
-- Terraform installed and configured (Linux preferred)
 
 Scenario
 ####################
@@ -57,7 +61,7 @@ Module Overview
 Module 1: Front-end Portal deployed in Cloud A
 **********************************************
 
-In this module we will deploy front-end portal in Cloud A, pick a public cloud with TF scripts for AWS (or Azure) and use F5 Distributed Cloud Services to configure HTTP LB for front-end. We will use a tool to generate a domain entry. This use case supposes SSL offloading, the process of removing the SSL-based encryption from incoming traffic to relieve a web server of the processing burden of decrypting and/or encrypting traffic sent via SSL.
+In this module we will deploy front-end portal in Cloud A with Terraform scripts for AWS and use F5 Distributed Cloud Services to configure HTTP LB for front-end. We will use a tool to generate a domain entry. This use case supposes SSL offloading, the process of removing the SSL-based encryption from incoming traffic to relieve a web server of the processing burden of decrypting and/or encrypting traffic sent via SSL.
 
 .. figure:: assets/ssl-offload.png
 
@@ -159,9 +163,9 @@ In this module we will connect the Refer-a-Friend Widget, which will be running 
 
 But first, we need to configure our second cloud (Cloud B) by following the `Terraform instructions <./terraform/cloud-b>`_, where again you can choose a cloud provider. 
 
-If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use Azure for Cloud B, since we already configured AWS for Cloud A. 
+If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use AWS for Cloud B, since we only have AWS permissions within the F5 UDF environment. 
 
-If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./terraform/cloud-b>`_, and the scripts will create a new independent AWS VPC or Azure Resource Group for the deployment of the Refer-a-Friend Widget. 
+If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./terraform/cloud-b>`_, and the scripts will create a new independent AWS VPC for the deployment of the Refer-a-Friend Widget. 
 
 Below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
 
@@ -246,8 +250,6 @@ In this module we will connect the Arcadia Core app (back-end service) to anothe
 
 But first, we need to configure our last cloud provider (Cloud C) by following the `Terraform instructions <./terraform/cloud-c>`_. 
 
-If you have previously used AWS for Cloud A and Azure for Cloud B, we recommend that you choose Azure for Cloud C (the scripts will create another Resource Group / VNET in Azure). If you have access to just one provider, continue with the scripts for that provider and a different VPC or Resource Group / VNET will be created. 
-
 At the end of this module, we will have the following architecture for our app services:
 
 .. figure:: assets/layer-3.png
@@ -296,11 +298,11 @@ To complete the process we will click **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Now we will add the Global Network we created to Cloud C, Azure VNET site. Navigate to **Azure VNET Sites** through **Site Management**.
+Now we will add the Global Network we created to Cloud C, AWS VPC site. Navigate to **AWS VPC Sites** through **Site Management**.
 
 .. figure:: assets/cloud_c_azure_1.png
 
-Open site menu and select **Manage Configuration** to add the Global Network to Azure VNET site.
+Open site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
 
 .. figure:: assets/cloud_c_azure_2.png
 
