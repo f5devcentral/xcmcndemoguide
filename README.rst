@@ -66,6 +66,9 @@ In this module we will deploy front-end portal in Cloud A with Terraform scripts
 
 .. figure:: assets/ssl-offload.png
 
+Prepare Lab Environment
+~~~~~~~~~~~~~~~~~~~~~~~
+
 Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
@@ -118,6 +121,9 @@ Clone the repository and open the directory.
      git clone https://github.com/f5devcentral/f5xc-mcn-TechXchange.git
      cd f5xc-mcn-TechXchange/
 
+Deploy with Terraform
+~~~~~~~~~~~~~~~~~~~~~~~
+
 Create the tfvars file and update it with your settings.
 
 .. code:: bash
@@ -139,6 +145,9 @@ Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** t
 Open **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_a_ready.png
+
+Create HTTP LB
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
 
@@ -186,6 +195,9 @@ Take a look at the load balancer configuration and finish creating it by clickin
 
 .. figure:: assets/cloud_a_lb_save.png
 
+Update DNS
+~~~~~~~~~~~~~~~~~~~~~~~
+
 You will see the created HTTP Load Balancer. Now we need to copy the host name in order to delegate the domain. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.  
 
 .. figure:: assets/cloud_a_lb_dns_open.png
@@ -201,6 +213,9 @@ Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and paste the ho
 It may take a few minutes to update the DNS info and generate and apply the certificate. You will see their updated status as below:
 
 .. figure:: assets/cloud_a_lb_dns_valid.png
+
+Test Application
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that the DNS is updated and the certificate is active, let's proceed to the website and test. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. Let's now log in. 
 
