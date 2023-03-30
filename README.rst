@@ -4,7 +4,7 @@
 
 Objective
 ####################
-Use this guide and the provided sample app, included scripts and utility app to explore the Multi-Cloud Networking (MCN) use-cases of the F5 Distributed Cloud platform (xC). This will help you get familiar with the following features & capabilities: 
+Use this guide and the provided sample app, included scripts and utility app to explore the Multi-Cloud Networking (MCN) use-cases of the F5 Distributed Cloud platform (XC). This will help you get familiar with the following features & capabilities: 
 
 - MCN Cloud-to-Cloud via HTTP Load Balancer (Layer 7);
 - MCN Cloud-to-Cloud via Global Network (Layer 3);
@@ -14,7 +14,7 @@ Each of the modules in this guide addresses a specific use-case with a help of i
 
 The included link to a utility service provides some helpful tools to assist with both configuration and testing of the environments:
 
-- Generate a domain and configure DNS records for it based on xC CNAME and other specific parameters;
+- Generate a domain and configure DNS records for it based on XC CNAME and other specific parameters;
 
 Public Cloud (multi-cloud), Modules & Scripts
 ##############################################
@@ -54,9 +54,9 @@ Pre-requisites
 Scenario
 ####################
 
-The xC MCN is a complete multi-cloud networking solution to deploy distributed applications across clouds and edge sites. This demo is intended to be self-sufficient as a quick way to familiarize with some of the main MCN use-cases supported by the xC platform. We’ll use a representative customer app scenario with multiple app services distributed across different clouds: a fictitious Arcadia Finance app which is representative of a typical banking website with features such as customer login, statements, and bank transfers. This customer is looking to add to its website additional banking services, such as a Refer-a-Friend Widget and a Transactions Module, which are developed and managed by other teams, and are deployed/running on public cloud infrastructure other than the core banking app. 
+The XC MCN is a complete multi-cloud networking solution to deploy distributed applications across clouds and edge sites. This demo is intended to be self-sufficient as a quick way to familiarize with some of the main MCN use-cases supported by the XC platform. We’ll use a representative customer app scenario with multiple app services distributed across different clouds: a fictitious Arcadia Finance app which is representative of a typical banking website with features such as customer login, statements, and bank transfers. This customer is looking to add to its website additional banking services, such as a Refer-a-Friend Widget and a Transactions Module, which are developed and managed by other teams, and are deployed/running on public cloud infrastructure other than the core banking app. 
 
-The initial state of the Arcadia Finance website features several "Coming Soon" placeholders for the additional banking services which will "come online" as soon as the networking is properly configured. We will use F5 Cloud Services Multi-Cloud Networking to quickly connect these new services into the core banking module by way of xC MCN features. Once properly networked, these features will be turned.
+The initial state of the Arcadia Finance website features several "Coming Soon" placeholders for the additional banking services which will "come online" as soon as the networking is properly configured. We will use F5 Cloud Services Multi-Cloud Networking to quickly connect these new services into the core banking module by way of XC MCN features. Once properly networked, these features will be turned.
 
 .. figure:: assets/mcn-overview.gif
 
@@ -70,7 +70,64 @@ In this module we will deploy front-end portal in Cloud A with Terraform scripts
 
 .. figure:: assets/ssl-offload.png
 
-Follow the `Terraform instructions <./terraform/cloud-a>`_ to get started with the environment config using your public cloud provider with Terraform.
+Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
+
+.. figure:: assets/xc/administration.png
+
+Open **Credentials** section and click **Add Credentials**.
+
+.. figure:: assets/xc/create_credentials.png
+
+Fill the form as on the screen below and download your credentials file.
+
+.. figure:: assets/xc/fill_credentials.png
+
+The Terraform code will be deployed from the UDF "Client" as it has all the necessary tools installed already. Therefore, we need the p12 credentials file on the UDF "Client". The connection information will be found in the UDF deployment "Client" details under the tab "Access Methods".
+
+.. figure:: assets/xc/udf-access-methods.png
+
+SCP the p12 credentials file from your desktop to the UDF "Client" using the connection information from the previous step. This /path/file location will be used in tfvars as the value for "api_p12_file".
+
+.. code:: bash
+
+     # syntax example - Replace "CHANGEME" with your info
+     scp -O -P 47000 ~/CHANGEME/f5-sales-demo.console.ves.volterra.io.api-creds.p12 CHANGEME.access.udf.f5.com:/var/tmp/
+     
+In the UDF "Client" SSH terminal, create **VES_P12_PASSWORD** environment variable with the password form the previous step.
+
+.. code:: bash
+
+     export VES_P12_PASSWORD=your_certificate_password
+
+On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". These will be used in tfvars as the values for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
+
+.. figure:: assets/xc/udf-cloud-account.png
+
+Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. This will be used in tfvars as the value for "zone_name".
+
+.. figure:: assets/xc/zone_name.png
+
+Create the tfvars file and update it with your settings.
+
+.. code:: bash
+
+  cp admin.auto.tfvars.example admin.auto.tfvars
+  # MODIFY TO YOUR SETTINGS
+  vi admin.auto.tfvars
+
+Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
+
+.. code:: bash
+
+     ./cloud-A-setup.sh
+
+Open F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and navigate to the **Cloud and Edge Sites** tab.
+
+.. figure:: assets/xc/cloud_a_sites.png
+
+Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+
+.. figure:: assets/xc/cloud_a_ready.png
 
 Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
 
@@ -84,7 +141,7 @@ Give it a name. For this demo we will use **arcadia-finance**.
 
 .. figure:: assets/cloud_a_lb_metadata.png
 
-Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we specify **yawning-white-antelope.github.securelab.online**.
+Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**).
 
 Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
 
