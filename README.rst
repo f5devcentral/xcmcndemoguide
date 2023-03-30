@@ -132,7 +132,7 @@ Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.
 
      ./cloud-A-setup.sh
 
-Open F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and navigate to the **Cloud and Edge Sites** tab.
+Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
 
 .. figure:: assets/xc/cloud_a_sites.png
 
