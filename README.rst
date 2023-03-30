@@ -441,7 +441,16 @@ And finally, we will take a look at statistics by interface on each F5 Distribut
 
 .. figure:: assets/monitoring_3.png
 
+Destroy Environment
+###################
 
+When your done with the lab, make sure to run the destroy scripts to delete all resources in F5 Distributed Cloud and AWS.
+
+.. code:: bash
+
+     ./cloud-A-destroy.sh
+     ./cloud-B-destroy.sh
+     ./cloud-C-destroy.sh
 
 Wrap-Up
 #######
