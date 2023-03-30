@@ -234,21 +234,25 @@ Module 2: Back-end Service via HTTP LB (Layer 7) in Cloud B
 
 In this module we will connect the Refer-a-Friend Widget, which will be running in our Cloud B. We will create another HTTP Load Balancer (Layer 7), and make it available on the Arcadia Finance website, which was previously inactive in the step above. 
 
-But first, we need to configure our second cloud (Cloud B) by following the `Terraform instructions <./terraform/cloud-b>`_, where again you can choose a cloud provider. 
-
-If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use AWS for Cloud B, since we only have AWS permissions within the F5 UDF environment. 
-
-If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./terraform/cloud-b>`_, and the scripts will create a new independent AWS VPC for the deployment of the Refer-a-Friend Widget. 
+But first, we need to configure our second cloud (Cloud B). It is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. However, we will use AWS for Cloud B since the F5 UDF environment only has AWS permissions. 
 
 Below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
 
 .. figure:: assets/layer-7.png
 
+Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
+
+.. code:: bash
+
+     ./cloud-B-setup.sh
+
+Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab. Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+
 Let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/cloud_b_lb_create.png
 
-Give this Load Balancer a name. For this use case we will use **friends_module**.
+Give this Load Balancer a name. For this use case we will use **friends-module**.
 
 .. figure:: assets/cloud_b_lb_metadata.png
 
