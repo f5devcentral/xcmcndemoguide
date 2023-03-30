@@ -74,13 +74,13 @@ Open **Credentials** section and click **Add Credentials**.
 
 .. figure:: assets/xc/create_credentials.png
 
-Fill the form as on the screen below and download your credentials file.
+Fill the form as on the screen below and download your credentials file. Remember the password as it will be used for **VES_P12_PASSWORD** in later steps.
 
 .. figure:: assets/xc/fill_credentials.png
 
 The Terraform code will be deployed from the UDF "Client" as it has all the necessary tools installed already. Therefore, we need the p12 credentials file on the UDF "Client". The connection information will be found in the UDF deployment "Client" details under the tab "Access Methods".
 
-.. figure:: assets/xc/udf-access-methods.png
+.. figure:: assets/udf/udf-access-methods.png
 
 SCP the p12 credentials file from your desktop to the UDF "Client" using the connection information from the previous step. This /path/file location will be used in tfvars as the value for "api_p12_file".
 
@@ -88,20 +88,31 @@ SCP the p12 credentials file from your desktop to the UDF "Client" using the con
 
      # syntax example - Replace "CHANGEME" with your info
      scp -O -P 47000 ~/CHANGEME/f5-sales-demo.console.ves.volterra.io.api-creds.p12 CHANGEME.access.udf.f5.com:/var/tmp/
-     
-In the UDF "Client" SSH terminal, create **VES_P12_PASSWORD** environment variable with the password form the previous step.
+
+On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". These will be used in tfvars as the values for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
+
+.. figure:: assets/udf/udf-cloud-account.png
+
+Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. This will be used in tfvars as the value for "zone_name".
+
+.. figure:: assets/xc/zone_name.png
+
+Login to the to the UDF "Client" via SSH to perform the rest of the deployment steps.
+
+.. figure:: assets/udf/udf-ssh-client.png
+
+Create **VES_P12_PASSWORD** environment variable with the password from the previous step.
 
 .. code:: bash
 
      export VES_P12_PASSWORD=your_certificate_password
 
-On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". These will be used in tfvars as the values for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
+Clone the repository and open the directory.
 
-.. figure:: assets/xc/udf-cloud-account.png
+.. code:: bash
 
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. This will be used in tfvars as the value for "zone_name".
-
-.. figure:: assets/xc/zone_name.png
+     git clone https://github.com/f5devcentral/f5xc-mcn-TechXchange.git
+     cd f5xc-mcn-TechXchange/
 
 Create the tfvars file and update it with your settings.
 
