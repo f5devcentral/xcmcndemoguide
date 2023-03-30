@@ -66,7 +66,7 @@ In this module we will deploy front-end portal in Cloud A with Terraform scripts
 
 .. figure:: assets/ssl-offload.png
 
-Open the UDF Blueprint ["F5 TechXchange 2023 XC MCN (update link)"](https://xxx.xxx.xxx) and click "Deploy" to create a deployment. Then hit "Start".
+Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
 
