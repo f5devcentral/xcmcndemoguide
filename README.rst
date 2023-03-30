@@ -246,15 +246,11 @@ Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.
 
      ./cloud-B-setup.sh
 
-Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
-
-.. figure:: assets/xc/cloud_a_sites.png
-
-Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_b_ready.png
 
-Let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/cloud_b_lb_create.png
 
@@ -331,11 +327,21 @@ Module 3: Back-end Service via Sites/Global Network (Layer 3) in Cloud C
 
 In this module we will connect the Arcadia Core app (back-end service) to another apps service: The Transaction Module. We will use a different approach from the previous module, by using the Layer 3 connectivity via F5 Distributed Cloud Multi-Cloud Networking via Sites/Global Network.
 
-But first, we need to configure our last cloud provider (Cloud C) by following the `Terraform instructions <./terraform/cloud-c>`_. 
+But first, we need to configure our last cloud provider (Cloud C). We will once again use AWS since the F5 UDF environment only has access to AWS.
 
 At the end of this module, we will have the following architecture for our app services:
 
 .. figure:: assets/layer-3.png
+
+Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
+
+.. code:: bash
+
+     ./cloud-C-setup.sh
+
+You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+
+.. figure:: assets/xc/cloud_c_ready.png
 
 Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
 
