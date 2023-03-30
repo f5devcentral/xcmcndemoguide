@@ -389,9 +389,9 @@ To complete the process we will click **Save and Exit**.
 
 Now we will add the Global Network we created to Cloud C, AWS VPC site. We can do this connectivity since there is non-overlapping IP space. If you recall, Cloud A is configured with 10.0.0.0/16 CIDR, and Cloud C is configured with 192.168.0.0/16 CIDR.
 
-Open site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
+Open the Cloud C site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
 
-.. figure:: assets/cloud_c_azure_2.png
+.. figure:: assets/cloud_c_aws_12.png
 
 Enable editing configuration by clicking **Edit Configuration**.
 
