@@ -399,7 +399,7 @@ Enable editing configuration by clicking **Edit Configuration**.
 
 Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
 
-.. figure:: assets/cloud_c_azure_4.png
+.. figure:: assets/cloud_c_aws_14.png
 
 First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
 
