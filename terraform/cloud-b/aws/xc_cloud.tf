@@ -1,5 +1,5 @@
 resource "volterra_cloud_credentials" "aws_cred" {
-  name = var.environment
+  name = "${var.owner}-${var.environment}"
   namespace = "system"
   aws_secret_key {
 	  access_key = var.aws_access_key
@@ -11,24 +11,24 @@ resource "volterra_cloud_credentials" "aws_cred" {
   }
 }
 resource "volterra_aws_vpc_site" "aws_vpc_site" {
-  name = var.environment
-  namespace = "system"
+  name       = "${var.owner}-${var.environment}"
+  namespace  = "system"
   aws_region = var.aws_region
   aws_cred {
-	  name = volterra_cloud_credentials.aws_cred.name
+	  name      = volterra_cloud_credentials.aws_cred.name
 	  namespace = "system"
   }
   vpc {
 	  vpc_id = aws_vpc.vpc.id
   }
-  disk_size = 80
+  disk_size     = 80
   instance_type = var.aws_xc_instance_type
 
   ingress_egress_gw {
 	  aws_certified_hw = "aws-byol-multi-nic-voltmesh"
 	  az_nodes {
 	  	aws_az_name = var.aws_availability_zones[0]
-	  	disk_size = 100
+	  	disk_size   = 100
 	  	inside_subnet {
 			existing_subnet_id = element(aws_subnet.private_subnet.*.id, 0)
 	  	}
@@ -39,9 +39,9 @@ resource "volterra_aws_vpc_site" "aws_vpc_site" {
 			existing_subnet_id = element(aws_subnet.workload_subnet.*.id, 0)
 	  	}
 	  }
-	  no_global_network = true
-	  no_inside_static_routes = true
-	  no_network_policy = true
+	  no_global_network        = true
+	  no_inside_static_routes  = true
+	  no_network_policy        = true
 	  no_outside_static_routes = true
   }
 
@@ -62,9 +62,9 @@ resource "volterra_cloud_site_labels" "labels" {
 }
 
 resource "volterra_tf_params_action" "action_apply" {
-	site_name = volterra_aws_vpc_site.aws_vpc_site.name
-	site_kind = "aws_vpc_site"
-	action = "apply"
+	site_name       = volterra_aws_vpc_site.aws_vpc_site.name
+	site_kind       = "aws_vpc_site"
+	action          = "apply"
 	wait_for_action = true
 
 	depends_on = [

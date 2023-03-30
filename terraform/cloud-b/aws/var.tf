@@ -3,6 +3,11 @@ variable "environment" {
 	description = "Environment Name"
 }
 
+variable "owner" {
+	default		= null
+	description = "Owner of the deployment for tagging purposes"
+}
+
 variable "api_cert" {
 	type = string
 	default = ""
