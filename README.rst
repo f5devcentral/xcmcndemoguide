@@ -360,6 +360,10 @@ At the end of this module, we will have the following architecture for our app s
 
 .. figure:: assets/layer-3.png
 
+
+Deploy with Terraform
+~~~~~~~~~~~~~~~~~~~~~~~
+
 Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
 
 .. code:: bash
@@ -369,6 +373,9 @@ Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.
 You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_c_ready.png
+
+Create Global Network
+~~~~~~~~~~~~~~~~~~~~~
 
 Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
 
@@ -444,9 +451,16 @@ Take a look at the configuration and complete updating by clicking **Save and Ex
 
 .. figure:: assets/cloud_c_aws_11.png
 
+Update Routes
+~~~~~~~~~~~~~~
+
 Next we need to specify routes in the clouds. In this demo we already did it. You can take a look at the screenshot taken from Cloud A below.
 
 .. figure:: assets/cloud_c_routes.png
+
+
+Test Application
+~~~~~~~~~~~~~~~~~
 
 Now let's test the connected modules. We will open the site and see that now all the modules are active, including the Transactions. 
 
