@@ -31,13 +31,13 @@ Note: The lab for F5 TechXchange uses the F5 UDF environment and only has permis
 
 * Cloud B: AWS - simulating multi-cloud with IP overlap
 
-  - 1x VNet (10.0.0.0/16 CIDR) - IP Overlap!!
+  - 1x VPC (10.0.0.0/16 CIDR) - IP Overlap!!
   - 1x F5 XC Node
   - 1x Arcadia friends app (EC2 instance)
 
 * Cloud C: AWS - simulating multi-cloud with global network transit layer 3
 
-  - 1x VNet (192.168.0.0/16)
+  - 1x VPC (192.168.0.0/16)
   - 1x F5 XC Node
   - 1x Arcadia money transfer app (EC2 instance)
 
