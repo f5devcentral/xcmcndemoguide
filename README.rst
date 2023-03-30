@@ -403,19 +403,19 @@ Scroll down the configuration and click **Edit Configuration** under **Networkin
 
 First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
 
-.. figure:: assets/cloud_c_azure_5.png
+.. figure:: assets/cloud_c_aws_15.png
 
 Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
 
-.. figure:: assets/cloud_c_azure_6.png
+.. figure:: assets/cloud_c_aws_16.png
 
 Apply the updated configuration to the Site by clicking **Apply**.
 
-.. figure:: assets/cloud_c_azure_7.png
+.. figure:: assets/cloud_c_aws_10.png
 
 Take a look at the configuration and complete updating by clicking **Save and Exit**.
 
-.. figure:: assets/cloud_c_azure_8.png
+.. figure:: assets/cloud_c_aws_11.png
 
 Next we need to specify routes in the clouds. In this demo we already did it. You can take a look at the screenshot taken from Cloud A below.
 
