@@ -104,7 +104,10 @@ Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zo
 
 .. figure:: assets/xc/zone_name.png
 
-Login to the to the UDF "Client" via SSH to perform the rest of the deployment steps.
+Deploy with Terraform
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Login to the to the UDF "Client" via SSH.
 
 .. figure:: assets/udf/udf-ssh-client.png
 
@@ -120,9 +123,6 @@ Clone the repository and open the directory.
 
      git clone https://github.com/f5devcentral/f5xc-mcn-TechXchange.git
      cd f5xc-mcn-TechXchange/
-
-Deploy with Terraform
-~~~~~~~~~~~~~~~~~~~~~~~
 
 Create the tfvars file and update it with your settings.
 
