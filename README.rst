@@ -4,7 +4,7 @@
 
 Objective
 ####################
-Use this guide and the provided sample app, included scripts and utility app to explore the Multi-Cloud Networking (MCN) use-cases of the F5 Distributed Cloud platform (xC). This will help you get familiar with the following features & capabilities: 
+Use this guide and the provided sample app, included scripts and utility app to explore the Multi-Cloud Networking (MCN) use-cases of the F5 Distributed Cloud platform (XC). This will help you get familiar with the following features & capabilities: 
 
 - MCN Cloud-to-Cloud via HTTP Load Balancer (Layer 7);
 - MCN Cloud-to-Cloud via Global Network (Layer 3);
@@ -14,40 +14,45 @@ Each of the modules in this guide addresses a specific use-case with a help of i
 
 The included link to a utility service provides some helpful tools to assist with both configuration and testing of the environments:
 
-- Generate a domain and configure DNS records for it based on xC CNAME and other specific parameters;
+- Generate a domain and configure DNS records for it based on XC CNAME and other specific parameters;
 
 Public Cloud (multi-cloud), Modules & Scripts
 ##############################################
 
-The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds (rev. 1: Amazon AWS and Microsoft Azure, rev.2: adds Google GCP). 
+The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds. These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases.
 
-These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases. Here's a recommended selection of cloud providers for this guide, which will be used as a reference throughout:
+Note: The lab for F5 TechXchange uses the F5 UDF environment and only has permissions into AWS public cloud. As a result, all resources deployed for F5 TechXchange 2023 will be deployed to AWS. However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
 
-Cloud A: AWS
-Cloud B: Azure - VNET1
-Cloud C: Azure - VNET2
+* Cloud A: AWS
 
-Note that at a minimum only one public cloud is required (see Requirements), in which case you'd need to deploy app components in different virtual private clouds (VPCs) on AWS or VNETs on Azure.
+  - 1x VPC (10.0.0.0/16 CIDR)
+  - 1x F5 XC Node
+  - 1x Arcadia frontend app (EC2 instance)
 
-Cloud A: AWS VPC 1 (or Azure VNET 1)
-Cloud B: AWS VPC 2 (or Azure VNET 2) - simulating multi-cloud  
-Cloud C: AWS VPC 3 (or Azure VNET 3) - simulating multi-cloud 
+* Cloud B: AWS - simulating multi-cloud with IP overlap
 
-However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
+  - 1x VNet (10.0.0.0/16 CIDR) - IP Overlap!!
+  - 1x F5 XC Node
+  - 1x Arcadia friends app (EC2 instance)
+
+* Cloud C: AWS - simulating multi-cloud with global network transit layer 3
+
+  - 1x VNet (192.168.0.0/16)
+  - 1x F5 XC Node
+  - 1x Arcadia money transfer app (EC2 instance)
 
 Pre-requisites
 #################
 
-- F5 Distributed Cloud Account (trial is sufficient for most modules)
+- F5 UDF Blueprint = TBD
 - A Web browser to access the F5 Distributed Cloud console
-- Terraform installed and configured (Linux preferred)
 
 Scenario
 ####################
 
-The xC MCN is a complete multi-cloud networking solution to deploy distributed applications across clouds and edge sites. This demo is intended to be self-sufficient as a quick way to familiarize with some of the main MCN use-cases supported by the xC platform. We’ll use a representative customer app scenario with multiple app services distributed across different clouds: a fictitious Arcadia Finance app which is representative of a typical banking website with features such as customer login, statements, and bank transfers. This customer is looking to add to its website additional banking services, such as a Refer-a-Friend Widget and a Transactions Module, which are developed and managed by other teams, and are deployed/running on public cloud infrastructure other than the core banking app. 
+The XC MCN is a complete multi-cloud networking solution to deploy distributed applications across clouds and edge sites. This demo is intended to be self-sufficient as a quick way to familiarize with some of the main MCN use-cases supported by the XC platform. We’ll use a representative customer app scenario with multiple app services distributed across different clouds: a fictitious Arcadia Finance app which is representative of a typical banking website with features such as customer login, statements, and bank transfers. This customer is looking to add to its website additional banking services, such as a Refer-a-Friend Widget and a Transactions Module, which are developed and managed by other teams, and are deployed/running on public cloud infrastructure other than the core banking app. 
 
-The initial state of the Arcadia Finance website features several "Coming Soon" placeholders for the additional banking services which will "come online" as soon as the networking is properly configured. We will use F5 Cloud Services Multi-Cloud Networking to quickly connect these new services into the core banking module by way of xC MCN features. Once properly networked, these features will be turned.
+The initial state of the Arcadia Finance website features several "Coming Soon" placeholders for the additional banking services which will "come online" as soon as the networking is properly configured. We will use F5 Cloud Services Multi-Cloud Networking to quickly connect these new services into the core banking module by way of XC MCN features. Once properly networked, these features will be turned.
 
 .. figure:: assets/mcn-overview.gif
 
@@ -57,11 +62,83 @@ Module Overview
 Module 1: Front-end Portal deployed in Cloud A
 **********************************************
 
-In this module we will deploy front-end portal in Cloud A, pick a public cloud with TF scripts for AWS (or Azure) and use F5 Distributed Cloud Services to configure HTTP LB for front-end. We will use a tool to generate a domain entry. This use case supposes SSL offloading, the process of removing the SSL-based encryption from incoming traffic to relieve a web server of the processing burden of decrypting and/or encrypting traffic sent via SSL.
+In this module we will deploy front-end portal in Cloud A with Terraform scripts for AWS and use F5 Distributed Cloud Services to configure HTTP LB for front-end. We will use a tool to generate a domain entry. This use case supposes SSL offloading, the process of removing the SSL-based encryption from incoming traffic to relieve a web server of the processing burden of decrypting and/or encrypting traffic sent via SSL.
 
 .. figure:: assets/ssl-offload.png
 
-Follow the `Terraform instructions <./terraform/cloud-a>`_ to get started with the environment config using your public cloud provider with Terraform.
+Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
+
+> *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
+
+Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
+
+.. figure:: assets/xc/administration.png
+
+Open **Credentials** section and click **Add Credentials**.
+
+.. figure:: assets/xc/create_credentials.png
+
+Fill the form as on the screen below and download your credentials file. Remember the password as it will be used for **VES_P12_PASSWORD** in later steps.
+
+.. figure:: assets/xc/fill_credentials.png
+
+The Terraform code will be deployed from the UDF "Client" as it has all the necessary tools installed already. Therefore, we need the p12 credentials file on the UDF "Client". The connection information will be found in the UDF deployment "Client" details under the tab "Access Methods".
+
+.. figure:: assets/udf/udf-access-methods.png
+
+SCP the p12 credentials file from your desktop to the UDF "Client" using the connection information from the previous step. This /path/file location will be used in tfvars as the value for "api_p12_file".
+
+.. code:: bash
+
+     # syntax example - Replace "CHANGEME" with your info
+     scp -O -P 47000 ~/CHANGEME/f5-sales-demo.console.ves.volterra.io.api-creds.p12 CHANGEME.access.udf.f5.com:/var/tmp/
+
+On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". These will be used in tfvars as the values for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
+
+.. figure:: assets/udf/udf-cloud-account.png
+
+Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. This will be used in tfvars as the value for "zone_name".
+
+.. figure:: assets/xc/zone_name.png
+
+Login to the to the UDF "Client" via SSH to perform the rest of the deployment steps.
+
+.. figure:: assets/udf/udf-ssh-client.png
+
+Create **VES_P12_PASSWORD** environment variable with the password from the previous step.
+
+.. code:: bash
+
+     export VES_P12_PASSWORD=your_certificate_password
+
+Clone the repository and open the directory.
+
+.. code:: bash
+
+     git clone https://github.com/f5devcentral/f5xc-mcn-TechXchange.git
+     cd f5xc-mcn-TechXchange/
+
+Create the tfvars file and update it with your settings.
+
+.. code:: bash
+
+  cp admin.auto.tfvars.example admin.auto.tfvars
+  # MODIFY TO YOUR SETTINGS
+  vi admin.auto.tfvars
+
+Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
+
+.. code:: bash
+
+     ./cloud-A-setup.sh
+
+Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
+
+.. figure:: assets/xc/cloud_a_sites.png
+
+Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+
+.. figure:: assets/xc/cloud_a_ready.png
 
 Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
 
@@ -75,7 +152,7 @@ Give it a name. For this demo we will use **arcadia-finance**.
 
 .. figure:: assets/cloud_a_lb_metadata.png
 
-Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we specify **yawning-white-antelope.github.securelab.online**.
+Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**).
 
 Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
 
@@ -157,21 +234,27 @@ Module 2: Back-end Service via HTTP LB (Layer 7) in Cloud B
 
 In this module we will connect the Refer-a-Friend Widget, which will be running in our Cloud B. We will create another HTTP Load Balancer (Layer 7), and make it available on the Arcadia Finance website, which was previously inactive in the step above. 
 
-But first, we need to configure our second cloud (Cloud B) by following the `Terraform instructions <./terraform/cloud-b>`_, where again you can choose a cloud provider. 
-
-If you have access to different cloud providers, it is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. In this guide, we will use Azure for Cloud B, since we already configured AWS for Cloud A. 
-
-If you only have access to one provider, you can run the Terraform scripts for that same provider for `Cloud B <./terraform/cloud-b>`_, and the scripts will create a new independent AWS VPC or Azure Resource Group for the deployment of the Refer-a-Friend Widget. 
+But first, we need to configure our second cloud (Cloud B). It is recommended that for Cloud B you use a provider different from the one you've configured for Cloud A. However, we will use AWS for Cloud B since the F5 UDF environment only has AWS permissions. 
 
 Below is the service topology we will achieve at the end of this module. Note the IP overlap of the Core Module IP (deployed in the previous step), and the IP of the Refer-a-Friend service (also 10.0.20.100). This is a perfect opportunity to use an HTTP Load Balancer!
 
 .. figure:: assets/layer-7.png
 
-Let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
+
+.. code:: bash
+
+     ./cloud-B-setup.sh
+
+You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+
+.. figure:: assets/xc/cloud_b_ready.png
+
+Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/cloud_b_lb_create.png
 
-Give this Load Balancer a name. For this use case we will use **friends_module**.
+Give this Load Balancer a name. For this use case we will use **friends-module**.
 
 .. figure:: assets/cloud_b_lb_metadata.png
 
@@ -244,13 +327,21 @@ Module 3: Back-end Service via Sites/Global Network (Layer 3) in Cloud C
 
 In this module we will connect the Arcadia Core app (back-end service) to another apps service: The Transaction Module. We will use a different approach from the previous module, by using the Layer 3 connectivity via F5 Distributed Cloud Multi-Cloud Networking via Sites/Global Network.
 
-But first, we need to configure our last cloud provider (Cloud C) by following the `Terraform instructions <./terraform/cloud-c>`_. 
-
-If you have previously used AWS for Cloud A and Azure for Cloud B, we recommend that you choose Azure for Cloud C (the scripts will create another Resource Group / VNET in Azure). If you have access to just one provider, continue with the scripts for that provider and a different VPC or Resource Group / VNET will be created. 
+But first, we need to configure our last cloud provider (Cloud C). We will once again use AWS since the F5 UDF environment only has access to AWS.
 
 At the end of this module, we will have the following architecture for our app services:
 
 .. figure:: assets/layer-3.png
+
+Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
+
+.. code:: bash
+
+     ./cloud-C-setup.sh
+
+You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+
+.. figure:: assets/xc/cloud_c_ready.png
 
 Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
 
@@ -280,7 +371,7 @@ Open the list of the Global Virtual Networks and click **Create new Virtual Netw
 
 .. figure:: assets/cloud_c_aws_7.png
 
-First, give it a name. Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
+First, give it a *unique* name (ex. yourlastname-arcadia-global). Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
 
 .. figure:: assets/cloud_c_aws_8.png
 
@@ -296,37 +387,35 @@ To complete the process we will click **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Now we will add the Global Network we created to Cloud C, Azure VNET site. Navigate to **Azure VNET Sites** through **Site Management**.
+Now we will add the Global Network we created to Cloud C, AWS VPC site. We can do this connectivity since there is non-overlapping IP space. If you recall, Cloud A is configured with 10.0.0.0/16 CIDR, and Cloud C is configured with 192.168.0.0/16 CIDR.
 
-.. figure:: assets/cloud_c_azure_1.png
+Open the Cloud C site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
 
-Open site menu and select **Manage Configuration** to add the Global Network to Azure VNET site.
-
-.. figure:: assets/cloud_c_azure_2.png
+.. figure:: assets/cloud_c_aws_12.png
 
 Enable editing configuration by clicking **Edit Configuration**.
 
-.. figure:: assets/cloud_c_azure_3.png
+.. figure:: assets/cloud_c_aws_13.png
 
 Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
 
-.. figure:: assets/cloud_c_azure_4.png
+.. figure:: assets/cloud_c_aws_14.png
 
 First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
 
-.. figure:: assets/cloud_c_azure_5.png
+.. figure:: assets/cloud_c_aws_15.png
 
 Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
 
-.. figure:: assets/cloud_c_azure_6.png
+.. figure:: assets/cloud_c_aws_16.png
 
 Apply the updated configuration to the Site by clicking **Apply**.
 
-.. figure:: assets/cloud_c_azure_7.png
+.. figure:: assets/cloud_c_aws_10.png
 
 Take a look at the configuration and complete updating by clicking **Save and Exit**.
 
-.. figure:: assets/cloud_c_azure_8.png
+.. figure:: assets/cloud_c_aws_11.png
 
 Next we need to specify routes in the clouds. In this demo we already did it. You can take a look at the screenshot taken from Cloud A below.
 

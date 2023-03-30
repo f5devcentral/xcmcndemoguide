@@ -1,0 +1,6 @@
+owner          = "lastname"
+api_url        = "https://f5-sales-demo.console.ves.volterra.io/api"
+api_p12_file   = "./f5xc-mcn-TechXchange/f5-sales-demo.console.ves.volterra.io.api-creds.p12"
+aws_access_key = "accesskeyxxxx"
+aws_secret_key = "secretxxxx"
+zone_name      = "your.domain.com"
