@@ -246,7 +246,13 @@ Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.
 
      ./cloud-B-setup.sh
 
-Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab. Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
+
+.. figure:: ../../../assets/xc/cloud_a_sites.png
+
+Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+
+.. figure:: ../../../assets/xc/cloud_b_ready.png
 
 Let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
