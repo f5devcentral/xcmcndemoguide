@@ -147,7 +147,7 @@ Open **Site List** and check the **Health Score**. It may take some time to prov
 .. figure:: assets/xc/cloud_a_ready.png
 
 Create HTTP LB
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
 
@@ -196,7 +196,7 @@ Take a look at the load balancer configuration and finish creating it by clickin
 .. figure:: assets/cloud_a_lb_save.png
 
 Update DNS
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
 
 You will see the created HTTP Load Balancer. Now we need to copy the host name in order to delegate the domain. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.  
 
@@ -215,7 +215,7 @@ It may take a few minutes to update the DNS info and generate and apply the cert
 .. figure:: assets/cloud_a_lb_dns_valid.png
 
 Test Application
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 Now that the DNS is updated and the certificate is active, let's proceed to the website and test. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. Let's now log in. 
 
@@ -255,6 +255,9 @@ Below is the service topology we will achieve at the end of this module. Note th
 
 .. figure:: assets/layer-7.png
 
+Deploy with Terraform
+~~~~~~~~~~~~~~~~~~~~~~~
+
 Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
 
 .. code:: bash
@@ -264,6 +267,9 @@ Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.
 You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_b_ready.png
+
+Create HTTP LB
+~~~~~~~~~~~~~~~
 
 Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
@@ -321,6 +327,9 @@ Take a look at the load balancer configuration and finish creating it by clickin
 
 .. figure:: assets/cloud_b_lb_save.png
 
+Update DNS
+~~~~~~~~~~~~
+
 Now that we've configured the HTTP Load Balancer, we need to run the following command in CLI to extract the private IP value for our site from the Cloud A file: 
 
 .. figure:: assets/cloud_b_terraform_output.png
@@ -330,6 +339,9 @@ The output will show us the private IP address for our site deployed by F5 Distr
 Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
 
 .. figure:: assets/cloud_b_dns_update.png
+
+Test Application
+~~~~~~~~~~~~~~~~~
 
 As soon as the DNS is updated, we can go to our website and see that a new module is now active - Refer a friend. 
 
