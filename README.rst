@@ -395,7 +395,7 @@ Open the Cloud C site menu and select **Manage Configuration** to add the Global
 
 Enable editing configuration by clicking **Edit Configuration**.
 
-.. figure:: assets/cloud_c_azure_3.png
+.. figure:: assets/cloud_c_aws_13.png
 
 Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
 
