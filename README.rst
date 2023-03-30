@@ -21,29 +21,25 @@ Public Cloud (multi-cloud), Modules & Scripts
 
 The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds. These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases.
 
+Note: The lab for F5 TechXchange uses the F5 UDF environment and only has permissions into AWS public cloud. As a result, all resources deployed for F5 TechXchange 2023 will be deployed to AWS. However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
+
 * Cloud A: AWS
 
   - 1x VPC (10.0.0.0/16 CIDR)
   - 1x F5 XC Node
   - 1x Arcadia frontend app (EC2 instance)
 
-* Cloud B: AWS
+* Cloud B: AWS - simulating multi-cloud with IP overlap
 
   - 1x VNet (10.0.0.0/16 CIDR) - IP Overlap!!
   - 1x F5 XC Node
   - 1x Arcadia friends app (EC2 instance)
 
-* Cloud C: AWS
+* Cloud C: AWS - simulating multi-cloud with global network transit layer 3
 
   - 1x VNet (192.168.0.0/16)
   - 1x F5 XC Node
   - 1x Arcadia money transfer app (EC2 instance)
-
-Note: The lab for F5 TechXchange uses the F5 UDF environment and only has permissions into AWS public cloud. As a result, all resources deployed for F5 TechXchange 2023 will be deployed to AWS. However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
-
-- Cloud A: AWS VPC 1
-- Cloud B: AWS VPC 2 - simulating multi-cloud with IP overlap
-- Cloud C: AWS VPC 3 - simulating multi-cloud with global network transit layer 3
 
 Pre-requisites
 #################
