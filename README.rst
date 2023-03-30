@@ -371,7 +371,7 @@ Open the list of the Global Virtual Networks and click **Create new Virtual Netw
 
 .. figure:: assets/cloud_c_aws_7.png
 
-First, give it a name. Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
+First, give it a *unique* name (ex. yourlastname-arcadia-global). Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
 
 .. figure:: assets/cloud_c_aws_8.png
 
@@ -387,9 +387,7 @@ To complete the process we will click **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Now we will add the Global Network we created to Cloud C, AWS VPC site. Navigate to **AWS VPC Sites** through **Site Management**.
-
-.. figure:: assets/cloud_c_azure_1.png
+Now we will add the Global Network we created to Cloud C, AWS VPC site. We can do this connectivity since there is non-overlapping IP space. If you recall, Cloud A is configured with 10.0.0.0/16 CIDR, and Cloud C is configured with 192.168.0.0/16 CIDR.
 
 Open site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
 
