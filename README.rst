@@ -69,11 +69,11 @@ In this module we will deploy front-end portal in Cloud A with Terraform scripts
 Prepare Lab Environment
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
+#. Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
 
-Access the UDF "jumphost" via xRDP desktop session.
+#. Access the UDF "jumphost" via xRDP desktop session.
 
 .. figure:: assets/udf/udf-jumphost-xrdp.png
 
@@ -83,20 +83,20 @@ User    Password
 ubuntu  HelloUDF
 ======  ========
 
-Open a terminal on the "jumphost". Clone the lab repository and change into the directory.
+#. Open a terminal on the "jumphost". Clone the lab repository and change into the directory.
 
 .. code:: bash
 
      git clone https://github.com/f5devcentral/f5xc-mcn-TechXchange.git
      cd f5xc-mcn-TechXchange/
 
-Copy the tfvars file.
+#. Copy the tfvars file.
 
 .. code:: bash
 
      cp admin.auto.tfvars.example admin.auto.tfvars
 
-Edit the file using "vi" in the terminal so you can customize the parameter values for your lab like owner, keys, and zone. You will retrieve the values in the following steps. 
+#. Edit the file using "vi" in the terminal so you can customize the parameter values for your lab like owner, keys, and zone. You will retrieve the values in the following steps. 
 
 .. code:: bash
 
@@ -115,29 +115,29 @@ Edit the file using "vi" in the terminal so you can customize the parameter valu
      # aws_secret_key = "secretxxxx"
      # zone_name      = "your.domain.com"
 
-On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". Paste the values in the tfvars file for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
+#. On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". Paste the values in the tfvars file for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
 
 .. figure:: assets/udf/udf-cloud-account.png
 
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. Paste the value in the tfvars file for "zone_name".
+#. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. Paste the value in the tfvars file for "zone_name".
 
 .. figure:: assets/xc/zone_name.png
 
-Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
+#. Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
 
 .. figure:: assets/xc/administration.png
 
-Open **Credentials** section and click **Add Credentials**.
+#. Open **Credentials** section and click **Add Credentials**.
 
 .. figure:: assets/xc/create_credentials.png
 
-Fill the form as on the screen below and download your credentials file. The p12 file will download to /home/ubuntu/Downloads/f5-sales-demo.console.ves.volterra.io.api-creds.p12 and is used in tfvars as the value for "api_p12_file".
+#. Fill the form as on the screen below and download your credentials file. The p12 file will download to /home/ubuntu/Downloads/f5-sales-demo.console.ves.volterra.io.api-creds.p12 and is used in tfvars as the value for "api_p12_file".
 
 Note: Remember the password as it will be used for **VES_P12_PASSWORD** in the next step
 
 .. figure:: assets/xc/fill_credentials.png
 
-Return to the "jumphost" terminal. Save the tfvars file and exit "vi" mode.
+#. Return to the "jumphost" terminal. Save the tfvars file and exit "vi" mode.
 
 .. code:: bash
 
@@ -145,7 +145,7 @@ Return to the "jumphost" terminal. Save the tfvars file and exit "vi" mode.
      # 1. hit "ESC" key to quit editing mode
      # 2. hold shift + ZZ to save
 
-Create **VES_P12_PASSWORD** environment variable with the password from the previous step. Keep the terminal window open.
+#. Create **VES_P12_PASSWORD** environment variable with the password from the previous step. Keep the terminal window open.
 
 .. code:: bash
 
@@ -154,7 +154,7 @@ Create **VES_P12_PASSWORD** environment variable with the password from the prev
 Deploy with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Return to the "jumphost" terminal within the xRDP session. Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
+#. Return to the "jumphost" terminal within the xRDP session. Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
 
 .. code:: bash
 
