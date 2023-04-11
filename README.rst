@@ -69,159 +69,193 @@ In this module we will deploy front-end portal in Cloud A with Terraform scripts
 Prepare Lab Environment
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
+1. Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx and click "Deploy" to create a deployment. Then hit "Start".
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
 
-Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
+2. Access the UDF "jumphost" via xRDP desktop session.
 
-.. figure:: assets/xc/administration.png
+======  ========
+User    Password
+======  ========
+ubuntu  HelloUDF
+======  ========
 
-Open **Credentials** section and click **Add Credentials**.
+.. figure:: assets/udf/udf-jumphost-xrdp.png
 
-.. figure:: assets/xc/create_credentials.png
-
-Fill the form as on the screen below and download your credentials file. Remember the password as it will be used for **VES_P12_PASSWORD** in later steps.
-
-.. figure:: assets/xc/fill_credentials.png
-
-The Terraform code will be deployed from the UDF "Client" as it has all the necessary tools installed already. Therefore, we need the p12 credentials file on the UDF "Client". The connection information will be found in the UDF deployment "Client" details under the tab "Access Methods".
-
-.. figure:: assets/udf/udf-access-methods.png
-
-SCP the p12 credentials file from your desktop to the UDF "Client" using the connection information from the previous step. This /path/file location will be used in tfvars as the value for "api_p12_file".
-
-.. code:: bash
-
-     # syntax example - Replace "CHANGEME" with your info
-     scp -O -P 47000 ~/CHANGEME/f5-sales-demo.console.ves.volterra.io.api-creds.p12 CHANGEME.access.udf.f5.com:/var/tmp/
-
-On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". These will be used in tfvars as the values for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
-
-.. figure:: assets/udf/udf-cloud-account.png
-
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. This will be used in tfvars as the value for "zone_name".
-
-.. figure:: assets/xc/zone_name.png
-
-Deploy with Terraform
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Login to the to the UDF "Client" via SSH.
-
-.. figure:: assets/udf/udf-ssh-client.png
-
-Create **VES_P12_PASSWORD** environment variable with the password from the previous step.
-
-.. code:: bash
-
-     export VES_P12_PASSWORD=your_certificate_password
-
-Clone the repository and open the directory.
+3. Open a terminal on the "jumphost". Clone the lab repository and change into the directory.
 
 .. code:: bash
 
      git clone https://github.com/f5devcentral/f5xc-mcn-TechXchange.git
      cd f5xc-mcn-TechXchange/
 
-Create the tfvars file and update it with your settings.
+4. Copy the tfvars file.
 
 .. code:: bash
 
-  cp admin.auto.tfvars.example admin.auto.tfvars
-  # MODIFY TO YOUR SETTINGS
-  vi admin.auto.tfvars
+     cp admin.auto.tfvars.example admin.auto.tfvars
 
-Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
+5. Edit the file using "vi" in the terminal so you can customize the parameter values for your lab like owner, keys, and zone. You will retrieve the values in the following steps. 
+
+.. code:: bash
+
+     vi admin.auto.tfvars
+
+     # Editing Tips
+     # 1. type "i" for insert
+     # 2. hit "ESC" key to quit editing mode
+     # 3. hold shift + ZZ to save
+
+     # Example Values
+     # owner          = "lastname"
+     # api_url        = "https://f5-sales-demo.console.ves.volterra.io/api"
+     # api_p12_file   = "/home/ubuntu/Downloads/f5-sales-demo.console.ves.volterra.io.api-creds.p12"
+     # aws_access_key = "accesskeyxxxx"
+     # aws_secret_key = "secretxxxx"
+     # zone_name      = "your.domain.com"
+
+6. On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". Paste the values in the tfvars file for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
+
+.. figure:: assets/udf/udf-cloud-account.png
+
+7. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. Paste the value in the tfvars file for "zone_name".
+
+.. figure:: assets/xc/zone_name.png
+
+8. Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
+
+.. figure:: assets/xc/administration.png
+
+9. Open **Credentials** section and click **Add Credentials**.
+
+.. figure:: assets/xc/create_credentials.png
+
+10. Fill the form as on the screen below and download your credentials file. The p12 file will download to /home/ubuntu/Downloads/f5-sales-demo.console.ves.volterra.io.api-creds.p12 and is used in tfvars as the value for "api_p12_file".
+
+Note: Remember the password as it will be used for **VES_P12_PASSWORD** in the next step
+
+.. figure:: assets/xc/fill_credentials.png
+
+11. Return to the "jumphost" terminal. Save the tfvars file and exit "vi" mode.
+
+.. code:: bash
+
+     # Editing Tips
+     # 1. hit "ESC" key to quit editing mode
+     # 2. hold shift + ZZ to save
+
+12. Create **VES_P12_PASSWORD** environment variable with the password from the previous step. Keep the terminal window open.
+
+.. code:: bash
+
+     export VES_P12_PASSWORD=your_certificate_password
+
+Deploy with Terraform
+~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Return to the "jumphost" terminal within the xRDP session. Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
 
 .. code:: bash
 
      ./cloud-A-setup.sh
 
-Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
+2. Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
 
 .. figure:: assets/xc/cloud_a_sites.png
 
-Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+3. Open **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_a_ready.png
 
 Create HTTP LB
 ~~~~~~~~~~~~~~~
 
-Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
+Next set up the HTTP Load Balancer.
+
+1. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
 
 .. figure:: assets/open_lb.png
 
-Select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+2. Select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/create_cloud_a_lb.png
 
-Give it a name. For this demo we will use **arcadia-finance**.
+3. Give it a name. For this demo we will use **arcadia-finance**.
 
 .. figure:: assets/cloud_a_lb_metadata.png
 
-Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**).
-
-Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
+4. Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**). Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
 
 .. figure:: assets/cloud_a_lb_domains.png
 
-After that let's create a new origin pool, which will be used in our load balancer. The origin pools are a mechanism to configure a set of endpoints grouped together into a resource pool that is used in the load balancer configuration. Click **Add Item** to open the pool creation form.
+5. After that let's create a new origin pool, which will be used in our load balancer. The origin pools are a mechanism to configure a set of endpoints grouped together into a resource pool that is used in the load balancer configuration. Click **Add Item** to open the pool creation form.
 
 .. figure:: assets/cloud_a_lb_origins.png
 
-Then open the drop-down menu and click **Create new Origin Pool**.
+6. Then open the drop-down menu and click **Create new Origin Pool**.
 
 .. figure:: assets/cloud_a_lb_create_origin.png
 
-To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
+7. To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
 
 .. figure:: assets/cloud_a_lb_origin_details.png
 
-Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+8. Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
 
 .. figure:: assets/cloud_a_lb_origin_server.png
 
-Then just click **Continue** to move on.
+9. Then just click **Continue** to move on.
 
 .. figure:: assets/cloud_a_lb_origin_details_save.png
 
-Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+10. Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_a_lb_origin_save.png
 
-Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+11. Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_a_lb_save.png
 
 Update DNS
 ~~~~~~~~~~~~
 
-You will see the created HTTP Load Balancer. Now we need to copy the host name in order to delegate the domain. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.  
+You will see the created HTTP Load Balancer. Now we need to copy the host name in order to delegate the domain.
+
+1. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.  
 
 .. figure:: assets/cloud_a_lb_dns_open.png
 
-Copy host name you see in the configuration. Host name will be used as CNAME value for the domain. After copying the host name, move on and copy CNAME value. It will be used to create an HTTPS certificate. 
+2. Copy host name you see in the configuration. Host name will be used as CNAME value for the domain. After copying the host name, move on and copy CNAME value. It will be used to create an HTTPS certificate. 
 
 .. figure:: assets/cloud_a_lb_dns_details.png
 
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and paste the host name as **CNAME record** and the CNAME value as **ACME_CHALLENGE record**. Then click **Update** to update DNS and create the certificate. 
+3. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and paste the host name as **CNAME record** and the CNAME value as **ACME_CHALLENGE record**. Then click **Update** to update DNS and create the certificate. 
 
 .. figure:: assets/cloud_a_lb_tool_update.png
 
-It may take a few minutes to update the DNS info and generate and apply the certificate. You will see their updated status as below:
+4. Check the status in the XC Console. It may take a few minutes to update the DNS info and generate and apply the certificate. You will see their updated status as below:
 
 .. figure:: assets/cloud_a_lb_dns_valid.png
 
 Test Application
 ~~~~~~~~~~~~~~~~~
 
-Now that the DNS is updated and the certificate is active, let's proceed to the website and test. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. Let's now log in. 
+Now that the DNS is updated and the certificate is active, let's proceed to the website and test.
+
+1. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. 
+
+Note: your FQDN will be different!
 
 .. figure:: assets/cloud_a_lb_website.png
 
-Fill in **admin** as username and **iloveblue** as its password. 
+2. Let's now log in. Use the following credentials:
+
+======  =========
+User    Password
+======  =========
+admin   iloveblue
+======  =========
 
 .. figure:: assets/cloud_a_lb_website_login.png
 
@@ -229,11 +263,11 @@ After we enter the website, we can see it's up and running. We can also see that
 
 .. figure:: assets/cloud_a_lb_website_sections.png
 
-Next let's navigate to **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
+3. Next let's navigate to the XC Console **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
 
 .. figure:: assets/app_traffic_1.png
 
-And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
+4. And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
 
 .. figure:: assets/app_traffic_2.png
 
@@ -258,85 +292,96 @@ Below is the service topology we will achieve at the end of this module. Note th
 Deploy with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
+1. Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
 
 .. code:: bash
 
      ./cloud-B-setup.sh
 
-You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+2. You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_b_ready.png
 
 Create HTTP LB
 ~~~~~~~~~~~~~~~
 
-Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case.
+
+1. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/cloud_b_lb_create.png
 
-Give this Load Balancer a name. For this use case we will use **friends-module**.
+2. Give this Load Balancer a name. For this use case we will use **friends-module**.
 
 .. figure:: assets/cloud_b_lb_metadata.png
 
-Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Next we need to specify the port. We will use Port **80** for this use case. 
+3. Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Next we need to specify the port. We will use Port **80** for this use case. 
+
+Note: your FQDN will be different!
 
 .. figure:: assets/cloud_b_lb_dns.png
 
-After that let's create a new origin pool, which will be used in our load balancer. Click **Add Item** to open the pool creation form.
+4. After that let's create a new origin pool, which will be used in our load balancer. Click **Add Item** to open the pool creation form.
 
 .. figure:: assets/cloud_b_lb_pool_add.png
 
-Then open the drop-down menu and click **Create new Origin Pool**.
+5. Then open the drop-down menu and click **Create new Origin Pool**.
 
 .. figure:: assets/cloud_b_lb_origin_create.png
 
-To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name - **friends-origin**. Next we need to configure the port - **80**. And then click **Add Item** to start configuring an origin server.
+6. To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name - **friends-origin**. Next we need to configure the port - **80**. And then click **Add Item** to start configuring an origin server.
 
 .. figure:: assets/cloud_b_lb_origin_meta.png
 
-First open the drop-down menu to specify the type of origin server. For this use case select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100**. After that we need to select **Site** as Site type and specify it as **cloud-b**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+7. First open the drop-down menu to specify the type of origin server. For this use case select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100**. After that we need to select **Site** as Site type and specify it as **cloud-b**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
 
 .. figure:: assets/cloud_b_lb_origin_add_server.png
 
-Then click **Continue** to move on.
+8. Then click **Continue** to move on.
 
 .. figure:: assets/cloud_b_lb_origin_continue.png
 
-Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+9. Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_b_lb_pool_continue.png
 
-Finally, configure the HTTP Load Balancer to Advertise the VIP to **cloud-a** for this use case. Select **Custom** for VIP Advertisement, which configures the specific sites where the VIP is advertised. And then click **Configure**.
+10. Finally, configure the HTTP Load Balancer to Advertise the VIP to **cloud-a** for this use case. Select **Custom** for VIP Advertisement, which configures the specific sites where the VIP is advertised. And then click **Configure**.
 
 .. figure:: assets/cloud_b_lb_avertisement.png
 
-Click **Add Item** to add the configuration.
+11. Click **Add Item** to add the configuration.
 
 .. figure:: assets/cloud_b_lb_avertisement_add.png
 
-In the drop down menu select **Site** as a place to advertise. Then select **Inside Network** for the site. And finally, select **cloud-a** as site reference. Click **Add Item** to add the specified configuration. 
+12. In the drop down menu select **Site** as a place to advertise. Then select **Inside Network** for the site. And finally, select **cloud-a** as site reference. Click **Add Item** to add the specified configuration. 
 
 .. figure:: assets/cloud_b_lb_avertisement_add_details.png
 
-Proceed by clicking **Apply**. This will apply the VIP Advertisement configuration to the HTTP Load Balancer. 
+13. Proceed by clicking **Apply**. This will apply the VIP Advertisement configuration to the HTTP Load Balancer. 
 
 .. figure:: assets/cloud_b_lb_avertisement_continue.png
 
-Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+14. Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_b_lb_save.png
 
 Update DNS
 ~~~~~~~~~~~~
 
-Now that we've configured the HTTP Load Balancer, we need to run the following command in CLI to extract the private IP value for our site from the Cloud A file: 
+1. Now that we've configured the HTTP Load Balancer, we need to run the following command in CLI to extract the private IP value for our site from the Cloud A file: 
 
-.. figure:: assets/cloud_b_terraform_output.png
+.. code:: bash
 
-The output will show us the private IP address for our site deployed by F5 Distributed Cloud Services. 
+     terraform -chdir=terraform/cloud-a/aws output
 
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
+The output will show us the private IP address for our site deployed by F5 Distributed Cloud Services.
+
+.. code:: bash
+
+     # example
+     xc_node_private_ip = "10.0.20.34"
+
+2. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
 
 .. figure:: assets/cloud_b_dns_update.png
 
@@ -360,113 +405,119 @@ At the end of this module, we will have the following architecture for our app s
 
 .. figure:: assets/layer-3.png
 
-
 Deploy with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
+1. Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
 
 .. code:: bash
 
      ./cloud-C-setup.sh
 
-You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+2. You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_c_ready.png
 
 Create Global Network
 ~~~~~~~~~~~~~~~~~~~~~
 
-Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
+Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site.
+
+1. Open the service menu and proceed to **Cloud and Edge Sites**.
 
 .. figure:: assets/cloud_c_aws_1.png
 
-In **Site Management** select **AWS VPC Sites** to see the site created. 
+2. In **Site Management** select **AWS VPC Sites** to see the site created. 
 
 .. figure:: assets/cloud_c_aws_2.png
 
-Open the menu of Cloud A site and select **Manage Configuration**.
+3. Open the menu of Cloud A site and select **Manage Configuration**.
 
 .. figure:: assets/cloud_c_aws_3.png
 
-In order to enable the editing mode, click **Edit Configuration**.
+4. In order to enable the editing mode, click **Edit Configuration**.
 
 .. figure:: assets/cloud_c_aws_4.png
 
-Scroll down to the **Networking Config** and click **Edit Configuration**. 
+5. Scroll down to the **Networking Config** and click **Edit Configuration**. 
 
 .. figure:: assets/cloud_c_aws_5.png
 
-Open the drop down menu to select global networks to connect and click **Add Item** to start creating Global Network.
+6. Open the drop down menu to select global networks to connect and click **Add Item** to start creating Global Network.
 
 .. figure:: assets/cloud_c_aws_6.png
 
-Open the list of the Global Virtual Networks and click **Create new Virtual Network**.
+7. Open the list of the Global Virtual Networks and click **Create new Virtual Network**.
 
 .. figure:: assets/cloud_c_aws_7.png
 
-First, give it a *unique* name (ex. yourlastname-arcadia-global). Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
+8. First, give it a *unique* name (ex. yourlastname-arcadia-global). Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
 
 .. figure:: assets/cloud_c_aws_8.png
 
-Take a look at the Network and click **Add Item**. 
+9. Take a look at the Network and click **Add Item**. 
 
 .. figure:: assets/cloud_c_aws_9.png
 
-The created Global Network will appear in the site configuration. Look it through and click **Apply**.
+10. The created Global Network will appear in the site configuration. Look it through and click **Apply**.
 
 .. figure:: assets/cloud_c_aws_10.png
 
-To complete the process we will click **Save and Exit**. 
+11. To complete the process we will click **Save and Exit**. 
 
 .. figure:: assets/cloud_c_aws_11.png
 
 Now we will add the Global Network we created to Cloud C, AWS VPC site. We can do this connectivity since there is non-overlapping IP space. If you recall, Cloud A is configured with 10.0.0.0/16 CIDR, and Cloud C is configured with 192.168.0.0/16 CIDR.
 
-Open the Cloud C site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
+12. Open the Cloud C site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
 
 .. figure:: assets/cloud_c_aws_12.png
 
-Enable editing configuration by clicking **Edit Configuration**.
+13. Enable editing configuration by clicking **Edit Configuration**.
 
 .. figure:: assets/cloud_c_aws_13.png
 
-Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
+14. Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
 
 .. figure:: assets/cloud_c_aws_14.png
 
-First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
+15. First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
 
 .. figure:: assets/cloud_c_aws_15.png
 
-Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
+16. Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
 
 .. figure:: assets/cloud_c_aws_16.png
 
-Apply the updated configuration to the Site by clicking **Apply**.
+17. Apply the updated configuration to the Site by clicking **Apply**.
 
 .. figure:: assets/cloud_c_aws_10.png
 
-Take a look at the configuration and complete updating by clicking **Save and Exit**.
+18. Take a look at the configuration and complete updating by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
 Update Routes
 ~~~~~~~~~~~~~~
 
-Next we need to specify routes in the clouds. In this demo we already did it. You can take a look at the screenshot taken from Cloud A below.
+Next we need to specify routes in the clouds. In this demo we already did it.
+
+1. You can take a look at the screenshot taken from Cloud A below.
 
 .. figure:: assets/cloud_c_routes.png
 
+2. Go explore! Navigate to the Cloud B site and review those route tables too. What routes exist?
 
 Test Application
 ~~~~~~~~~~~~~~~~~
 
-Now let's test the connected modules. We will open the site and see that now all the modules are active, including the Transactions. 
+Now let's test the connected modules.
+
+1. We will open the site and see that now all the modules are active, including the Transactions. 
 
 .. figure:: assets/cloud_c_app.png
 
-Let's now take a look at site monitoring and visibility. Navigate to **Site Connectivity** and then move on to **Site Networking**. 
+2. Let's now take a look at site monitoring and visibility. Navigate to **Site Connectivity** and then move on to **Site Networking**. 
 
 .. figure:: assets/monitoring_0.png
 
@@ -474,11 +525,11 @@ The dashboard shows all the insights, including sites' status and traffic distri
 
 .. figure:: assets/monitoring_1.png
 
-Next let's go to the **Tunnel** tab and some tunnel analytics, including status, latency, data plane reachability, throughput and drop rate. We can see that our tunnels are up and running with high connectivity.    
+3. Next let's go to the **Tunnel** tab and some tunnel analytics, including status, latency, data plane reachability, throughput and drop rate. We can see that our tunnels are up and running with high connectivity.    
 
 .. figure:: assets/monitoring_2.png
 
-And finally, we will take a look at statistics by interface on each F5 Distributed Cloud Services node. Proceed to the **Interfaces** tab to see the site the interface refers to, its status and throughput, as well as drop rate.   
+4. And finally, we will take a look at statistics by interface on each F5 Distributed Cloud Services node. Proceed to the **Interfaces** tab to see the site the interface refers to, its status and throughput, as well as drop rate.   
 
 .. figure:: assets/monitoring_3.png
 
