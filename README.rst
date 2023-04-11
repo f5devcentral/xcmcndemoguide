@@ -245,13 +245,13 @@ Test Application
 
 Now that the DNS is updated and the certificate is active, let's proceed to the website and test.
 
-1. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. Let's now log in. 
+1. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. 
 
 Note: your FQDN will be different!
 
 .. figure:: assets/cloud_a_lb_website.png
 
-Use the following credentials:
+2. Let's now log in. Use the following credentials:
 
 ======  =========
 User    Password
@@ -265,11 +265,11 @@ After we enter the website, we can see it's up and running. We can also see that
 
 .. figure:: assets/cloud_a_lb_website_sections.png
 
-2. Next let's navigate to the XC Console **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
+3. Next let's navigate to the XC Console **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
 
 .. figure:: assets/app_traffic_1.png
 
-3. And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
+4. And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
 
 .. figure:: assets/app_traffic_2.png
 
@@ -294,72 +294,75 @@ Below is the service topology we will achieve at the end of this module. Note th
 Deploy with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
+1. Deploy the Terraform code for "Cloud B" by running the script **./cloud-B-setup.sh**.
 
 .. code:: bash
 
      ./cloud-B-setup.sh
 
-You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+2. You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_b_ready.png
 
 Create HTTP LB
 ~~~~~~~~~~~~~~~
 
-Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+Assuming you now have your Cloud B confirmed, let's create one more HTTP Load Balancer for this use case.
+
+1. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/cloud_b_lb_create.png
 
-Give this Load Balancer a name. For this use case we will use **friends-module**.
+2. Give this Load Balancer a name. For this use case we will use **friends-module**.
 
 .. figure:: assets/cloud_b_lb_metadata.png
 
-Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Next we need to specify the port. We will use Port **80** for this use case. 
+3. Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Next we need to specify the port. We will use Port **80** for this use case. 
 
+Note: your FQDN will be different!
 .. figure:: assets/cloud_b_lb_dns.png
 
-After that let's create a new origin pool, which will be used in our load balancer. Click **Add Item** to open the pool creation form.
+4. After that let's create a new origin pool, which will be used in our load balancer. Click **Add Item** to open the pool creation form.
 
 .. figure:: assets/cloud_b_lb_pool_add.png
 
-Then open the drop-down menu and click **Create new Origin Pool**.
+5. Then open the drop-down menu and click **Create new Origin Pool**.
 
 .. figure:: assets/cloud_b_lb_origin_create.png
 
-To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name - **friends-origin**. Next we need to configure the port - **80**. And then click **Add Item** to start configuring an origin server.
+6. To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name - **friends-origin**. Next we need to configure the port - **80**. And then click **Add Item** to start configuring an origin server.
 
 .. figure:: assets/cloud_b_lb_origin_meta.png
 
-First open the drop-down menu to specify the type of origin server. For this use case select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100**. After that we need to select **Site** as Site type and specify it as **cloud-b**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+7. First open the drop-down menu to specify the type of origin server. For this use case select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100**. After that we need to select **Site** as Site type and specify it as **cloud-b**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
 
 .. figure:: assets/cloud_b_lb_origin_add_server.png
 
-Then click **Continue** to move on.
+8. Then click **Continue** to move on.
 
 .. figure:: assets/cloud_b_lb_origin_continue.png
 
-Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+9. Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_b_lb_pool_continue.png
 
-Finally, configure the HTTP Load Balancer to Advertise the VIP to **cloud-a** for this use case. Select **Custom** for VIP Advertisement, which configures the specific sites where the VIP is advertised. And then click **Configure**.
+10. Finally, configure the HTTP Load Balancer to Advertise the VIP to **cloud-a** for this use case. Select **Custom** for VIP Advertisement, which configures the specific sites where the VIP is advertised. And then click **Configure**.
 
 .. figure:: assets/cloud_b_lb_avertisement.png
 
-Click **Add Item** to add the configuration.
+11. Click **Add Item** to add the configuration.
 
 .. figure:: assets/cloud_b_lb_avertisement_add.png
 
-In the drop down menu select **Site** as a place to advertise. Then select **Inside Network** for the site. And finally, select **cloud-a** as site reference. Click **Add Item** to add the specified configuration. 
+12. In the drop down menu select **Site** as a place to advertise. Then select **Inside Network** for the site. And finally, select **cloud-a** as site reference. Click **Add Item** to add the specified configuration. 
 
 .. figure:: assets/cloud_b_lb_avertisement_add_details.png
 
-Proceed by clicking **Apply**. This will apply the VIP Advertisement configuration to the HTTP Load Balancer. 
+13. Proceed by clicking **Apply**. This will apply the VIP Advertisement configuration to the HTTP Load Balancer. 
 
 .. figure:: assets/cloud_b_lb_avertisement_continue.png
 
-Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+14. Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_b_lb_save.png
 
