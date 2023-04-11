@@ -185,37 +185,35 @@ Next set up the HTTP Load Balancer.
 
 .. figure:: assets/cloud_a_lb_metadata.png
 
-4. Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**).
-
-5. Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
+4. Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**). Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
 
 .. figure:: assets/cloud_a_lb_domains.png
 
-6. After that let's create a new origin pool, which will be used in our load balancer. The origin pools are a mechanism to configure a set of endpoints grouped together into a resource pool that is used in the load balancer configuration. Click **Add Item** to open the pool creation form.
+5. After that let's create a new origin pool, which will be used in our load balancer. The origin pools are a mechanism to configure a set of endpoints grouped together into a resource pool that is used in the load balancer configuration. Click **Add Item** to open the pool creation form.
 
 .. figure:: assets/cloud_a_lb_origins.png
 
-7. Then open the drop-down menu and click **Create new Origin Pool**.
+6. Then open the drop-down menu and click **Create new Origin Pool**.
 
 .. figure:: assets/cloud_a_lb_create_origin.png
 
-8. To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
+7. To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
 
 .. figure:: assets/cloud_a_lb_origin_details.png
 
-9. Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+8. Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
 
 .. figure:: assets/cloud_a_lb_origin_server.png
 
-10. Then just click **Continue** to move on.
+9. Then just click **Continue** to move on.
 
 .. figure:: assets/cloud_a_lb_origin_details_save.png
 
-11. Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+10. Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_a_lb_origin_save.png
 
-12. Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+11. Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_a_lb_save.png
 
@@ -369,13 +367,20 @@ Note: your FQDN will be different!
 Update DNS
 ~~~~~~~~~~~~
 
-Now that we've configured the HTTP Load Balancer, we need to run the following command in CLI to extract the private IP value for our site from the Cloud A file: 
+1. Now that we've configured the HTTP Load Balancer, we need to run the following command in CLI to extract the private IP value for our site from the Cloud A file: 
 
-.. figure:: assets/cloud_b_terraform_output.png
+.. code:: bash
 
-The output will show us the private IP address for our site deployed by F5 Distributed Cloud Services. 
+     terraform -chdir=terraform/cloud-a/aws output
 
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
+The output will show us the private IP address for our site deployed by F5 Distributed Cloud Services.
+
+.. code:: bash
+
+     # example
+     xc_node_private_ip = "10.0.20.34"
+
+2. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
 
 .. figure:: assets/cloud_b_dns_update.png
 
@@ -399,113 +404,119 @@ At the end of this module, we will have the following architecture for our app s
 
 .. figure:: assets/layer-3.png
 
-
 Deploy with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
+1. Deploy the Terraform code for "Cloud C" by running the script **./cloud-C-setup.sh**.
 
 .. code:: bash
 
      ./cloud-C-setup.sh
 
-You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
+2. You can check status in the F5 Distributed Cloud Console, **Cloud and Edge Sites**, **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_c_ready.png
 
 Create Global Network
 ~~~~~~~~~~~~~~~~~~~~~
 
-Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
+Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site.
+
+1. Open the service menu and proceed to **Cloud and Edge Sites**.
 
 .. figure:: assets/cloud_c_aws_1.png
 
-In **Site Management** select **AWS VPC Sites** to see the site created. 
+2. In **Site Management** select **AWS VPC Sites** to see the site created. 
 
 .. figure:: assets/cloud_c_aws_2.png
 
-Open the menu of Cloud A site and select **Manage Configuration**.
+3. Open the menu of Cloud A site and select **Manage Configuration**.
 
 .. figure:: assets/cloud_c_aws_3.png
 
-In order to enable the editing mode, click **Edit Configuration**.
+4. In order to enable the editing mode, click **Edit Configuration**.
 
 .. figure:: assets/cloud_c_aws_4.png
 
-Scroll down to the **Networking Config** and click **Edit Configuration**. 
+5. Scroll down to the **Networking Config** and click **Edit Configuration**. 
 
 .. figure:: assets/cloud_c_aws_5.png
 
-Open the drop down menu to select global networks to connect and click **Add Item** to start creating Global Network.
+6. Open the drop down menu to select global networks to connect and click **Add Item** to start creating Global Network.
 
 .. figure:: assets/cloud_c_aws_6.png
 
-Open the list of the Global Virtual Networks and click **Create new Virtual Network**.
+7. Open the list of the Global Virtual Networks and click **Create new Virtual Network**.
 
 .. figure:: assets/cloud_c_aws_7.png
 
-First, give it a *unique* name (ex. yourlastname-arcadia-global). Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
+8. First, give it a *unique* name (ex. yourlastname-arcadia-global). Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
 
 .. figure:: assets/cloud_c_aws_8.png
 
-Take a look at the Network and click **Add Item**. 
+9. Take a look at the Network and click **Add Item**. 
 
 .. figure:: assets/cloud_c_aws_9.png
 
-The created Global Network will appear in the site configuration. Look it through and click **Apply**.
+10. The created Global Network will appear in the site configuration. Look it through and click **Apply**.
 
 .. figure:: assets/cloud_c_aws_10.png
 
-To complete the process we will click **Save and Exit**. 
+11. To complete the process we will click **Save and Exit**. 
 
 .. figure:: assets/cloud_c_aws_11.png
 
 Now we will add the Global Network we created to Cloud C, AWS VPC site. We can do this connectivity since there is non-overlapping IP space. If you recall, Cloud A is configured with 10.0.0.0/16 CIDR, and Cloud C is configured with 192.168.0.0/16 CIDR.
 
-Open the Cloud C site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
+12. Open the Cloud C site menu and select **Manage Configuration** to add the Global Network to AWS VPC site.
 
 .. figure:: assets/cloud_c_aws_12.png
 
-Enable editing configuration by clicking **Edit Configuration**.
+13. Enable editing configuration by clicking **Edit Configuration**.
 
 .. figure:: assets/cloud_c_aws_13.png
 
-Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
+14. Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
 
 .. figure:: assets/cloud_c_aws_14.png
 
-First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
+15. First, enable showing advanced fields, and then select the global network to connect. Click **Add Item**.
 
 .. figure:: assets/cloud_c_aws_15.png
 
-Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
+16. Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
 
 .. figure:: assets/cloud_c_aws_16.png
 
-Apply the updated configuration to the Site by clicking **Apply**.
+17. Apply the updated configuration to the Site by clicking **Apply**.
 
 .. figure:: assets/cloud_c_aws_10.png
 
-Take a look at the configuration and complete updating by clicking **Save and Exit**.
+18. Take a look at the configuration and complete updating by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
 Update Routes
 ~~~~~~~~~~~~~~
 
-Next we need to specify routes in the clouds. In this demo we already did it. You can take a look at the screenshot taken from Cloud A below.
+Next we need to specify routes in the clouds. In this demo we already did it.
+
+1. You can take a look at the screenshot taken from Cloud A below.
 
 .. figure:: assets/cloud_c_routes.png
 
+2. Go explore! Navigate to the Cloud B site and review those route tables too. What routes exist?
 
 Test Application
 ~~~~~~~~~~~~~~~~~
 
-Now let's test the connected modules. We will open the site and see that now all the modules are active, including the Transactions. 
+Now let's test the connected modules.
+
+1. We will open the site and see that now all the modules are active, including the Transactions. 
 
 .. figure:: assets/cloud_c_app.png
 
-Let's now take a look at site monitoring and visibility. Navigate to **Site Connectivity** and then move on to **Site Networking**. 
+2. Let's now take a look at site monitoring and visibility. Navigate to **Site Connectivity** and then move on to **Site Networking**. 
 
 .. figure:: assets/monitoring_0.png
 
@@ -513,11 +524,11 @@ The dashboard shows all the insights, including sites' status and traffic distri
 
 .. figure:: assets/monitoring_1.png
 
-Next let's go to the **Tunnel** tab and some tunnel analytics, including status, latency, data plane reachability, throughput and drop rate. We can see that our tunnels are up and running with high connectivity.    
+3. Next let's go to the **Tunnel** tab and some tunnel analytics, including status, latency, data plane reachability, throughput and drop rate. We can see that our tunnels are up and running with high connectivity.    
 
 .. figure:: assets/monitoring_2.png
 
-And finally, we will take a look at statistics by interface on each F5 Distributed Cloud Services node. Proceed to the **Interfaces** tab to see the site the interface refers to, its status and throughput, as well as drop rate.   
+4. And finally, we will take a look at statistics by interface on each F5 Distributed Cloud Services node. Proceed to the **Interfaces** tab to see the site the interface refers to, its status and throughput, as well as drop rate.   
 
 .. figure:: assets/monitoring_3.png
 
