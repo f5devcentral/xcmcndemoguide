@@ -75,7 +75,7 @@ Open the UDF Blueprint "F5 TechXchange 2023 XC MCN (TBD)" https://xxx.xxx.xxx an
 
 Access the UDF "jumphost" via xRDP desktop session.
 
-.. figure:: assets/xc/udf-jumphost-xrdp.png
+.. figure:: assets/udf/udf-jumphost-xrdp.png
 
 ======  ========
 User    Password
@@ -94,14 +94,12 @@ Copy the tfvars file.
 
 .. code:: bash
 
-     # copy the example file
      cp admin.auto.tfvars.example admin.auto.tfvars
 
 Edit the file using "vi" in the terminal so you can customize the parameter values for your lab like owner, keys, and zone. You will retrieve the values in the following steps. 
 
 .. code:: bash
 
-     # edit the file
      vi admin.auto.tfvars
 
      # Editing Tips
