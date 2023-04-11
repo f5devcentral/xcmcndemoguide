@@ -75,13 +75,13 @@ Prepare Lab Environment
 
 2. Access the UDF "jumphost" via xRDP desktop session.
 
-.. figure:: assets/udf/udf-jumphost-xrdp.png
-
 ======  ========
 User    Password
 ======  ========
 ubuntu  HelloUDF
 ======  ========
+
+.. figure:: assets/udf/udf-jumphost-xrdp.png
 
 3. Open a terminal on the "jumphost". Clone the lab repository and change into the directory.
 
@@ -251,11 +251,12 @@ Note: your FQDN will be different!
 
 .. figure:: assets/cloud_a_lb_website.png
 
-======  ========
+Use the following credentials:
+======  =========
 User    Password
-======  ========
-admin  iloveblue
-======  ========
+======  =========
+admin   iloveblue
+======  =========
 
 .. figure:: assets/cloud_a_lb_website_login.png
 
