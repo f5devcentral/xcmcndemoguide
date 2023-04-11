@@ -252,6 +252,7 @@ Note: your FQDN will be different!
 .. figure:: assets/cloud_a_lb_website.png
 
 Use the following credentials:
+
 ======  =========
 User    Password
 ======  =========
