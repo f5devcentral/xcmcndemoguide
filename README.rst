@@ -160,79 +160,83 @@ Deploy with Terraform
 
      ./cloud-A-setup.sh
 
-Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
+2. Open F5 Distributed Cloud Console and navigate to the **Cloud and Edge Sites** tab.
 
 .. figure:: assets/xc/cloud_a_sites.png
 
-Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+3. Open **Site List** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: assets/xc/cloud_a_ready.png
 
 Create HTTP LB
 ~~~~~~~~~~~~~~~
 
-Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
+Next set up the HTTP Load Balancer.
+
+1. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
 
 .. figure:: assets/open_lb.png
 
-Select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+2. Select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/create_cloud_a_lb.png
 
-Give it a name. For this demo we will use **arcadia-finance**.
+3. Give it a name. For this demo we will use **arcadia-finance**.
 
 .. figure:: assets/cloud_a_lb_metadata.png
 
-Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**).
+4. Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use the domain name supplied by the Arcadia DNS tool which is unique for each lab student (ex. **"yawning-white-antelope.github.securelab.online"**).
 
-Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
+5. Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
 
 .. figure:: assets/cloud_a_lb_domains.png
 
-After that let's create a new origin pool, which will be used in our load balancer. The origin pools are a mechanism to configure a set of endpoints grouped together into a resource pool that is used in the load balancer configuration. Click **Add Item** to open the pool creation form.
+6. After that let's create a new origin pool, which will be used in our load balancer. The origin pools are a mechanism to configure a set of endpoints grouped together into a resource pool that is used in the load balancer configuration. Click **Add Item** to open the pool creation form.
 
 .. figure:: assets/cloud_a_lb_origins.png
 
-Then open the drop-down menu and click **Create new Origin Pool**.
+7. Then open the drop-down menu and click **Create new Origin Pool**.
 
 .. figure:: assets/cloud_a_lb_create_origin.png
 
-To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
+8. To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
 
 .. figure:: assets/cloud_a_lb_origin_details.png
 
-Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+9. Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
 
 .. figure:: assets/cloud_a_lb_origin_server.png
 
-Then just click **Continue** to move on.
+10. Then just click **Continue** to move on.
 
 .. figure:: assets/cloud_a_lb_origin_details_save.png
 
-Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+11. Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_a_lb_origin_save.png
 
-Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+12. Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
 
 .. figure:: assets/cloud_a_lb_save.png
 
 Update DNS
 ~~~~~~~~~~~~
 
-You will see the created HTTP Load Balancer. Now we need to copy the host name in order to delegate the domain. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.  
+You will see the created HTTP Load Balancer. Now we need to copy the host name in order to delegate the domain.
+
+1. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.  
 
 .. figure:: assets/cloud_a_lb_dns_open.png
 
-Copy host name you see in the configuration. Host name will be used as CNAME value for the domain. After copying the host name, move on and copy CNAME value. It will be used to create an HTTPS certificate. 
+2. Copy host name you see in the configuration. Host name will be used as CNAME value for the domain. After copying the host name, move on and copy CNAME value. It will be used to create an HTTPS certificate. 
 
 .. figure:: assets/cloud_a_lb_dns_details.png
 
-Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and paste the host name as **CNAME record** and the CNAME value as **ACME_CHALLENGE record**. Then click **Update** to update DNS and create the certificate. 
+3. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and paste the host name as **CNAME record** and the CNAME value as **ACME_CHALLENGE record**. Then click **Update** to update DNS and create the certificate. 
 
 .. figure:: assets/cloud_a_lb_tool_update.png
 
-It may take a few minutes to update the DNS info and generate and apply the certificate. You will see their updated status as below:
+4. Check the status in the XC Console. It may take a few minutes to update the DNS info and generate and apply the certificate. You will see their updated status as below:
 
 .. figure:: assets/cloud_a_lb_dns_valid.png
 
