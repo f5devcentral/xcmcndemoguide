@@ -243,7 +243,11 @@ You will see the created HTTP Load Balancer. Now we need to copy the host name i
 Test Application
 ~~~~~~~~~~~~~~~~~
 
-Now that the DNS is updated and the certificate is active, let's proceed to the website and test. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. Let's now log in. 
+Now that the DNS is updated and the certificate is active, let's proceed to the website and test.
+
+1. Go to **yawning-white-antelope.github.securelab.online** and see if the certificate of the site is valid. Let's now log in. 
+
+Note: your FQDN will be different!
 
 .. figure:: assets/cloud_a_lb_website.png
 
@@ -255,11 +259,11 @@ After we enter the website, we can see it's up and running. We can also see that
 
 .. figure:: assets/cloud_a_lb_website_sections.png
 
-Next let's navigate to **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
+2. Next let's navigate to the XC Console **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
 
 .. figure:: assets/app_traffic_1.png
 
-And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
+3. And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
 
 .. figure:: assets/app_traffic_2.png
 
