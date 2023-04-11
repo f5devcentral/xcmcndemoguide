@@ -251,7 +251,11 @@ Note: your FQDN will be different!
 
 .. figure:: assets/cloud_a_lb_website.png
 
-Fill in **admin** as username and **iloveblue** as its password. 
+======  ========
+User    Password
+======  ========
+admin  iloveblue
+======  ========
 
 .. figure:: assets/cloud_a_lb_website_login.png
 
