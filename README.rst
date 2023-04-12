@@ -505,11 +505,11 @@ Next we need to configure routing. Traffic between Cloud A and Cloud C needs to 
 Items of importance...
 "Send all traffic matching 192.168.0.0/16 to the XC node"
 
-==============  =========
-Destination     Target
-==============  =========
-192.168.0.0/16   eni-00b55ee73d3b7b9ce << XC node NIC ID
-==============  =========
+==============================  =========
+Destination                     Target
+==============================  =========
+192.168.0.0/16 << Cloud C CIDR  eni-00b55ee73d3b7b9ce << Cloud A XC node NIC ID
+==============================  =========
 
 2. Go explore! Navigate to the Cloud B site and review those route tables too. What routes exist?
 
