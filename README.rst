@@ -17,7 +17,7 @@ Public Cloud (multi-cloud), Modules & Scripts
 
 The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds. These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases.
 
-Note: The lab for F5 TechXchange uses the F5 UDF environment and only has permissions into AWS public cloud. As a result, all resources deployed for F5 TechXchange 2023 will be deployed to AWS. (Outside of TechXchange, we recommend to try this lab across two different public cloud providers for the most representative MCN experience.)
+Note: The lab for F5 TechXchange uses the F5 UDF environment, and for simplicity only leverages the AWS public cloud. As a result, all resources deployed for F5 TechXchange 2023 will be deployed to AWS. After TechXchange, we recommend trying this lab across two different public cloud providers for the most representative MCN experience.
 
 * Cloud A: AWS
 
