@@ -1,5 +1,5 @@
 resource "volterra_cloud_credentials" "aws_cred" {
-  name = "${var.owner}-${var.environment}"
+  name = "${var.owner}-${var.environment}-techxchange"
   namespace = "system"
   aws_secret_key {
 	  access_key = var.aws_access_key
@@ -11,7 +11,7 @@ resource "volterra_cloud_credentials" "aws_cred" {
   }
 }
 resource "volterra_aws_vpc_site" "aws_vpc_site" {
-  name       = "${var.owner}-${var.environment}"
+  name       = "${var.owner}-${var.environment}-techxchange"
   namespace  = "system"
   aws_region = var.aws_region
   aws_cred {
@@ -74,7 +74,7 @@ resource "volterra_tf_params_action" "action_apply" {
 
 data "aws_instance" "xc_node" {
   instance_tags = {
-    "ves-io-site-name" = "${var.owner}-${var.environment}"
+    "ves-io-site-name" = "${var.owner}-${var.environment}-techxchange"
   }
 
   filter {
