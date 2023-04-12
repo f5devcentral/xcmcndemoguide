@@ -376,6 +376,7 @@ The output will show us the private IP address for our site deployed by F5 Distr
 
      # example
      xc_node_private_ip = "10.0.20.34"
+     xc_node_private_nic_id = "eni-00b55ee73d3b7b9ce"
 
 2. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
 
@@ -496,14 +497,13 @@ Now we will add the Global Network we created to Cloud C, AWS VPC site. We can d
 Update Routes
 ~~~~~~~~~~~~~~
 
-Next we need to configure routing. Traffic between Cloud A and Cloud C needs to use the XC Global Network. This is achieved with route table entries, matching address prefixes, and setting next hop as the XC node's network interface. This demo has already created a route table entry for Cloud A to reach Cloud C via the XC Global Network. Your task is to configure similar routing on Cloud C.
+Next we need to configure routing. Traffic between Cloud A and Cloud C will use the XC Global Network. This is achieved with route table entries, matching address prefixes, and setting next hop as the XC node's network interface. This demo has already created a route table entry for Cloud A to reach Cloud C via the XC Global Network.
 
 1. You can take a look at the screenshot taken from Cloud A below.
 
 .. figure:: assets/cloud_c_routes.png
 
 Items of importance...
-"Send all traffic matching 192.168.0.0/16 to the XC node"
 
 ==============================  =========
 Destination                     Target
@@ -511,7 +511,11 @@ Destination                     Target
 192.168.0.0/16 << Cloud C CIDR  eni-00b55ee73d3b7b9ce << Cloud A XC node NIC ID
 ==============================  =========
 
-2. Go explore! Navigate to the Cloud B site and review those route tables too. What routes exist?
+Your task is to configure similar routing in Cloud C.
+
+2. Retrieve the NIC ID of the XC node running in Cloud C within the AWS console > EC2. 
+
+3. 
 
 Test Application
 ~~~~~~~~~~~~~~~~~
