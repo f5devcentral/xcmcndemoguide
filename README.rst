@@ -12,10 +12,6 @@ Use this guide and the provided sample app, included scripts and utility app to 
 
 Each of the modules in this guide addresses a specific use-case with a help of included Terraform scripts. With Terraform scripts you can simplify the deployment of a sample app components in multiple cloud environments,
 
-The included link to a utility service provides some helpful tools to assist with both configuration and testing of the environments:
-
-- Generate a domain and configure DNS records for it based on XC CNAME and other specific parameters;
-
 Public Cloud (multi-cloud), Modules & Scripts
 ##############################################
 
