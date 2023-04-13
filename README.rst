@@ -583,7 +583,7 @@ First, identify the target network interface (ENI) for the XC node in Cloud C.
 
 .. figure:: assets/cloud_c_eni_ids.png
 
-5. You can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
+5. Optionally, you can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
 
 .. figure:: assets/cloud_c_eni_tags.png
 
@@ -629,6 +629,8 @@ Alternatively, you can re-run the Cloud C setup script to apply the correct tags
 10. Click "Add route", supply details, then "Save Changes".
 
 .. figure:: assets/cloud_c_route_table_public3.png
+
+Items of importance...
 
 ==============================  =========
 Destination                     Target
