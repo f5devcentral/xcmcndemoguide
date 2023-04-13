@@ -1,21 +1,29 @@
-resource "volterra_cloud_credentials" "aws_cred" {
-  name = "${var.owner}-${var.environment}-techxchange"
-  namespace = "system"
-  aws_secret_key {
-	  access_key = var.aws_access_key
-	  secret_key {
-	  	clear_secret_info {
-	  		url = "string:///${base64encode(var.aws_secret_key)}"
-	  	}
-	  }
-  }
-}
+# resource "volterra_cloud_credentials" "aws_cred" {
+#   name = "${var.owner}-${var.environment}-techxchange"
+#   namespace = "system"
+#   aws_secret_key {
+# 	  access_key = var.aws_access_key
+# 	  secret_key {
+# 	  	clear_secret_info {
+# 	  		url = "string:///${base64encode(var.aws_secret_key)}"
+# 	  	}
+# 	  }
+#   }
+# }
+
+# JeffGiroux - TechXchange notes
+# 	All 3 clouds in the lab guide use AWS. Therefore
+# 	only Cloud A needs to create new cloud credentials.
+# 	Cloud B and Cloud C will reference the existing name.
+# 	This avoids creating duplicate cloud credentials.
+
 resource "volterra_aws_vpc_site" "aws_vpc_site" {
   name       = "${var.owner}-${var.environment}-techxchange"
   namespace  = "system"
   aws_region = var.aws_region
   aws_cred {
-	  name      = volterra_cloud_credentials.aws_cred.name
+	  #name      = volterra_cloud_credentials.aws_cred.name
+	  name      = "${var.owner}-${var.environment}-techxchange"
 	  namespace = "system"
   }
   vpc {
