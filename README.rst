@@ -566,19 +566,21 @@ At this point in the lab, you validated that Cloud A has route entries to reach 
 
 .. figure:: assets/cloud_c_region.png
 
-7. Select the XC instance "master-0", click "Networking" tab, then copy the private interface ENI ID. This will be used as the route entry "target". You can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
+7. Select the XC instance "master-0", click "Networking" tab, then copy the private interface ENI ID. This will be used as the route entry "target".
 
 .. figure:: assets/cloud_c_eni_ids.png
 
+8. You can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
+
 .. figure:: assets/cloud_c_eni_tags.png
 
-8. Navigate to VPC, then Route Tables.
+9. Navigate to VPC, then Route Tables.
 
 .. figure:: assets/cloud_aws_console_vpc.png
 
 .. figure:: assets/cloud_aws_console_route_tables.png
 
-9. Select the Cloud C public route table.
+10. Select the Cloud C public route table.
 
 Note: The Terraform code in this demo assigns the tag "Name" with a value of "cloud-c-public-route-table". Unfortunately, the XC node deployment also updates the "Name" tag and changes the value. Therefore, your Cloud C public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
 
@@ -603,11 +605,11 @@ Alternatively, you can re-run the Cloud C setup script to apply the correct tags
      Plan: 0 to add, 1 to change, 0 to destroy.
      ...snippet...
 
-10. Select "Edit Routes".
+11. Select "Edit Routes".
 
 .. figure:: assets/cloud_c_route_table_public2.png
 
-11. Click "Add route", supply details, then "Save Changes".
+12. Click "Add route", supply details, then "Save Changes".
 
 .. figure:: assets/cloud_c_route_table_public3.png
 
