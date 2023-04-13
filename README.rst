@@ -113,7 +113,7 @@ ubuntu  HelloUDF
 
 6. On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". Paste the values in the tfvars file for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
 
-.. figure:: assets/udf/udf-cloud-account.png
+.. figure:: assets/udf/udf-cloud-account-api.png
 
 7. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. Paste the value in the tfvars file for "zone_name".
 
@@ -376,6 +376,7 @@ The output will show us the private IP address for our site deployed by F5 Distr
 
      # example
      xc_node_private_ip = "10.0.20.34"
+     xc_node_private_nic_id = "eni-0d64d56fe2e9bcadc"
 
 2. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
 
@@ -493,16 +494,155 @@ Now we will add the Global Network we created to Cloud C, AWS VPC site. We can d
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Update Routes
-~~~~~~~~~~~~~~
+Update Routes in Cloud A
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Next we need to specify routes in the clouds. In this demo we already did it.
+Next we need to configure routing. Traffic between Cloud A and Cloud C will use the XC Global Network. This is achieved with route table entries, matching address prefixes, and setting next hop as the XC node's network interface. This demo already created a route table entry for Cloud A to reach Cloud C via the XC Global Network.
 
-1. You can take a look at the screenshot taken from Cloud A below.
+Login to Cloud A (AWS) to validate existing routes.
 
-.. figure:: assets/cloud_c_routes.png
+1. On the UDF deployment page, click the "Cloud Accounts" tab and copy the value for "Console Password". Then open the "Console URL" to login to AWS.
 
-2. Go explore! Navigate to the Cloud B site and review those route tables too. What routes exist?
+.. figure:: assets/udf/udf-cloud-account-console.png
+
+================  ================
+Console Username  Console Password
+================  ================
+udf               <redacted>
+================  ================
+
+2. Change the AWS Region to match Cloud A. For this demo, you deployed to "us-east-2" US East (Ohio).
+
+.. figure:: assets/cloud_a_region.png
+
+3. Navigate to VPC.
+
+.. figure:: assets/cloud_aws_console_vpc.png
+
+4. Select Route Tables.
+
+.. figure:: assets/cloud_aws_console_route_tables.png
+
+5. Select the Cloud A public route table and view the Routes.
+
+Note: The Terraform code in this demo assigns "Name" with a value of "cloud-a-public-route-table". Unfortunately, the XC node deployment also updates "Name" and changes the value. Therefore, your public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
+
+.. figure:: assets/cloud_a_route_table_public1.png
+
+Alternatively, you can re-run the Cloud A setup script to apply the correct tags and values.
+
+.. code:: bash
+
+     ./cloud-A-setup.sh
+
+     # example output
+     Terraform will perform the following actions:
+
+     # aws_route_table.public will be updated in-place
+     ~ resource "aws_route_table" "public" {
+          id               = "rtb-0d4ebe7caae0c2ac0"
+          ~ tags             = {
+               "Environment"             = "cloud-a"
+               ~ "Name"                    = "CGyYiprZO-outside" -> "cloud-a-public-route-table"
+
+     Plan: 0 to add, 1 to change, 0 to destroy.
+     ...snippet...
+
+.. figure:: assets/cloud_a_route_table_public2.png
+
+Items of importance...
+
+==============================  =========
+Destination                     Target
+==============================  =========
+192.168.0.0/16 << Cloud C CIDR  eni-0d64d56fe2e9bcadc << Cloud A XC node NIC ID
+==============================  =========
+
+What does this mean? Subnets in Cloud A that are associated with this route table will send 192.168.0.0/16 destination traffic to the XC node as the next hop.
+
+Update Routes in Cloud C
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+At this point in the lab, you validated that Cloud A has route entries to reach Cloud C. Now you need to setup similar routing in Cloud C to allow return traffic.
+
+First, identify the target network interface (ENI) for the XC node in Cloud C.
+
+1. Return to the AWS Console Home and navigate to EC2.
+
+.. figure:: assets/cloud_aws_console_ec2.png
+
+2. Select Instances.
+
+.. figure:: assets/cloud_aws_ec2_instances.png
+
+3. Change the AWS Region to match Cloud C. For this demo, you deployed to "us-west-2" US West (Oregon).
+
+.. figure:: assets/cloud_c_region.png
+
+4. Select the XC instance "master-0", click "Networking" tab, then copy the private interface ENI ID. This will be used as the route entry "target".
+
+.. figure:: assets/cloud_c_eni_ids.png
+
+5. Optionally, you can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
+
+.. figure:: assets/cloud_c_eni_tags.png
+
+Next, you will use the ENI to create a route entry.
+
+6. Navigate to VPC.
+
+.. figure:: assets/cloud_aws_console_vpc.png
+
+7. Select Route Tables.
+
+.. figure:: assets/cloud_aws_console_route_tables.png
+
+8. Select the Cloud C public route table.
+
+Note: The Terraform code in this demo assigns "Name" with a value of "cloud-c-public-route-table". Unfortunately, the XC node deployment also updates "Name" and changes the value. Therefore, your public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
+
+.. figure:: assets/cloud_c_route_table_public1.png
+
+Alternatively, you can re-run the Cloud C setup script to apply the correct tags and values.
+
+.. code:: bash
+
+     ./cloud-C-setup.sh
+
+     # example output
+     Terraform will perform the following actions:
+
+     # aws_route_table.public will be updated in-place
+     ~ resource "aws_route_table" "public" {
+          id               = "rtb-0fdef2c59eb633906"
+          ~ tags             = {
+               "Environment"             = "cloud-c"
+               ~ "Name"                    = "7gS4kTqtj-outside" -> "cloud-c-public-route-table"
+
+     Plan: 0 to add, 1 to change, 0 to destroy.
+     ...snippet...
+
+9. Select "Edit Routes" to create a new route entry.
+
+.. figure:: assets/cloud_c_route_table_public2.png
+
+10. Click "Add route", supply details, then "Save Changes".
+
+.. figure:: assets/cloud_c_route_table_public3.png
+
+Items of importance...
+
+==============================  =========
+Destination                     Target
+==============================  =========
+10.0.0.0/16 << Cloud A CIDR     eni-05dcbec0b9eade0c4 << Cloud C XC node NIC ID
+==============================  =========
+
+11. Review the route entries.
+
+.. figure:: assets/cloud_c_route_table_public4.png
+
+What does this mean? Subnets in Cloud C that are associated with this route table will send 10.0.0.0/16 destination traffic to the XC node as the next hop.
 
 Test Application
 ~~~~~~~~~~~~~~~~~

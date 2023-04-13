@@ -1,5 +1,5 @@
 resource "volterra_cloud_credentials" "aws_cred" {
-  name = "${var.owner}-${var.environment}"
+  name = "${var.owner}-${var.environment}-techxchange"
   namespace = "system"
   aws_secret_key {
 	  access_key = var.aws_access_key
@@ -11,7 +11,7 @@ resource "volterra_cloud_credentials" "aws_cred" {
   }
 }
 resource "volterra_aws_vpc_site" "aws_vpc_site" {
-  name       = "${var.owner}-${var.environment}"
+  name       = "${var.owner}-${var.environment}-techxchange"
   namespace  = "system"
   aws_region = var.aws_region
   aws_cred {
@@ -74,7 +74,7 @@ resource "volterra_tf_params_action" "action_apply" {
 
 data "aws_instance" "xc_node" {
   instance_tags = {
-    "ves-io-site-name" = "${var.owner}-${var.environment}"
+    "ves-io-site-name" = "${var.owner}-${var.environment}-techxchange"
   }
 
   filter {
@@ -103,8 +103,16 @@ data "aws_network_interface" "xc_private_nic" {
   ]
 }
 
-resource "aws_route" "remote_network" {
-  route_table_id              = aws_route_table.public.id
-  destination_cidr_block      = var.xc_remote_cidr
-  network_interface_id        = data.aws_network_interface.xc_private_nic.id
+output "xc_node_private_nic_id" {
+  value = data.aws_network_interface.xc_private_nic.id
 }
+
+# JeffGiroux - The code below adds routes to the AWS route table.
+# Leave commented for TechXchange. This reinforces learning by
+# requiring the student to manually create the route table entries.
+
+# resource "aws_route" "remote_network" {
+#   route_table_id              = aws_route_table.public.id
+#   destination_cidr_block      = var.xc_remote_cidr
+#   network_interface_id        = data.aws_network_interface.xc_private_nic.id
+# }
