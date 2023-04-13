@@ -121,6 +121,8 @@ ubuntu  HelloUDF
 
 8. Using a jumphost web browser, open the XC Console https://f5-sales-demo.console.ves.volterra.io and click **Administration** tab.
 
+.. figure:: assets/xc/administration.png
+
 9. Open **Credentials** section and click **Add Credentials**.
 
 .. figure:: assets/xc/create_credentials.png
