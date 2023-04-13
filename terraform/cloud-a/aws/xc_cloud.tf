@@ -1,5 +1,5 @@
 resource "volterra_cloud_credentials" "aws_cred" {
-  name = "${var.owner}-${var.environment}-techxchange"
+  name = "${var.owner}-aws-techxchange"
   namespace = "system"
   aws_secret_key {
 	  access_key = var.aws_access_key

@@ -23,7 +23,7 @@ resource "volterra_aws_vpc_site" "aws_vpc_site" {
   aws_region = var.aws_region
   aws_cred {
 	  #name      = volterra_cloud_credentials.aws_cred.name
-	  name      = "${var.owner}-${var.environment}-techxchange"
+	  name      = "${var.owner}-aws-techxchange"
 	  namespace = "system"
   }
   vpc {
