@@ -497,7 +497,9 @@ Now we will add the Global Network we created to Cloud C, AWS VPC site. We can d
 Update Routes in Cloud A
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Next we need to configure routing. Traffic between Cloud A and Cloud C will use the XC Global Network. This is achieved with route table entries, matching address prefixes, and setting next hop as the XC node's network interface. This demo already created a route table entry for Cloud A to reach Cloud C via the XC Global Network. Login to Cloud A (AWS) to validate existing routes.
+Next we need to configure routing. Traffic between Cloud A and Cloud C will use the XC Global Network. This is achieved with route table entries, matching address prefixes, and setting next hop as the XC node's network interface. This demo already created a route table entry for Cloud A to reach Cloud C via the XC Global Network.
+
+Login to Cloud A (AWS) to validate existing routes.
 
 1. On the UDF deployment page, click the "Cloud Accounts" tab and copy the value for "Console Password". Then open the "Console URL" to login to AWS.
 
