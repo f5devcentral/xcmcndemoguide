@@ -494,8 +494,8 @@ Now we will add the Global Network we created to Cloud C, AWS VPC site. We can d
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Update Routes
-~~~~~~~~~~~~~~
+Update Routes in Cloud A
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Next we need to configure routing. Traffic between Cloud A and Cloud C will use the XC Global Network. This is achieved with route table entries, matching address prefixes, and setting next hop as the XC node's network interface. This demo already created a route table entry for Cloud A to reach Cloud C via the XC Global Network. Login to Cloud A (AWS) to validate existing routes.
 
@@ -555,6 +555,9 @@ Destination                     Target
 ==============================  =========
 192.168.0.0/16 << Cloud C CIDR  eni-0d64d56fe2e9bcadc << Cloud A XC node NIC ID
 ==============================  =========
+
+Update Routes in Cloud C
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 At this point in the lab, you validated that Cloud A has route entries to reach Cloud C. Now you need to setup similar routing in Cloud C to allow proper routing of response traffic. 
 
