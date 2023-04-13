@@ -565,7 +565,7 @@ Update Routes in Cloud C
 
 At this point in the lab, you validated that Cloud A has route entries to reach Cloud C. Now you need to setup similar routing in Cloud C to allow return traffic.
 
-First, identify the target network interface (ENI) for the XC node in Cloud C. Then you will use that ENI to create a route entry.
+First, identify the target network interface (ENI) for the XC node in Cloud C.
 
 1. Return to the AWS Console Home and navigate to EC2.
 
@@ -586,6 +586,8 @@ First, identify the target network interface (ENI) for the XC node in Cloud C. T
 5. You can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
 
 .. figure:: assets/cloud_c_eni_tags.png
+
+Next, you will use the ENI to create a route entry.
 
 6. Navigate to VPC.
 
