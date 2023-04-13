@@ -587,7 +587,7 @@ First, identify the target network interface (ENI) for the XC node in Cloud C.
 
 .. figure:: assets/cloud_c_eni_tags.png
 
-Next, you will use the ENI to create a route entry.
+Next, you will use the ENI ID to create a route entry.
 
 6. Navigate to VPC.
 
