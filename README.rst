@@ -69,7 +69,7 @@ Prepare Lab Environment
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
 
-2. Access the UDF "jumphost" via xRDP desktop session.
+2. Access the UDF jumphost via xRDP desktop session.
 
 ======  ========
 User    Password
@@ -79,7 +79,7 @@ ubuntu  HelloUDF
 
 .. figure:: assets/udf/udf-jumphost-xrdp.png
 
-3. Open a terminal on the "jumphost". Clone the lab repository and change into the directory.
+3. Open a terminal on the jumphost. Clone the lab repository and change into the directory.
 
 .. code:: bash
 
@@ -111,29 +111,27 @@ ubuntu  HelloUDF
      # aws_secret_key = "secretxxxx"
      # zone_name      = "your.domain.com"
 
-6. On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". Paste the values in the tfvars file for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
-
-.. figure:: assets/udf/udf-cloud-account-api.png
-
-7. Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. Paste the value in the tfvars file for "zone_name".
+6. Open the `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and copy your Zone Name. Paste the value in the tfvars file for "zone_name".
 
 .. figure:: assets/xc/zone_name.png
 
-8. Use a web browser to access the F5 Distributed Cloud Console https://f5-sales-demo.console.ves.volterra.io and open **Administration** tab.
+7. On the UDF deployment page, click the "Cloud Accounts" tab and copy the values for "API Key" and "API Secret". Paste the values in the tfvars file for "aws_access_key" and "aws_secret_key". The AWS Access Key and the Secret Key can be used to create the **AWS Programmatic Access Credentials** on F5 Distributed Cloud Console. See `AWS Cloud Credentials <https://docs.cloud.f5.com/docs/how-to/site-management/cloud-credentials#aws-programmable-access-credentials>`_  for more information.
 
-.. figure:: assets/xc/administration.png
+.. figure:: assets/udf/udf-cloud-account-api.png
+
+8. Using a jumphost web browser, open the XC Console https://f5-sales-demo.console.ves.volterra.io and click **Administration** tab.
 
 9. Open **Credentials** section and click **Add Credentials**.
 
 .. figure:: assets/xc/create_credentials.png
 
-10. Fill the form as on the screen below and download your credentials file. The p12 file will download to /home/ubuntu/Downloads/f5-sales-demo.console.ves.volterra.io.api-creds.p12 and is used in tfvars as the value for "api_p12_file".
+10. Fill in the details and download your credentials file. The p12 file will download to /home/ubuntu/Downloads/f5-sales-demo.console.ves.volterra.io.api-creds.p12 and is used in tfvars as the value for "api_p12_file". DO NOT change the path! If you do, then you will need to make sure the tfvars value matches too!
 
-Note: Remember the password as it will be used for **VES_P12_PASSWORD** in the next step
+Note: Remember the "Password" as it will be used for **VES_P12_PASSWORD** in the next step.
 
 .. figure:: assets/xc/fill_credentials.png
 
-11. Return to the "jumphost" terminal. Save the tfvars file and exit "vi" mode.
+11. Return to the jumphost terminal. Save the tfvars file and exit "vi" mode.
 
 .. code:: bash
 
@@ -141,7 +139,9 @@ Note: Remember the password as it will be used for **VES_P12_PASSWORD** in the n
      # 1. hit "ESC" key to quit editing mode
      # 2. hold shift + ZZ to save
 
-12. Create **VES_P12_PASSWORD** environment variable with the password from the previous step. Keep the terminal window open.
+12. Create **VES_P12_PASSWORD** environment variable with the password from the previous step.
+
+Note: Keep the terminal window open.
 
 .. code:: bash
 
@@ -150,7 +150,7 @@ Note: Remember the password as it will be used for **VES_P12_PASSWORD** in the n
 Deploy with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Return to the "jumphost" terminal within the xRDP session. Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
+1. Return to the jumphost terminal within the xRDP session. Deploy the Terraform code for "Cloud A" by running the script **./cloud-A-setup.sh**.
 
 .. code:: bash
 
