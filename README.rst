@@ -521,7 +521,30 @@ udf               <redacted>
 
 4. Select the Cloud A public route table and view the Routes.
 
-.. figure:: assets/cloud_a_route_table_public.png
+Note: The Terraform code in this demo assigns the tag "Name" with a value of "cloud-a-public-route-table". Unfortunately, the XC node deployment also updates the "Name" tag and changes the value. Therefore, your public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
+
+.. figure:: assets/cloud_a_route_table_public1.png
+
+Alternatively, you can re-run the Cloud A setup script to apply the correct tags and values.
+
+.. code:: bash
+
+     ./cloud-A-setup.sh
+
+     # example output
+     Terraform will perform the following actions:
+
+     # aws_route_table.public will be updated in-place
+     ~ resource "aws_route_table" "public" {
+          id               = "rtb-0d4ebe7caae0c2ac0"
+          ~ tags             = {
+               "Environment"             = "cloud-a"
+               ~ "Name"                    = "CGyYiprZO-outside" -> "cloud-a-public-route-table"
+
+     Plan: 0 to add, 1 to change, 0 to destroy.
+     ...snippet...
+
+.. figure:: assets/cloud_a_route_table_public2.png
 
 Items of importance...
 
