@@ -563,35 +563,35 @@ Update Routes in Cloud C
 
 At this point in the lab, you validated that Cloud A has route entries to reach Cloud C. Now you need to setup similar routing in Cloud C to allow proper routing of response traffic. 
 
-6. Return to the AWS Console Home and navigate to EC2.
+1. Return to the AWS Console Home and navigate to EC2.
 
 .. figure:: assets/cloud_aws_console_ec2.png
 
-7. Select Instances.
+2. Select Instances.
 
 .. figure:: assets/cloud_aws_ec2_instances.png
 
-8. Change the AWS Region to match Cloud C. For this demo, you deployed to "us-west-2" US West (Oregon).
+3. Change the AWS Region to match Cloud C. For this demo, you deployed to "us-west-2" US West (Oregon).
 
 .. figure:: assets/cloud_c_region.png
 
-9. Select the XC instance "master-0", click "Networking" tab, then copy the private interface ENI ID. This will be used as the route entry "target".
+4. Select the XC instance "master-0", click "Networking" tab, then copy the private interface ENI ID. This will be used as the route entry "target".
 
 .. figure:: assets/cloud_c_eni_ids.png
 
-10. You can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
+5. You can further validate the "inside" interface by selecting the ENI (click the link). Then click the "Tags" tab to see more details about this interface.
 
 .. figure:: assets/cloud_c_eni_tags.png
 
-11. Navigate to VPC.
+6. Navigate to VPC.
 
 .. figure:: assets/cloud_aws_console_vpc.png
 
-12. Select Route Tables.
+7. Select Route Tables.
 
 .. figure:: assets/cloud_aws_console_route_tables.png
 
-13. Select the Cloud C public route table.
+8. Select the Cloud C public route table.
 
 Note: The Terraform code in this demo assigns the tag "Name" with a value of "cloud-c-public-route-table". Unfortunately, the XC node deployment also updates the "Name" tag and changes the value. Therefore, your Cloud C public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
 
@@ -616,15 +616,15 @@ Alternatively, you can re-run the Cloud C setup script to apply the correct tags
      Plan: 0 to add, 1 to change, 0 to destroy.
      ...snippet...
 
-14. Select "Edit Routes".
+9. Select "Edit Routes".
 
 .. figure:: assets/cloud_c_route_table_public2.png
 
-15. Click "Add route", supply details, then "Save Changes".
+10. Click "Add route", supply details, then "Save Changes".
 
 .. figure:: assets/cloud_c_route_table_public3.png
 
-16. Review the route entries.
+11. Review the route entries.
 
 .. figure:: assets/cloud_c_route_table_public4.png
 
