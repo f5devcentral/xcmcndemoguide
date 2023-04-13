@@ -628,17 +628,15 @@ Alternatively, you can re-run the Cloud C setup script to apply the correct tags
 
 .. figure:: assets/cloud_c_route_table_public3.png
 
-11. Review the route entries.
-
-.. figure:: assets/cloud_c_route_table_public4.png
-
-Items of importance...
-
 ==============================  =========
 Destination                     Target
 ==============================  =========
 10.0.0.0/16 << Cloud A CIDR     eni-05dcbec0b9eade0c4 << Cloud C XC node NIC ID
 ==============================  =========
+
+11. Review the route entries.
+
+.. figure:: assets/cloud_c_route_table_public4.png
 
 What does this mean? Subnets in Cloud C that are associated with this route table will send 10.0.0.0/16 destination traffic to the XC node as the next hop.
 
