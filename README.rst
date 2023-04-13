@@ -525,7 +525,7 @@ udf               <redacted>
 
 5. Select the Cloud A public route table and view the Routes.
 
-Note: The Terraform code in this demo assigns the tag "Name" with a value of "cloud-a-public-route-table". Unfortunately, the XC node deployment also updates the "Name" tag and changes the value. Therefore, your public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
+Note: The Terraform code in this demo assigns "Name" with a value of "cloud-a-public-route-table". Unfortunately, the XC node deployment also updates "Name" and changes the value. Therefore, your public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
 
 .. figure:: assets/cloud_a_route_table_public1.png
 
@@ -558,10 +558,12 @@ Destination                     Target
 192.168.0.0/16 << Cloud C CIDR  eni-0d64d56fe2e9bcadc << Cloud A XC node NIC ID
 ==============================  =========
 
+What does this mean? Subnets in Cloud A that are associated with this route table will send 192.168.0.0/16 destination traffic to the XC node as the next hop.
+
 Update Routes in Cloud C
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point in the lab, you validated that Cloud A has route entries to reach Cloud C. Now you need to setup similar routing in Cloud C to allow proper routing of response traffic. 
+At this point in the lab, you validated that Cloud A has route entries to reach Cloud C. Now you need to setup similar routing in Cloud C to allow return traffic.
 
 1. Return to the AWS Console Home and navigate to EC2.
 
@@ -593,7 +595,7 @@ At this point in the lab, you validated that Cloud A has route entries to reach 
 
 8. Select the Cloud C public route table.
 
-Note: The Terraform code in this demo assigns the tag "Name" with a value of "cloud-c-public-route-table". Unfortunately, the XC node deployment also updates the "Name" tag and changes the value. Therefore, your Cloud C public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
+Note: The Terraform code in this demo assigns "Name" with a value of "cloud-c-public-route-table". Unfortunately, the XC node deployment also updates "Name" and changes the value. Therefore, your public route table might be named differently. If this is the case, choose the route table with "-outside" as the suffix.
 
 .. figure:: assets/cloud_c_route_table_public1.png
 
@@ -616,7 +618,7 @@ Alternatively, you can re-run the Cloud C setup script to apply the correct tags
      Plan: 0 to add, 1 to change, 0 to destroy.
      ...snippet...
 
-9. Select "Edit Routes".
+9. Select "Edit Routes" to create a new route entry.
 
 .. figure:: assets/cloud_c_route_table_public2.png
 
@@ -635,6 +637,8 @@ Destination                     Target
 ==============================  =========
 10.0.0.0/16 << Cloud A CIDR     eni-05dcbec0b9eade0c4 << Cloud C XC node NIC ID
 ==============================  =========
+
+What does this mean? Subnets in Cloud C that are associated with this route table will send 10.0.0.0/16 destination traffic to the XC node as the next hop.
 
 Test Application
 ~~~~~~~~~~~~~~~~~
