@@ -63,7 +63,7 @@ In this module we will deploy front-end portal in Cloud A, pick a public cloud w
 
 Follow the `Terraform instructions <./terraform/cloud-a>`_ to get started with the environment config using your public cloud provider with Terraform.
 
-Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Load Balancers** service in the service menu.
+Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Multi-Cloud App Connect** service in the service menu.
 
 .. figure:: assets/open_lb.png
 
@@ -167,7 +167,7 @@ Below is the service topology we will achieve at the end of this module. Note th
 
 .. figure:: assets/layer-7.png
 
-Let's create one more HTTP Load Balancer for this use case. Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+Let's create one more HTTP Load Balancer for this use case. Navigate to **Multi-Cloud App Connect** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/cloud_b_lb_create.png
 
@@ -252,7 +252,7 @@ At the end of this module, we will have the following architecture for our app s
 
 .. figure:: assets/layer-3.png
 
-Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Cloud and Edge Sites**.
+Assuming you now have your Cloud C confirmed, let's move on to create and configure a Global Network in Cloud A VPC site. Open the service menu and proceed to **Multi-Cloud Network Connect**.
 
 .. figure:: assets/cloud_c_aws_1.png
 
