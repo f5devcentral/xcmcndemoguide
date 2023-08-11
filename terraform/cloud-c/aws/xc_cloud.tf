@@ -57,7 +57,11 @@ resource "volterra_aws_vpc_site" "aws_vpc_site" {
     ignore_changes = [labels]
   }
 
-  ssh_key = [tls_private_key.key.public_key_openssh]
+  ssh_key                  = tls_private_key.key.public_key_openssh
+  direct_connect_disabled  = true
+  egress_gateway_default   = true
+  disable_internet_vip     = true
+  logs_streaming_disabled  = true
 }
 
 resource "volterra_cloud_site_labels" "labels" {
@@ -108,11 +112,29 @@ data "aws_network_interface" "xc_private_nic" {
     volterra_tf_params_action.action_apply
   ]
 }
+data "aws_route_table" "private_route_table" {
+  subnet_id = element(aws_subnet.private_subnet.*.id, 0)
+  depends_on = [
+    volterra_tf_params_action.action_apply
+  ]
+}
 
 resource "aws_route" "remote_network" {
-  route_table_id              = aws_route_table.public.id
-  destination_cidr_block      = var.xc_remote_cidr
-  network_interface_id        = data.aws_network_interface.xc_private_nic.id
+  route_table_id          = data.aws_route_table.private_route_table.id
+  destination_cidr_block  = var.xc_remote_cidr
+  network_interface_id    = data.aws_network_interface.xc_private_nic.id
+}
+
+resource "aws_route" "private_internet_gateway" {
+  route_table_id         = data.aws_route_table.private_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.ig.id
+}
+
+resource "aws_route" "private_xc_gateway" {
+  route_table_id         = data.aws_route_table.private_route_table.id
+  destination_cidr_block = element(var.aws_public_subnets_cidr, 0)
+  network_interface_id   = data.aws_network_interface.xc_private_nic.id
 }
 
 output "xc_private_key" {

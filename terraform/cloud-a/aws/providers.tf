@@ -1,23 +1,20 @@
 terraform {
-  required_version = ">= 0.12.9, != 0.13.0"
+  required_version = ">= 1.4.0"
 
   required_providers {
     volterra = {
-      source = "volterraedge/volterra"
-      version = ">=0.0.6"
+      source  = "volterraedge/volterra"
+      version = "=0.11.24"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.16"
+      version = "=5.12.0"
     }
   }
 }
 
 provider "volterra" {
   api_p12_file = var.api_p12_file
-  api_cert     = var.api_p12_file != "" ? "" : var.api_cert
-  api_key      = var.api_p12_file != "" ? "" : var.api_key
-  api_ca_cert  = var.api_ca_cert
   url          = var.api_url
 }
 

@@ -3,19 +3,6 @@ variable "environment" {
   description = "Environment Name"
 }
 
-variable "api_cert" {
-  type    = string
-  default = ""
-}
-
-variable "api_key" {
-  type    = string
-  default = ""
-}
-variable "api_ca_cert" {
-  default = ""
-}
-
 variable "api_url" {
   type    = string
   default = "https://console.ves.volterra.io/api"
@@ -48,7 +35,7 @@ variable "aws_xc_instance_type" {
 
 variable "zone_name" {
   type        = string
-  default     = "demo.example.com"
+  default     = "liable-bronze-snake.github.securelab.online"
   description = "Zone name"
 }
 
