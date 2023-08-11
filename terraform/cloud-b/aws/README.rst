@@ -20,7 +20,6 @@ Fill required parameters and click **Next**.
 
 - **STACK_NAME** - The name associated with the AWS Cloud Formation stack. For example: xc-cloud-access
 - **Policy Name** - The name of the Service Account Policy. For example: F5XCServiceAccountPolicyForAWSSite
-- **Password** - New user's password
 
 .. figure:: ../../../assets/aws/aws_stack_details.png
 
