@@ -1,3 +1,7 @@
+resource "tls_private_key" "key" {
+  algorithm = "RSA"
+}
+
 resource "volterra_cloud_credentials" "azure_cred" {
   name      = var.environment
   namespace = "system"
@@ -31,39 +35,41 @@ resource "volterra_azure_vnet_site" "azure_vnet_site" {
   machine_type = var.azure_xc_machine_type
 
   ingress_egress_gw {
-	  azure_certified_hw = "azure-byol-multi-nic-voltmesh"
-	  az_nodes {
-        azure_az  = "1"
-	  	disk_size = "80"
-	  	inside_subnet {
-	  		subnet {
-	  			subnet_name  = azurerm_subnet.private_subnet.name
-                vnet_resource_group = true
-	  		}
-	  	}
-	  	outside_subnet {
-	  		subnet {
-	  			subnet_name  = azurerm_subnet.public_subnet.name
-                vnet_resource_group = true
-	  		}
-	  	}
-	  }
-	  no_global_network = true
-	  no_inside_static_routes = true
-	  no_network_policy = true
-	  no_outside_static_routes = true
+    azure_certified_hw = "azure-byol-multi-nic-voltmesh"
+    az_nodes {
+      azure_az  = "1"
+      disk_size = "80"
+      inside_subnet {
+        subnet {
+          subnet_name         = azurerm_subnet.private_subnet.name
+          vnet_resource_group = true
+        }
+      }
+      outside_subnet {
+        subnet {
+          subnet_name         = azurerm_subnet.public_subnet.name
+          vnet_resource_group = true
+        }
+      }
+    }
+    no_global_network        = true
+    no_inside_static_routes  = true
+    no_network_policy        = true
+    no_outside_static_routes = true
   }
 
   vnet {
     existing_vnet {
-        resource_group = azurerm_resource_group.rg.name
-        vnet_name = azurerm_virtual_network.vnet.name
+      resource_group = azurerm_resource_group.rg.name
+      vnet_name      = azurerm_virtual_network.vnet.name
     }
   }
 
   lifecycle {
     ignore_changes = [labels]
   }
+
+  ssh_key = [tls_private_key.key.public_key_openssh]
 }
 
 resource "volterra_cloud_site_labels" "labels" {
@@ -74,21 +80,21 @@ resource "volterra_cloud_site_labels" "labels" {
 }
 
 resource "volterra_tf_params_action" "action_apply" {
-	site_name = volterra_azure_vnet_site.azure_vnet_site.name
-	site_kind = "azure_vnet_site"
-	action = "apply"
-	wait_for_action = true
+  site_name = volterra_azure_vnet_site.azure_vnet_site.name
+  site_kind = "azure_vnet_site"
+  action = "apply"
+  wait_for_action = true
 
-	depends_on = [
-   	volterra_azure_vnet_site.azure_vnet_site
+  depends_on = [
+    volterra_azure_vnet_site.azure_vnet_site
   ]
 }
 
 data "azurerm_network_interface" "xc_private_nic" {
   name                = "master-0-sli"
   resource_group_name = "${azurerm_resource_group.rg.name}-xc"
-	depends_on = [
-   	volterra_tf_params_action.action_apply
+  depends_on = [
+     volterra_tf_params_action.action_apply
   ]
 }
 
@@ -109,9 +115,18 @@ resource "azurerm_route_table" "xc_routes" {
     next_hop_in_ip_address = data.azurerm_network_interface.xc_private_nic.private_ip_address
   }
 
-	depends_on = [
-   	volterra_tf_params_action.action_apply
+  depends_on = [
+    volterra_tf_params_action.action_apply
   ]
+}
+
+output "xc_private_key" {
+  value     = tls_private_key.key.private_key_pem
+  sensitive = true
+}
+
+output "xc_public_key" {
+  value = tls_private_key.key.public_key_openssh
 }
 
 resource "azurerm_subnet_route_table_association" "xc_routes_association" {
