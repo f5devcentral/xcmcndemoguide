@@ -69,7 +69,7 @@ resource "volterra_azure_vnet_site" "azure_vnet_site" {
     ignore_changes = [labels]
   }
 
-  ssh_key = [tls_private_key.key.public_key_openssh]
+  ssh_key = tls_private_key.key.public_key_openssh
 }
 
 resource "volterra_cloud_site_labels" "labels" {
