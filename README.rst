@@ -268,7 +268,7 @@ In order to enable the editing mode, click **Edit Configuration**.
 
 .. figure:: assets/cloud_c_aws_4.png
 
-Scroll down to the **Networking Config** and click **Edit Configuration**. 
+Scroll down to the **Site Type Selection** section, find the **Select Ingress Gateway or Ingress/Egress Gateway** part and click **Edit Configuration**. 
 
 .. figure:: assets/cloud_c_aws_5.png
 
