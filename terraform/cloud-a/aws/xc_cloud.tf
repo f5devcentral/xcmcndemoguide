@@ -150,9 +150,3 @@ output "xc_private_key" {
 output "xc_public_key" {
   value = tls_private_key.key.public_key_openssh
 }
-
-resource "aws_route" "remote_network" {
-  route_table_id              = aws_route_table.public.id
-  destination_cidr_block      = var.xc_remote_cidr
-  network_interface_id        = data.aws_network_interface.xc_private_nic.id
-}
