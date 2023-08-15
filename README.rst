@@ -137,11 +137,11 @@ After we enter the website, we can see it's up and running. We can also see that
 
 .. figure:: assets/cloud_a_lb_website_sections.png
 
-Next let's navigate to **App Traffic** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
+Next let's navigate to **Applications** and proceed to the **Traffic Graph** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
 
 .. figure:: assets/app_traffic_1.png
 
-And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **HTTP Load Balancers** and then click on the created one. 
+And finally, let's take a look at the HTTP Load Balancer dashboard. Proceed to **Performance** and then click on the created HTTP LB. 
 
 .. figure:: assets/app_traffic_2.png
 
