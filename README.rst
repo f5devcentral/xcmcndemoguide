@@ -296,7 +296,7 @@ To complete the process we will click **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Now we will add the Global Network we created to Cloud C, Azure VNET site. Navigate to **Azure VNET Sites** through **Site Management**.
+Now we will add the Global Network we created to Cloud C, Azure VNET site. Switch to the **Multi-Cloud Network Connect** service, navigate to **Azure VNET Sites** through **Site Management**.
 
 .. figure:: assets/cloud_c_azure_1.png
 
@@ -308,7 +308,7 @@ Enable editing configuration by clicking **Edit Configuration**.
 
 .. figure:: assets/cloud_c_azure_3.png
 
-Scroll down the configuration and click **Edit Configuration** under **Networking Config**.
+Scroll down the configuration to the **Site Type Selection** section and click **Edit Configuration** under **Ingress/Egress Gateway (Two Interface) on Recommended Region**.
 
 .. figure:: assets/cloud_c_azure_4.png
 
