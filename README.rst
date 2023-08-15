@@ -336,22 +336,17 @@ Now let's test the connected modules. We will open the site and see that now all
 
 .. figure:: assets/cloud_c_app.png
 
-Let's now take a look at site monitoring and visibility. Navigate to **Site Connectivity** and then move on to **Site Networking**. 
-
-.. figure:: assets/monitoring_0.png
-
-The dashboard shows all the insights, including sites' status and traffic distribution. We can also see the top 10 sites and tunnels filtered using various criteria, such as data sent and / or received, throughput and others.
+Let's now take a look at site monitoring and visibility. In the **Multi-Cloud Network Connect** service navigate to **Performance**. First, we will see the **Dashboard** tab. The dashboard shows all the insights, including alerts, interface status, data plane health and control plane health. We can also see the top 10 links filtered by various criteria, such as throughput, latency and drop rate.
 
 .. figure:: assets/monitoring_1.png
 
-Next let's go to the **Tunnel** tab and some tunnel analytics, including status, latency, data plane reachability, throughput and drop rate. We can see that our tunnels are up and running with high connectivity.    
+Next let's go to the **Links** tab and some link analytics, including status, latency, data plane reachability, throughput and drop rate. We can see that our links are up and running with high connectivity.    
 
 .. figure:: assets/monitoring_2.png
 
 And finally, we will take a look at statistics by interface on each F5 Distributed Cloud Services node. Proceed to the **Interfaces** tab to see the site the interface refers to, its status and throughput, as well as drop rate.   
 
 .. figure:: assets/monitoring_3.png
-
 
 
 Wrap-Up
