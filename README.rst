@@ -67,7 +67,7 @@ Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate
 
 .. figure:: assets/open_lb.png
 
-Select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
+Navigate to **Load Balancers** and select **HTTP Load Balancers**. Then click the **Add HTTP Load Balancer** button to open the form of HTTP Load Balancer creation.
 
 .. figure:: assets/create_cloud_a_lb.png
 
@@ -296,7 +296,7 @@ To complete the process we will click **Save and Exit**.
 
 .. figure:: assets/cloud_c_aws_11.png
 
-Now we will add the Global Network we created to Cloud C, Azure VNET site. Switch to the **Multi-Cloud Network Connect** service, navigate to **Azure VNET Sites** through **Site Management**.
+Now we will add the Global Network we created to Cloud C, Azure VNET site. In the **Multi-Cloud Network Connect** service, navigate to **Azure VNET Sites** through **Site Management**.
 
 .. figure:: assets/cloud_c_azure_1.png
 
