@@ -19,7 +19,7 @@ The included link to a utility service provides some helpful tools to assist wit
 Resources 
 #########
 
-For more information covered by this Demo Guide, please see the following resources including DevCentral articles, YouTube videos and demo guides for AWS and Azure Clouds with the terraform istructions:
+For more information covered by this Demo Guide, please see the following resources including DevCentral articles, YouTube videos and terraform istructions:
 
 - DevCentral Articles: 
 
