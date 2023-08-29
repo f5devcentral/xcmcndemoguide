@@ -14,7 +14,26 @@ Each of the modules in this guide addresses a specific use-case with a help of i
 
 The included link to a utility service provides some helpful tools to assist with both configuration and testing of the environments:
 
-- Generate a domain and configure DNS records for it based on xC CNAME and other specific parameters;
+- Generate a domain and configure DNS records for it based on xC CNAME and other specific parameters
+
+Resources 
+#########
+
+For more information covered by this Demo Guide, please see the following resources including DevCentral articles, YouTube videos and demo guides for AWS and Azure Clouds with the terraform istructions:
+
+- DevCentral Articles: 
+
+    - `Outlining Multi-Cloud Networking with F5 Distributed Cloud Services <https://community.f5.com/t5/technical-articles/demo-guide-multi-cloud-networking-with-f5-distributed-cloud/ta-p/317523>`_ 
+
+    - `Overviewing the key networking use cases for F5 Distributed Cloud <https://community.f5.com/t5/technical-articles/demo-guide-amp-video-series-for-f5-distributed-cloud-network/ta-p/309875>`_
+
+    - `Using F5 Distributed Cloud to connect apps running in multiple clusters and sites <https://community.f5.com/t5/technical-articles/use-f5-distributed-cloud-to-connect-apps-running-in-multiple/ta-p/298357>`_
+
+- `YouTube video series discussing the different aspects of this configuration in each cloud location <https://www.youtube.com/watch?v=7vTGdjmMZP8&t=42s>`_
+
+- `A set of Terraform scripts <https://github.com/f5devcentral/xcmcndemoguide/tree/main/terraform>`_
+
+
 
 Public Cloud (multi-cloud), Modules & Scripts
 ##############################################
