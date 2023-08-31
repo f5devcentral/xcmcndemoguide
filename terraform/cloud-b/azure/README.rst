@@ -118,11 +118,11 @@ Find **api_url** variable and fill it with your F5 xC tenant name.
           default = "https://your_tenant.console.ves.volterra.io/api"
      }
 
-Sign in to the F5 Distributed Cloud Console and open **Administration** tab.
+Sign in to the F5 Distributed Cloud Console and open the **Administration** tab.
 
 .. figure:: ../../../assets/xc/administration.png
 
-Open **Credentials** section and click **Add Credentials**.
+Open the **Credentials** section and click **Add Credentials**.
 
 .. figure:: ../../../assets/xc/create_credentials.png
 
@@ -138,7 +138,7 @@ Copy credentials file to the scripts folder and fix path for the **.p12** certif
           default = "./path-to-api-cert.p12"
      }
      
-Create **VES_P12_PASSWORD** environment variable with the password form the previous step.
+Create **VES_P12_PASSWORD** environment variable with the password from the previous step.
 
 .. code:: bash
 
