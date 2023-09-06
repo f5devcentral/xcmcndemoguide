@@ -2,8 +2,8 @@ resource "tls_private_key" "key" {
   algorithm = "RSA"
 }
 
-resource "volterra_cloud_credentials" "aws_cred" {
-  name = var.environment
+resource "volterra_cloud_credentials" "aws_cred2" {
+  name = local.environment
   namespace = "system"
   aws_secret_key {
     access_key = var.aws_access_key
@@ -15,11 +15,11 @@ resource "volterra_cloud_credentials" "aws_cred" {
   }
 }
 resource "volterra_aws_vpc_site" "aws_vpc_site" {
-  name       = var.environment
+  name       = local.environment
   namespace  = "system"
   aws_region = var.aws_region
   aws_cred {
-    name      = volterra_cloud_credentials.aws_cred.name
+    name      = volterra_cloud_credentials.aws_cred2.name
     namespace = "system"
   }
   vpc {
@@ -84,7 +84,7 @@ resource "volterra_tf_params_action" "action_apply" {
 
 data "aws_instance" "xc_node" {
   instance_tags = {
-    "ves-io-site-name" = var.environment
+    "ves-io-site-name" = local.environment
   }
 
   filter {

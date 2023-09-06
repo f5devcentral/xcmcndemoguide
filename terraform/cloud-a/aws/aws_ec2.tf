@@ -1,3 +1,16 @@
+resource "random_string" "random_suffix" {
+  length  = 4
+  special = false
+  upper   = false
+  numeric  = true
+  min_lower = 1
+  min_numeric = 1
+}
+
+locals {
+  environment = "${var.environment}-${random_string.random_suffix.result}"
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -20,8 +33,8 @@ resource "aws_network_interface" "private_nic" {
   security_groups = [aws_security_group.allow_http.id, aws_security_group.default.id]
 
   tags = {
-    Name        = "${var.environment}-private-nic"
-    Environment = var.environment
+    Name        = "${local.environment}-private-nic"
+    Environment = local.environment
   }
 }
 
@@ -57,8 +70,8 @@ resource "aws_security_group" "allow_http" {
   }
 
   tags = {
-    Name        = "${var.environment}-arcadia-sg"
-    Environment = var.environment
+    Name        = "${local.environment}-arcadia-sg"
+    Environment = local.environment
   }
 }
 
@@ -72,8 +85,8 @@ resource "aws_instance" "arcadia_frontend" {
   }
 
   tags = {
-    Name        = "${var.environment}-arcadia-core"
-    Environment = var.environment
+    Name        = "${local.environment}-arcadia-core"
+    Environment = local.environment
   }
 
   depends_on = [
