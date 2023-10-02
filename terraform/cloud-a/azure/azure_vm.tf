@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "sg" {
-  name                = "${var.environment}-sg"
+  name                = "${local.environment}-sg"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -24,14 +24,14 @@ resource "azurerm_network_interface_security_group_association" "nic_sga" {
 }
 
 resource "azurerm_public_ip" "public_ip" {
-  name                = "${var.environment}-public-ip"
+  name                = "${local.environment}-public-ip"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = "${var.environment}-nic"
+  name                = "${local.environment}-nic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -47,11 +47,17 @@ resource "azurerm_network_interface" "nic" {
 resource "random_password" "password" {
   length           = 16
   special          = true
+  upper            = true
+  numeric          = true
+  min_lower        = 1
+  min_upper        = 1
+  min_numeric      = 1
+  min_special      = 1
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                  = "${var.environment}-vm"
+  name                  = "${local.environment}-vm"
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.nic.id]
@@ -67,14 +73,14 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    name              = "${var.environment}-osdisk"
+    name              = "${local.environment}-osdisk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
-    computer_name  = "${var.environment}-arcadia-core"
+    computer_name  = "${local.environment}-arcadia-core"
     admin_username = "ubuntu"
     admin_password = random_password.password.result
 

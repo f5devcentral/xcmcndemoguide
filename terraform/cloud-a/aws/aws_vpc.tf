@@ -4,16 +4,16 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true
 
   tags = {
-    Name        = "${var.environment}-vpc"
-    Environment = var.environment
+    Name        = "${local.environment}-vpc"
+    Environment = local.environment
   }
 }
 
 resource "aws_internet_gateway" "ig" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-    Name        = "${var.environment}-igw"
-    Environment = var.environment
+    Name        = "${local.environment}-igw"
+    Environment = local.environment
   }
 }
 
@@ -25,8 +25,8 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "${var.environment}-${element(var.aws_availability_zones, count.index)}-public-subnet"
-    Environment = var.environment
+    Name        = "${local.environment}-${element(var.aws_availability_zones, count.index)}-public-subnet"
+    Environment = local.environment
   }
 }
 
@@ -38,8 +38,8 @@ resource "aws_subnet" "private_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "${var.environment}-${element(var.aws_availability_zones, count.index)}-private-subnet"
-    Environment = var.environment
+    Name        = "${local.environment}-${element(var.aws_availability_zones, count.index)}-private-subnet"
+    Environment = local.environment
   }
 }
 
@@ -51,8 +51,8 @@ resource "aws_subnet" "workload_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name        = "${var.environment}-${element(var.aws_availability_zones, count.index)}-workload-subnet"
-    Environment = var.environment
+    Name        = "${local.environment}-${element(var.aws_availability_zones, count.index)}-workload-subnet"
+    Environment = local.environment
   }
 }
 
@@ -60,8 +60,8 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name        = "${var.environment}-public-route-table"
-    Environment = var.environment
+    Name        = "${local.environment}-public-route-table"
+    Environment = local.environment
   }
 }
 
@@ -78,7 +78,7 @@ resource "aws_route_table_association" "public_routes" {
 }
 
 resource "aws_security_group" "default" {
-  name        = "${var.environment}-default-sg"
+  name        = "${local.environment}-default-sg"
   description = "Default SG to alllow traffic from the VPC"
   vpc_id      = aws_vpc.vpc.id
   depends_on = [
@@ -100,6 +100,6 @@ resource "aws_security_group" "default" {
   }
 
   tags = {
-    Environment = var.environment
+    Environment = local.environment
   }
 }
