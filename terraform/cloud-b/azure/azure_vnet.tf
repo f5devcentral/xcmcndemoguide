@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "rg" {
-  name     = var.environment
+  name     = local.environment
   location = var.azure_rg_location
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${var.environment}-network"
+  name                = "${local.environment}-network"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name

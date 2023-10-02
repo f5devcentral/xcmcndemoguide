@@ -1,9 +1,22 @@
+resource "random_string" "random_suffix" {
+  length  = 4
+  special = false
+  upper   = false
+  numeric  = true
+  min_lower = 1
+  min_numeric = 1
+}
+
+locals {
+  environment = "${var.environment}-${random_string.random_suffix.result}"
+}
+
 resource "tls_private_key" "key" {
   algorithm = "RSA"
 }
 
 resource "volterra_cloud_credentials" "azure_cred" {
-  name      = var.environment
+  name      = local.environment
   namespace = "system"
   azure_client_secret {
     client_id = var.azure_service_principal_appid
@@ -18,7 +31,7 @@ resource "volterra_cloud_credentials" "azure_cred" {
 }
 
 resource "volterra_azure_vnet_site" "azure_vnet_site" {
-  name      = var.environment
+  name      = local.environment
   namespace = "system"
 
   default_blocked_services = true
