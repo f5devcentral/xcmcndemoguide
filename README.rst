@@ -4,7 +4,7 @@
 
 Objective
 ####################
-Use this guide and the provided sample app, included scripts and utility app to explore the Multi-Cloud Networking (MCN) use-cases of the F5 Distributed Cloud platform (xC). This will help you get familiar with the following features & capabilities: 
+Use this guide and the provided sample app, included scripts and utility app to explore the **Secure Multicloud Networking (MCN)** use-cases of the F5 Distributed Cloud Platform. This will help you get familiar with the following features & capabilities: 
 
 - MCN Cloud-to-Cloud via HTTP Load Balancer (Layer 7);
 - MCN Cloud-to-Cloud via Global Network (Layer 3);
@@ -14,7 +14,7 @@ Each of the modules in this guide addresses a specific use-case with a help of i
 
 The included link to a utility service provides some helpful tools to assist with both configuration and testing of the environments:
 
-- Generate a domain and configure DNS records for it based on xC CNAME and other specific parameters
+- Generate a domain and configure DNS records for it based on F5 Distributed Cloud Services CNAME and other specific parameters
 
 Resources 
 #########
@@ -35,38 +35,42 @@ For more information covered by this Demo Guide, please see the following resour
 
 
 
-Public Cloud (multi-cloud), Modules & Scripts
+Public Cloud (Multicloud), Modules & Scripts
 ##############################################
 
-The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multi-Cloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds (rev. 1: Amazon AWS and Microsoft Azure, rev.2: adds Google GCP). 
+The contents of the guide is divided into modules, which can be used separately or together in order to explore a particular Multicloud Networking use-case. Each module contains a set of `Terraform scripts <./terraform>`_ for different public clouds (rev. 1: Amazon AWS and Microsoft Azure, rev.2: adds Google GCP). 
 
 These modules are intended to simplify deployment of sample app services in three different clouds: Cloud A, Cloud B, and Cloud C in order to work through different MCN use-cases. Here's a recommended selection of cloud providers for this guide, which will be used as a reference throughout:
 
-Cloud A: AWS
-Cloud B: Azure - VNET1
-Cloud C: Azure - VNET2
+- Cloud A: AWS
+
+- Cloud B: Azure - VNET1
+
+- Cloud C: Azure - VNET2
 
 Note that at a minimum only one public cloud is required (see Requirements), in which case you'd need to deploy app components in different virtual private clouds (VPCs) on AWS or VNETs on Azure.
 
-Cloud A: AWS VPC 1 (or Azure VNET 1)
-Cloud B: AWS VPC 2 (or Azure VNET 2) - simulating multi-cloud  
-Cloud C: AWS VPC 3 (or Azure VNET 3) - simulating multi-cloud 
+- Cloud A: AWS VPC 1 (or Azure VNET 1)
+
+- Cloud B: AWS VPC 2 (or Azure VNET 2) - simulating multi-cloud  
+
+- Cloud C: AWS VPC 3 (or Azure VNET 3) - simulating multi-cloud 
 
 However, if possible, it's recommended to have access to at least two public clouds for the most representative MCN experience. 
 
 Pre-requisites
 #################
 
-- F5 Distributed Cloud Account (trial is sufficient for most modules)
-- A Web browser to access the F5 Distributed Cloud console
+- F5 Distributed Cloud Console account (trial is sufficient for most modules)
+- A Web browser to access the Console
 - Terraform installed and configured (Linux preferred)
 
 Scenario
 ####################
 
-The xC MCN is a complete multi-cloud networking solution to deploy distributed applications across clouds and edge sites. This demo is intended to be self-sufficient as a quick way to familiarize with some of the main MCN use-cases supported by the xC platform. We’ll use a representative customer app scenario with multiple app services distributed across different clouds: a fictitious Arcadia Finance app which is representative of a typical banking website with features such as customer login, statements, and bank transfers. This customer is looking to add to its website additional banking services, such as a Refer-a-Friend Widget and a Transactions Module, which are developed and managed by other teams, and are deployed/running on public cloud infrastructure other than the core banking app. 
+F5 Secure Multicloud Networking is a complete multi-cloud networking solution to deploy distributed applications across clouds and edge sites. This demo is intended to be self-sufficient as a quick way to familiarize with some of the main MCN use-cases supported by the Distributed Cloud Platform. We’ll use a representative customer app scenario with multiple app services distributed across different clouds: a fictitious Arcadia Finance app which is representative of a typical banking website with features such as customer login, statements, and bank transfers. This customer is looking to add to its website additional banking services, such as a Refer-a-Friend Widget and a Transactions Module, which are developed and managed by other teams, and are deployed/running on public cloud infrastructure other than the core banking app. 
 
-The initial state of the Arcadia Finance website features several "Coming Soon" placeholders for the additional banking services which will "come online" as soon as the networking is properly configured. We will use F5 Cloud Services Multi-Cloud Networking to quickly connect these new services into the core banking module by way of xC MCN features. Once properly networked, these features will be turned.
+The initial state of the Arcadia Finance website features several "Coming Soon" placeholders for the additional banking services which will "come online" as soon as the networking is properly configured. We will use F5 Secure Multicloud Networking solution to quickly connect these new services into the core banking module by way of F5 MCN features. Once properly networked, these features will be turned.
 
 .. figure:: assets/mcn-overview.gif
 
@@ -82,7 +86,7 @@ In this module we will deploy front-end portal in Cloud A, pick a public cloud w
 
 Follow the `Terraform instructions <./terraform/cloud-a>`_ to get started with the environment config using your public cloud provider with Terraform.
 
-Next set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Multi-Cloud App Connect** service in the service menu.
+Next, set up the HTTP Load Balancer. In the F5 Distributed Cloud Console navigate to the **Multi-Cloud App Connect** service in the service menu.
 
 .. figure:: assets/open_lb.png
 
@@ -94,7 +98,7 @@ Give it a name. For this demo we will use **arcadia-finance**.
 
 .. figure:: assets/cloud_a_lb_metadata.png
 
-Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we specify **yawning-white-antelope.github.securelab.online**.
+Next, we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we specify **yawning-white-antelope.github.securelab.online**.
 
 Then check off the boxes to redirect HTTP to HTTPS, and add HSTS Header.
 
@@ -104,27 +108,27 @@ After that let's create a new origin pool, which will be used in our load balanc
 
 .. figure:: assets/cloud_a_lb_origins.png
 
-Then open the drop-down menu and click **Create new Origin Pool**.
+Then open the drop-down menu and click **Add Item**.
 
 .. figure:: assets/cloud_a_lb_create_origin.png
 
-To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
+To configure the origin pool we'll add a pool name, followed by a set of config options for the pool. First, let's give this pool a name. Next, we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**. And now click **Add Item** to start configuring an origin server.
 
 .. figure:: assets/cloud_a_lb_origin_details.png
 
-Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that we need to select **Site** as Site type and specify it as **cloud-a**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+Let's now configure origin server. First open the drop-down menu to specify the type of origin server. For this demo select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100** for this demo. After that specify **cloud-a** as site. Finally, make sure **Inside Network** is selected. Complete by clicking **Apply**.
 
 .. figure:: assets/cloud_a_lb_origin_server.png
 
-Then just click **Continue** to move on.
+Then just click **Add Origin Pool** to move on.
 
 .. figure:: assets/cloud_a_lb_origin_details_save.png
 
-Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+Once done, click **Apply** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_a_lb_origin_save.png
 
-Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+Take a look at the load balancer configuration and finish creating it by clicking **Add HTTP Load Balancer**.
 
 .. figure:: assets/cloud_a_lb_save.png
 
@@ -156,7 +160,7 @@ After we enter the website, we can see it's up and running. We can also see that
 
 .. figure:: assets/cloud_a_lb_website_sections.png
 
-Next let's navigate to **Applications** and proceed to the **Traffic Graph** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 PoP with SSL offloading which provides security and speed.  
+Next, let's navigate to **Applications** and proceed to the **Traffic Graph** to see the current traffic flow. It shows us traffic coming from clients to Cloud A through F5 Distributed Cloud PoP with SSL offloading which provides security and speed.  
 
 .. figure:: assets/app_traffic_1.png
 
@@ -190,9 +194,11 @@ Let's create one more HTTP Load Balancer for this use case. In the **Multi-Cloud
 
 .. figure:: assets/cloud_b_lb_create.png
 
-Give this Load Balancer a name. For this use case we will use **friends_module**.
+Give this Load Balancer a name. For this use case we will use **friends-module**.
 
 .. figure:: assets/cloud_b_lb_metadata.png
+
+  TBD
 
 Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Next we need to specify the port. We will use Port **80** for this use case. 
 
