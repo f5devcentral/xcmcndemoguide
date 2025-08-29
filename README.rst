@@ -198,9 +198,7 @@ Give this Load Balancer a name. For this use case we will use **friends-module**
 
 .. figure:: assets/cloud_b_lb_metadata.png
 
-  TBD
-
-Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Next we need to specify the port. We will use Port **80** for this use case. 
+Now we need to provide a domain name for our workload. In this use case we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Make sure port **80** is specified. 
 
 .. figure:: assets/cloud_b_lb_dns.png
 
@@ -208,7 +206,7 @@ After that let's create a new origin pool, which will be used in our load balanc
 
 .. figure:: assets/cloud_b_lb_pool_add.png
 
-Then open the drop-down menu and click **Create new Origin Pool**.
+Then open the drop-down menu and click **Add Item**.
 
 .. figure:: assets/cloud_b_lb_origin_create.png
 
@@ -216,15 +214,15 @@ To configure the origin pool we'll add a pool name, followed by a set of config 
 
 .. figure:: assets/cloud_b_lb_origin_meta.png
 
-First open the drop-down menu to specify the type of origin server. For this use case select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100**. After that we need to select **Site** as Site type and specify it as **cloud-b**. Finally, the last step to configure the origin server is specifying network on the site. Select **Inside Network**. Complete by clicking **Add Item**.
+First open the drop-down menu to specify the type of origin server. For this use case select **IP address of Origin Server on given Sites**. Then specify IP - **10.0.20.100**. After that we need to select the **cloud-b** site. Finally, make sure **Inside Network** is specified. Complete by clicking **Apply**.
 
 .. figure:: assets/cloud_b_lb_origin_add_server.png
 
-Then click **Continue** to move on.
+Then click **Add Origin Pool** to move on.
 
 .. figure:: assets/cloud_b_lb_origin_continue.png
 
-Once done, click **Add Item** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
+Once done, click **Apply** to apply the origin pool to the load balancer configuration. This will return to the load balancer configuration form.
 
 .. figure:: assets/cloud_b_lb_pool_continue.png
 
@@ -236,7 +234,7 @@ Click **Add Item** to add the configuration.
 
 .. figure:: assets/cloud_b_lb_avertisement_add.png
 
-In the drop down menu select **Site** as a place to advertise. Then select **Inside Network** for the site. And finally, select **cloud-a** as site reference. Click **Add Item** to add the specified configuration. 
+Make sure **Site** is specified as a place to advertise. Then select **Inside Network** for the site. And finally, select **cloud-a** as site reference. Click **Apply** to add the specified configuration. 
 
 .. figure:: assets/cloud_b_lb_avertisement_add_details.png
 
@@ -244,7 +242,7 @@ Proceed by clicking **Apply**. This will apply the VIP Advertisement configurati
 
 .. figure:: assets/cloud_b_lb_avertisement_continue.png
 
-Take a look at the load balancer configuration and finish creating it by clicking **Save and Exit**.
+Take a look at the load balancer configuration and finish creating it by clicking **Add HTTP Load Balancer**.
 
 .. figure:: assets/cloud_b_lb_save.png
 
@@ -252,7 +250,7 @@ Now that we've configured the HTTP Load Balancer, we need to run the following c
 
 .. figure:: assets/cloud_b_terraform_output.png
 
-The output will show us the private IP address for our site deployed by F5 Distributed Cloud Services. 
+The output will show us the private IP address for our site deployed by Distributed Cloud Services. 
 
 Open `Arcadia DNS Tool <https://tool.xc-mcn.securelab.online>`_ and type in the IP address for the DNS server. Click **Update**.  
 
@@ -301,15 +299,15 @@ Open the drop down menu to select global networks to connect and click **Add Ite
 
 .. figure:: assets/cloud_c_aws_6.png
 
-Open the list of the Global Virtual Networks and click **Create new Virtual Network**.
+Open the list of the Global Virtual Networks and click **Add Item**.
 
 .. figure:: assets/cloud_c_aws_7.png
 
-First, give it a name. Then move on and select type of network in the drop down menu. For this use case we will need Global Network. Finally, click **Continue** to proceed.
+First, give it a name. Then make sure **Global Network** is specified. Finally, click **Add Virtual network** to proceed.
 
 .. figure:: assets/cloud_c_aws_8.png
 
-Take a look at the Network and click **Add Item**. 
+Take a look at the Network and click **Apply**. 
 
 .. figure:: assets/cloud_c_aws_9.png
 
@@ -317,7 +315,7 @@ The created Global Network will appear in the site configuration. Look it throug
 
 .. figure:: assets/cloud_c_aws_10.png
 
-To complete the process we will click **Save and Exit**. 
+To complete the process we will click **Save AWS VPC Site**. 
 
 .. figure:: assets/cloud_c_aws_11.png
 
@@ -341,7 +339,7 @@ First, enable showing advanced fields, and then select the global network to con
 
 .. figure:: assets/cloud_c_azure_5.png
 
-Open the list of networks and select the one we created earlier. Then add it by clicking **Add Item**.
+Open the list of networks and select the one we created earlier. Then add it by clicking **Apply**.
 
 .. figure:: assets/cloud_c_azure_6.png
 
@@ -349,7 +347,7 @@ Apply the updated configuration to the Site by clicking **Apply**.
 
 .. figure:: assets/cloud_c_azure_7.png
 
-Take a look at the configuration and complete updating by clicking **Save and Exit**.
+Take a look at the configuration and complete updating by clicking **Add Azure VNET Site**.
 
 .. figure:: assets/cloud_c_azure_8.png
 
