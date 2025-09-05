@@ -52,7 +52,7 @@ Open **./var.tf** and fill variables with your **Access Key** and **Access Secre
           default = "your_aws_access_secret"
      }
 
-Find **api_url** variable and fill it with your F5 xC tenant name.
+Find **api_url** variable and fill it with your F5 Distributed Cloud Platform tenant name.
 
 .. code:: bash
 
@@ -103,6 +103,6 @@ Open F5 Distributed Cloud Console and navigate to the **Multi-Cloud Network Conn
 
 .. figure:: ../../../assets/xc/cloud_a_sites.png
 
-Open **Site List** and check the **Health Score**. It may take some time to provision the node.
+Open **Infrastructure** => **Sites** and check the **Health Score**. It may take some time to provision the node.
 
 .. figure:: ../../../assets/xc/cloud_b_ready.png
