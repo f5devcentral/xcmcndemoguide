@@ -1,0 +1,4 @@
+api_url = "https://your_xc_tenant.console.ves.volterra.io/api"
+aws_region = "us-west-1"
+aws_access_key = "your_aws_access_key"
+aws_secret_key = "your_aws_secret_key"
