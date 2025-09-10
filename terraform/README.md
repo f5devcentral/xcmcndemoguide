@@ -1,6 +1,6 @@
 # Terraform Infrastructure Deployment
 
-This repository contains Terraform configurations for deploying multi-cloud infrastructure across AWS and Azure platforms using F5 Distributed Cloud (XC) services.
+This repository contains Terraform configurations for deploying multi-cloud infrastructure across AWS and Azure platforms using F5 Distributed Cloud Services.
 
 ## Overview
 
@@ -45,7 +45,7 @@ This guide covers:
 Before starting with either platform, ensure you have:
 
 - [Terraform](https://www.terraform.io/downloads.html) installed
-- F5 Distributed Cloud account and API credentials
+- F5 Distributed Cloud Services account and API credentials
 
 ## Quick Start
 

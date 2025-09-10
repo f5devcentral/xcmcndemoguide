@@ -86,8 +86,8 @@ resource "aws_instance" "arcadia_friends" {
       curl -fsSL https://get.docker.com -o get-docker.sh
       sh get-docker.sh
 
-      git clone https://github.com/yoctoalex/arcadia-finance-mcn.git
-      cd arcadia-finance-mcn/cloud-b
+      git clone https://github.com/f5devcentral/xcmcndemoguide.git
+      cd xcmcndemoguide/app/cloud-b
       docker compose up -d
   EOL
 }

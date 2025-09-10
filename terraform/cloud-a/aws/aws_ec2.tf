@@ -85,8 +85,8 @@ resource "aws_instance" "arcadia_frontend" {
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
 
-    git clone https://github.com/yoctoalex/arcadia-finance-mcn.git
-    cd arcadia-finance-mcn/cloud-a
+    git clone https://github.com/f5devcentral/xcmcndemoguide.git
+    cd xcmcndemoguide/app/cloud-a
     sed -i 's/user_zone.f5-demo.com/${var.zone_name}/g' docker-compose.yml
     docker compose up -d
   EOL

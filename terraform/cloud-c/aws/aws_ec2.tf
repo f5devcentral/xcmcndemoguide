@@ -85,8 +85,8 @@ resource "aws_instance" "arcadia_transaction" {
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
 
-    git clone https://github.com/yoctoalex/arcadia-finance-mcn.git
-    cd arcadia-finance-mcn/cloud-c
+    git clone https://github.com/f5devcentral/xcmcndemoguide.git
+    cd xcmcndemoguide/app/cloud-c
     docker compose up -d
   EOL
 }
