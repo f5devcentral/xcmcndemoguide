@@ -13,28 +13,16 @@ locals {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
+  owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
   }
 
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
-
-resource "aws_network_interface" "private_nic" {
-  subnet_id   = element(aws_subnet.private_subnet.*.id, 0)
-  private_ips = [var.demo_vm_ip]
-  security_groups = [aws_security_group.allow_http.id, aws_security_group.default.id]
-
-  tags = {
-    Name        = "${local.environment}-private-nic"
-    Environment = local.environment
   }
 }
 
@@ -76,13 +64,11 @@ resource "aws_security_group" "allow_http" {
 }
 
 resource "aws_instance" "arcadia_frontend" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.small"
-
-  network_interface {
-    network_interface_id = aws_network_interface.private_nic.id
-    device_index         = 0
-  }
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t3.small"
+  subnet_id              = element(aws_subnet.private_subnet.*.id, 0)
+  private_ip             = var.demo_vm_ip
+  vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.default.id]
 
   tags = {
     Name        = "${local.environment}-arcadia-core"
@@ -99,8 +85,8 @@ resource "aws_instance" "arcadia_frontend" {
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
 
-    git clone https://github.com/yoctoalex/arcadia-finance-mcn.git
-    cd arcadia-finance-mcn/cloud-a
+    git clone https://github.com/f5devcentral/xcmcndemoguide.git
+    cd xcmcndemoguide/app/cloud-a
     sed -i 's/user_zone.f5-demo.com/${var.zone_name}/g' docker-compose.yml
     docker compose up -d
   EOL

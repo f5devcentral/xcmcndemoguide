@@ -1,0 +1,943 @@
+/* Extra small devices - xs (portrait phones, less than 576px) */
+@media (max-width: 575px) { 
+
+/* Heading Styles Starts */
+
+	.main-heading-1::after, 
+	.main-heading-1.text-xs-center::after, 
+	.sub-heading-1.text-xs-center::after, 
+	.section-heading-1.text-xs-center:after {
+		margin-left: auto;
+		margin-right: auto;		
+	}		
+
+/* Main Menu Styles Starts */
+
+	.main-menu {
+		padding: 0;
+	}
+		.main-menu > .container {
+			max-width: 100%;
+		}
+		.main-menu .navbar-nav > .nav-item > a {
+			padding: 10px;
+		}
+		.main-menu .navbar-collapse {
+			border: solid #d8d8d8;
+			border-width: 1px 0 0 0;
+		}
+			.main-menu.one .dropdown-menu > a.dropdown-item {
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}	
+
+/* Full Header Styles Starts */
+
+	.header-parallax, 
+	.header-full {
+		padding-bottom: 30px;
+		min-height: 300px;
+	}
+		.header-parallax .navbar-collapse, 
+		.header-full .navbar-collapse {
+			margin-top: 20px;
+		}		
+
+/* Section Why Us Starts */
+
+	.why-us-item:hover .why-us-item-bar {
+		bottom: 0;
+	}
+	.why-us-item .overlay {
+		display: none;
+	}		
+
+/* Section Info Styles Starts */
+
+	.stats-info {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+		.stats-info li + li {
+			margin-top: 30px;
+		}				
+
+/* Box Styles Starts */
+
+	.box-1 {
+		margin-bottom: 50px;
+	}
+	.box-1.sub {
+		margin-top: 0;
+	}
+		.box-1.sub .fa {
+			margin-top: 5px;
+			font-size: 60px;
+		}
+	.box-1.last, 
+	.box-1.sub, 
+	.box-1.sub .fa {
+		margin-bottom: 0;
+	}
+
+	.box-4 h5 {
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+
+/* Box Styles Starts */
+
+	.box-6 {
+		padding: 20px;
+	}
+		.box-6, 
+		.box-6 h5 {
+			text-align: center;			
+		}
+		.box-6 .fa {
+			font-size: 36px;
+		}
+		.box-6 h5 {
+			font-size: 18px;
+		}
+		.box-6 h5.text-left, 
+		.box-6 h5.text-right {
+			float: none!important;
+		}
+			.box-6 h5:after {
+				display: none;
+			}
+
+	.bio-box-1 {
+		margin-top: 55px;
+	}
+	.bio-box-1.first {
+		margin-top: 20px;
+	}
+		.bio-box-1 .bio-sm-links {
+			margin-top: 20px;
+		}
+	.bio-box-1.two-col {
+		margin-top: 10px;
+		margin-bottom: 45px;
+	}
+		.bio-box-1.two-col h5 {
+			margin-top: 30px;
+		}	
+
+/* Section Financial Styles Starts */
+
+	.section-financial-list li {
+		margin-top: 25px;
+	}
+		.section-financial-list li .fa {
+			margin-right: 0;
+			margin-bottom: 20px;
+		}
+		.section-financial-list li h5::after {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+/* Section Services Starts */
+
+	.section-services {
+		background-image: url(../images/section-5-bg.jpg);
+	}			
+
+/* FAQ's Accordions Styles Starts */
+
+	#accordion-faqs h5.card-title {
+		width: 90%;
+		font-size: 16px;
+	}				
+
+/* Newsletter Bar Styles Starts */
+
+	.newsletter-bar .form-group {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}	
+
+/* Footer Top Section Styles Starts */
+	
+	.footer-top > .container > .row > div.col-sm-12 + div.col-sm-12 {
+		margin-top: 50px;
+	}
+
+		.foot-address-list .fa {
+			margin-top: 10px;
+			margin-right: 15px;
+			font-size: 20px;
+		}
+		.foot-address-list .fa-envelope {
+			font-size: 18px;
+		}
+		.foot-address-list .fa, 
+		.foot-address-list span {
+			float: none;
+		}	
+
+/* Footer Top 1 Section Styles Starts */
+
+	.foot-col-1 ul > li {
+		word-wrap: break-word;
+	}	
+
+/* Generic Styles Starts */
+
+	.d-xs-block {
+		display: block !important;
+	}
+	.d-xs-none {
+		display: none;
+	}
+	.img-center-xs {
+		margin-left: auto;
+		margin-right: auto;
+	}	
+
+	.text-xs-left   { text-align: left;   }
+	.text-xs-center { text-align: center; }
+	.text-xs-right  { text-align: right;  }			
+
+}
+
+/* Small devices - sm (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+
+/* Heading Styles Starts */
+
+	.main-heading-1::after, 
+	.main-heading-1.text-sm-center::after, 
+	.sub-heading-1.text-sm-center::after, 
+	.section-heading-1.text-sm-center:after {
+		margin-left: auto;
+		margin-right: auto;		
+	}
+	.main-header.one .fa.float-md-right {
+		margin-left: 15px;
+		margin-right: 0;
+	}	
+	
+/* Main Menu Styles Starts */
+
+	.main-menu {
+		padding: 0;
+	}
+		.main-menu > .container {
+			max-width: 100%;
+		}
+		.main-menu .navbar-nav > .nav-item > a {
+			padding: 10px;
+		}
+		.main-menu .navbar-collapse {
+			border: solid #d8d8d8;
+			border-width: 1px 0 0 0;
+		}
+			.main-menu.one .dropdown-menu > a.dropdown-item {
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}	
+
+/* Main Slider Styles Starts */
+
+	#main-slider .carousel-control-prev, 
+	#main-slider .carousel-control-next {
+		padding: 5px 12px;
+		top: 36%;
+		font-size: 15px;
+	}
+	#main-slider .carousel-control-prev {
+		left: 4%;
+	}
+	#main-slider .carousel-control-next {
+		right: 4%;
+	}	
+
+/* Full Header Styles Starts */
+
+	.header-parallax .navbar-collapse, 
+	.header-full .navbar-collapse {
+		margin-top: 20px;
+	}	
+
+/* Section Info Styles Starts */
+
+	.stats-info {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+		.stats-info li + li {
+			margin-top: 30px;
+		}	
+
+/* Section Financial Styles Starts */
+
+	.section-financial-list li {
+		margin-top: 25px;
+	}
+		.section-financial-list li .fa {
+			margin-right: 0;
+			margin-bottom: 20px;
+		}
+		.section-financial-list li h5::after {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+/* Section Services Starts */
+
+	.section-services {
+		background-image: url(../images/section-5-bg.jpg);
+	}	
+
+/* FAQ's Accordions Styles Starts */
+
+	#accordion-faqs .card-title {
+		font-size: 18px;
+	}	
+
+/* Section Why Us Starts */
+
+	.why-us-item:hover .why-us-item-bar {
+		bottom: 0;
+	}
+	.why-us-item .overlay {
+		display: none;
+	}
+
+/* Gallery Page Styles Starts */
+
+	ul#gallery-grid li {
+		min-height: 175px;
+		height: auto !important;
+		height: 175px;
+	}	
+
+/* Pagination Styles Starts */
+
+	.pagination-wrap {
+		margin-top: 10px;
+		padding-top: 20px;
+	}
+	.pagination {
+		margin-top: 15px;
+	}
+		.pagination > li + li {
+			margin-left: 10px;
+		}
+		.pagination > li > a, 
+		.pagination > li > span {
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			font-size: 14px;
+		}
+
+/* Newsletter Bar Styles Starts */
+
+	.newsletter-bar .form-group {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	
+/* Footer Top Section Styles Starts */
+	
+	.footer-top > .container > .row > div.col-sm-12 + div.col-sm-12 {
+		margin-top: 50px;
+	}	
+		.foot-address-list .fa, 
+		.foot-address-list span {
+			float: none;
+		}
+
+/* Footer Top 1 Section Styles Starts */
+
+	.foot-col-1 ul > li {
+		word-wrap: break-word;
+	}	
+	
+/* Box Styles Starts */
+
+	.box-1 {
+		margin-bottom: 50px;
+	}
+	.box-1.sub {
+		margin-top: 0;
+	}
+		.box-1.sub .fa {
+			margin-top: 5px;
+			font-size: 60px;
+		}
+	.box-1.last, 
+	.box-1.sub, 
+	.box-1.sub .fa {
+		margin-bottom: 0;
+	}
+
+	.box-4 h5 {
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+
+/* Box Styles Starts */
+
+	.box-6 {
+		padding: 20px;
+	}
+		.box-6, 
+		.box-6 h5 {
+			text-align: center;			
+		}
+		.box-6 .fa {
+			font-size: 36px;
+		}
+		.box-6 h5 {
+			font-size: 18px;
+		}
+		.box-6 h5.text-left, 
+		.box-6 h5.text-right {
+			float: none!important;
+		}
+			.box-6 h5:after {
+				display: none;
+			}
+
+	.bio-box-1 {
+		margin-top: 55px;
+	}
+	.bio-box-1.first {
+		margin-top: 20px;
+	}
+		.bio-box-1 .bio-sm-links {
+			margin-top: 20px;
+		}
+	.bio-box-1.two-col {
+		margin-top: 10px;
+		margin-bottom: 45px;
+	}
+		.bio-box-1.two-col h5 {
+			margin-top: 30px;
+		}		
+
+/* FAQ's Accordions Styles Starts */
+
+	#accordion-faqs h5.card-title {
+		font-size: 20px;
+	}	
+
+/* List Styles Starts */
+
+	.list-style-1 li {
+		margin-top: 30px;
+	}
+	.list-style-1 li .fa {
+		margin-top: 10px;
+		margin-right: 15px;
+		width: 70px;
+		height: 70px;
+		line-height: 70px;
+		font-size: 40px;
+	}
+
+	.list-style-2 {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.list-style-2 li {
+		margin-top: 20px;
+	}	
+
+/* Generic Styles Starts */
+
+	.img-center-sm {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+}
+
+/* Medium devices - md (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) { 	
+
+/* Heading Styles Starts */
+
+	.main-heading-1.text-center-md::after, 
+	.sub-heading-1.text-center-md::after, 
+	.section-heading-1.text-center-md:after {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.main-header.one .fa.float-md-right {
+		margin-left: 15px;
+		margin-right: 0;
+	}	
+
+/* Top Bar Styles Starts */
+
+	.top-bar.dark {
+		font-size: 13px;
+	}
+
+/* Header Styles Starts */
+
+	.main-header .fa {
+		margin-top: 5px;
+		margin-right: 10px;
+		width: 35px;
+		height: 35px;
+		line-height: 35px;
+		font-size: 22px;
+	}
+	.main-header h6 {
+		font-size: 16px;
+	}
+
+/* Main Menu Styles Starts */
+		
+	.main-menu .navbar-collapse {
+		padding-left: 0;
+		padding-right: 0;
+	}	
+		.main-menu .navbar-nav > .nav-item > a {
+			padding-left: 0;
+			padding-right: 15px;
+			font-size: 15px;
+		}
+	.main-menu .dropdown:hover .dropdown-menu {
+		display: block;
+	}	
+	
+/* Main Slider Styles Starts */
+
+	#main-slider .carousel-caption {
+		top: 14%;
+		left: 15%;
+	}
+	#main-slider .carousel-caption.inverse {
+		right: 15%;
+	}
+		#main-slider .carousel-caption h2 {
+			margin-top: 0;
+			margin-bottom: 25px;
+			font-size: 30px;
+		}
+		#main-slider .carousel-caption h5 {
+			margin-bottom: 15px;
+			font-size: 20px;
+		}
+		#main-slider .carousel-caption .btn {
+			margin-top: 10px;
+			padding: 8px 30px;
+			font-size: 16px;
+		}
+	#main-slider .carousel-control-prev, 
+	#main-slider .carousel-control-next {
+		padding: 8px 12px;
+		top: 41%;
+		font-size: 18px;
+	}
+	#main-slider .carousel-control-prev {
+		left: 4%;
+	}
+	#main-slider .carousel-control-next {
+		right: 4%;
+	}
+
+/* Full Header Styles Starts */
+
+	.header-full #nav .navbar-right {		
+	}
+		.header-parallax .main-menu .navbar-nav > li > a, 
+		.header-full .main-menu .navbar-nav > li > a {
+			padding-left: 9px;
+			padding-right: 9px;
+			font-size: 15px;
+		}
+		
+		.header-parallax #main-slider .carousel-control-prev, 
+		.header-full #main-slider .carousel-control-prev {
+			left: 0;
+		}
+		.header-parallax #main-slider .carousel-control-next, 
+		.header-full #main-slider .carousel-control-next {
+			right: 0;
+		}
+		
+/* Main Banner Styles Starts */
+
+	.main-banner {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+		.main-banner h2 {
+			font-size: 54px;
+		}	
+	
+/* Section Info Styles Starts */
+
+	.section-info.sub .stats-info {
+		margin-bottom: 30px;
+	}
+		.section-info.sub .stats-info > li {
+			margin-bottom: 30px;
+		}
+		.stats-info h3 {
+			font-size: 40px;
+		}
+		.stats-info h3 + h4 {
+			margin-top: 10px;
+			font-size: 28px;
+		}
+
+/* Section Testimonials Styles Starts */
+
+	.testimonial-box li + li {
+		margin-left: 0;
+	}
+		.testimonial-box li img.circle {
+			margin-bottom: 20px;
+			width: 40px;
+			height: 40px;
+		}
+	
+/* Section Financial Styles Starts */
+
+	.section-financial-list li {
+		margin-top: 30px;
+	}
+		.section-financial-list li .fa {
+			margin-top: 10px;
+			margin-bottom: 140px;
+			margin-right: 20px;
+			font-size: 60px;
+		}
+		.section-financial-list li h5::after {
+			margin-left: 26%;
+		}
+
+/* Section Services Starts */
+
+	.section-services {
+		background-image: url(../images/section-5-bg.jpg);
+	}		
+	
+/* Form Styles Starts */
+
+	.search-form .form-control {
+		min-width: 300px;		
+	}	
+
+/* Gallery Page Styles Starts */
+
+	ul#gallery-grid li {
+		min-height: 236px;
+		height: auto !important;
+		height: 236px;
+	}	
+		ul#gallery-grid .hover-content h6 {
+			margin-top: 17%;
+		}
+			ul#gallery-grid .hover-content h6::after {
+				margin-bottom: 15px;
+			}
+		ul#gallery-grid .hover-content p {
+			margin-bottom: 18px;
+		}
+	
+/* Blog Post Carousel Styles Starts */
+
+	#blog-post-carousel .owl-controls .owl-buttons .owl-prev, 
+	#blog-post-carousel .owl-controls .owl-buttons .owl-next {
+		font-size: 30px;
+	}		
+	
+/* List Styles Starts */
+
+	.address-list li {
+		font-size: 14px;
+		line-height: 24px;
+	}
+		.address-list li .fa {
+			margin-right: 5px;
+			font-size: 14px;
+		}
+		.address-list li .fa.pull-left {
+			margin-right: 1px;
+		}
+		.address-list li span {
+			margin-left: 0;
+		}
+	
+/* Box Styles Starts */
+
+	.box-6 {
+		padding: 20px;
+	}
+		.box-6 .fa {
+			font-size: 38px;
+		}
+		.box-6 h5 {
+			font-size: 20px;
+			line-height: 30px;
+		}
+			.box-6 h5:after {
+				display: none;
+			}		
+
+/* FAQ's Accordions Styles Starts */
+
+	#accordion-faqs h5.card-title {
+		font-size: 20px;
+	}
+
+/* Newsletter Bar Styles Starts */
+
+	.newsletter-bar h6 {
+		margin-top: 20px;
+		margin-bottom: 30px;
+	}
+
+/* Footer Top 1 Section Styles Starts */
+
+	.foot-col-1 ul > li {
+		word-wrap: break-word;
+	}		
+	
+/* Generic Styles Starts */
+
+	.img-center-md {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+}
+
+/* Large devices - lg (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) { 
+
+/* Heading Styles Starts */
+
+	.main-heading-1.text-center-lg::after, 
+	.sub-heading-1.text-center-lg::after, 
+	.section-heading-1.text-center-lg:after {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.main-header.one .fa.float-md-right {
+		margin-left: 15px;
+		margin-right: 0;
+	}	
+
+/* Main Menu Styles Starts */
+		
+	.main-menu .navbar-collapse {
+		padding-left: 0;
+		padding-right: 0;
+	}	
+		.main-menu .navbar-nav.navbar-right > li > a {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	.main-menu .dropdown:hover .dropdown-menu {
+		display: block;
+	}
+
+/* Main Slider Styles Starts */
+
+	#main-slider .carousel-caption {
+		top: 16%;
+		left: 13%;
+	}
+	#main-slider .carousel-caption.inverse {
+		right: 13%;
+	}
+		#main-slider .carousel-caption h2 {
+			margin-top: 0;
+			margin-bottom: 32px;
+			font-size: 50px;
+		}	
+	#main-slider .carousel-control {
+		padding: 10px;
+		top: 42%;
+		font-size: 22px;
+	}
+	#main-slider .carousel-control-prev {
+		left: 4%;
+	}
+	#main-slider .carousel-control-next {
+		right: 4%;
+	}
+
+/* Full Header Styles Starts */
+
+	.header-parallax #main-slider .carousel-control-prev, 
+	.header-full #main-slider .carousel-control-prev {
+		left: 0;
+	}
+	.header-parallax #main-slider .carousel-control-next, 
+	.header-full #main-slider .carousel-control-next {
+		right: 0;
+	}
+
+/* Section Financial Styles Starts */
+
+	.section-financial-list li .fa {
+		margin-bottom: 140px;
+	}
+	.section-financial-list li h5::after {
+		margin-left: 28%;
+	}
+
+/* Section Why Us Starts */
+
+	.why-us-item .overlay .inner {
+		padding: 15px 30px;
+		font-family: 12px;
+		line-height: 20px;
+	}	
+		.why-us-item .overlay .inner h5 {
+			margin-bottom: 15px;
+			font-size: 18px;
+		}
+			.why-us-item .overlay .inner h5 .fa {
+				font-size: 20px;
+			}
+		.why-us-item .overlay .inner p {
+			margin-bottom: 10px;
+		}
+		.why-us-item .overlay .inner .read-more {
+			font-size: 15px;
+			font-weight: 500;
+		}
+	
+/* Gallery Page Styles Starts */
+
+	ul#gallery-grid li {
+		min-height: 201px;
+		height: auto !important;
+		height: 201px;
+	}
+		ul#gallery-grid .hover-content h6 { 
+			margin-top: 14%;
+			margin-bottom: 0;
+		}
+			ul#gallery-grid .hover-content h6::after {
+				margin-bottom: 10px;
+			}
+		ul#gallery-grid .hover-content p {
+			margin-bottom: 15px;
+		}
+
+/* Footer Top Section Styles Starts */
+
+	.footer-top h5 {
+		font-size: 22px;
+	}	
+		.foot-sm-links {
+			margin-left: -4px;
+		}
+			.foot-sm-links li {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			
+		.foot-list-style-1 li {
+			font-size: 16px;
+		}
+
+/* Footer Top 1 Section Styles Starts */
+
+	.foot-col-1 ul > li {
+		word-wrap: break-word;
+	}		
+	
+/* Form Styles Starts */
+
+	.search-form .form-control {
+		min-width: 400px;		
+	}		
+	
+/* List Styles Starts */
+
+	.address-list li {
+		font-size: 16px;
+		line-height: 26px;
+	}
+		.address-list li .fa {
+			font-size: 18px;
+		}
+	
+/* Box Styles Starts */
+
+	.box-6 {
+		padding: 20px;
+	}
+		.box-6 .fa {
+			font-size: 42px;
+		}
+		.box-6 h5 {
+			font-size: 22px;
+			line-height: 32px;
+		}
+			.box-6 h5:after {
+				display: none;
+			}	
+
+/* Generic Styles Starts */
+
+	.img-center-lg {
+		margin-left: auto;
+		margin-right: auto;
+	}	
+
+}
+
+/* Extra large devices - xl (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
+/* Heading Styles Starts */
+
+	.main-heading-1.text-center-xl::after, 
+	.sub-heading-1.text-center-xl::after, 
+	.section-heading-1.text-center:after {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+/* Main Menu Styles Starts */
+		
+	.main-menu .navbar-collapse {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.main-menu.one h6 { 
+		margin-left: 10px;
+	}
+	.main-menu .dropdown:hover .dropdown-menu {
+		display: block;
+	}
+
+/* Main Slider Styles Starts */
+
+	#main-slider.one .carousel-caption {
+		top: 25%;
+		text-align: center;
+	}		
+
+/* Form Styles Starts */
+
+	.search-form .form-control {
+		min-width: 400px;		
+	}
+
+/* Gallery Page Styles Starts */
+
+	ul#gallery-grid li {
+		min-height: 246px;
+		height: auto !important;
+		height: 246px;
+	}		
+
+}

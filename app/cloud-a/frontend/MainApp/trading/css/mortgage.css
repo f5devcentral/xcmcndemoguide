@@ -1,0 +1,416 @@
+.mk-hidden {
+    display: none !important;
+}
+
+.mk-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+.mk-vcenter {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+#mk-container {
+    background-image: url("/trading/img/mortgage-calc-bk.png");
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#mk-res {
+    position: relative;
+    width: 703px;
+    height: 410px;
+    background-color: white;
+    border-radius: 7px;
+    top: 51px;
+    left: 87px;
+}
+
+#res-title {
+    position: relative;
+    text-align: center;
+    top: 14px;
+}
+
+#res-table-container {
+    font-size: 17px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#res-table {
+    position: relative;
+    width: 100%;
+}
+
+.res-table-number {
+    text-align: right;
+}
+
+.res-table-title {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.res-table-row {
+    border-bottom: 1px solid lightgray;
+}
+
+.res-table-total {
+    font-weight: bold;
+}
+
+#res-controls {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-top: 22px;
+}
+
+#res-recalculate-button {
+    display: block;
+    background-color: #1745B5;
+    color:white;
+    text-align: center;
+    cursor: pointer;
+    height: 47px;
+    border-radius: 7px;
+    width: 110px;
+    margin: auto;
+    line-height: 47px;
+}
+
+#res-monthly-payment {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
+#mk-coming-soon {
+    height: 100%;
+    width: 100%;
+}
+
+#mk-waiting {
+    display: block;
+    position: relative;
+    margin: auto;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+#table-coming-soon {
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #F2F4F8;
+    font-weight: bold;
+}
+
+.cell-coming-soon {
+    font-size: 144px;
+    text-transform: capitalize;
+}
+
+.cell-timer-inscription {
+    color: #DDE2EC;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.cell-timer {
+    font-size: 96px;
+}
+
+.cell-numbers {
+    width: 180px;
+    text-align: center;
+}
+
+#mk-calc {
+    display: flex;
+    position: relative;
+    width: 703px;
+    height: 356px;
+    background-color: white;
+    border-radius: 7px;
+    top: 51px;
+    left: 87px;
+}
+
+#loan-amount {
+    padding: 30px;
+    flex-grow: 1;
+}
+#mortgage-details {
+    padding: 30px;
+    flex-grow: 1;
+}
+
+.calc-title {
+    font-size: 22px;
+    color: #313B47;
+}
+
+.calc-note {
+    font-size: 11px;
+    color: #1745B5;
+    margin-top: 11px;
+}
+
+.mk-gray-field {
+    background-color: #F2F4F8;
+    height: 47px;
+    display: flex;
+    border-radius: 7px;
+    margin-top: 7px;
+    width: 281px;
+}
+
+.mk-gray-field input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 17px;
+}
+
+.mk-left-round {
+    border-radius: 7px 0px 0px 7px;
+}
+
+.mk-left-border {
+    border-left: 1px solid white;
+}
+
+.mk-units {
+    width: 39px;
+    background-color: #DDE2EC;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+}
+
+.mk-selected-units {
+    color: black;
+}
+
+.mk-additional-gap {
+    margin-top: 28px;
+}
+
+.mk-loan-amount {
+    color: #4ECC48;
+    font-size: 22px;
+    margin-top: 7px;
+}
+
+.mk-blue-button {
+    background-color: #1745B5;
+    color:white;
+    text-align: center;
+    cursor: pointer;
+    height: 47px;
+    border-radius: 7px;
+}
+
+mk-term-dd {
+    width: 100% !important;
+}
+
+.mk-selected-item {
+    padding-left: 14px;
+    line-height: 47px;
+    font-size: 17px;
+    white-space: nowrap ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 242px;
+}
+
+.mk-dropdown-chevron {
+    width: 39px;
+    background-color: #DDE2EC;
+    margin-left: auto;
+    border-radius: 0px 7px 7px 0px;
+}
+
+#mk-options {
+    font-size: 17px;
+    line-height: 22px;
+}
+
+#selected-item {
+    white-space: nowrap ;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 7px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.lds-grid {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-grid div {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    animation: lds-grid 1.2s linear infinite;
+}
+.lds-grid div:nth-child(1) {
+    top: 8px;
+    left: 8px;
+    animation-delay: 0s;
+}
+.lds-grid div:nth-child(2) {
+    top: 8px;
+    left: 32px;
+    animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(3) {
+    top: 8px;
+    left: 56px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(4) {
+    top: 32px;
+    left: 8px;
+    animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(5) {
+    top: 32px;
+    left: 32px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(6) {
+    top: 32px;
+    left: 56px;
+    animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(7) {
+    top: 56px;
+    left: 8px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(8) {
+    top: 56px;
+    left: 32px;
+    animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(9) {
+    top: 56px;
+    left: 56px;
+    animation-delay: -1.6s;
+}
+@keyframes lds-grid {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+#mk-title {
+    position: absolute;
+    color: white;
+    font-size: 62px;
+    width: 1000px;
+    left: 720px;
+    top: 20px;
+}
+
+#mk-apply-now {
+    position: absolute;
+    width: 320px;
+    height: 94px;
+    background-color: #1745B5;
+    border-radius: 5px;
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    line-height: 94px;
+    cursor: pointer;
+    left: 650px;
+    top: 400px;
+}
+
+#mk-bottom-bar {
+    left: -87px;
+    top: calc(100vh - 238px - 105px);
+    position: absolute;
+    width: 100vw;
+    min-width: 1300px;
+    height: 238px;
+    background-color: #293145;
+    padding: 50px;
+}
+
+#mk-table-bottom tr td {
+    padding-left: 50px;
+    padding-right: 50px;
+    vertical-align: top;
+}
+
+.mk-white-note {
+    padding-top: 40px;
+    color: white;
+}
+
+.mk-white-btn {
+    background-color: white;
+    color: rgba(23, 69, 181, 1);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#mk-arcadia-partner {
+    margin-bottom: 50px;
+}

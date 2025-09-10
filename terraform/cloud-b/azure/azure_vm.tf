@@ -67,8 +67,8 @@ resource "azurerm_virtual_machine" "vm" {
 
   storage_image_reference {
     publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04-lts-gen2"
+    offer     = "ubuntu-24_04-lts"
+    sku       = "server"
     version   = "latest"
   }
 
@@ -90,8 +90,8 @@ resource "azurerm_virtual_machine" "vm" {
       curl -fsSL https://get.docker.com -o get-docker.sh
       sh get-docker.sh
 
-      git clone https://github.com/yoctoalex/arcadia-finance-mcn.git
-      cd arcadia-finance-mcn/cloud-b
+      git clone https://github.com/f5devcentral/xcmcndemoguide.git
+      cd xcmcndemoguide/app/cloud-b
       docker compose up -d
     EOL
   }

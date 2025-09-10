@@ -1,0 +1,42 @@
+[
+{
+	"name":"Vincent",
+	"amount":"€510",
+	"date":"12.12.2018"
+},
+{
+	"name":"Bart",
+	"amount":"£480",
+	"date":"12.12.2018"
+},
+{
+	"name":"Or",
+	"amount":"€740",
+	"date":"11.12.2018"
+},
+{	
+	"name":"Phillipe",
+	"amount":"£200",
+	"date":"10.12.2018"
+},
+{
+	"name":"Alfredo",
+	"amount":"€140",
+	"date":"10.12.2018"
+},
+{
+	"name":"Sven",
+	"amount":"£300",
+	"date":"09.12.2018"
+},
+{	
+	"name":"Or",
+	"amount":"€160",
+	"date":"09.12.2018"
+},
+{
+	"name":"Bart",
+	"amount":"£70",
+	"date":"02.12.2018"
+}
+]

@@ -1,0 +1,189 @@
+swagger: '2.0'
+info:
+  description: A Simple API
+  title: F5Forum
+  version: v1
+host: f5forum
+schemes:
+  - https
+basePath: /
+paths:
+  /transfer_money.php:
+    post:
+      summary: Transfer money to a friend
+      parameters:
+      - in: "body"
+        name: "body"
+#        description: "Send money from an account to a selected friend"
+        required: true
+        schema:
+           $ref: "#/definitions/transfer_request"
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/transfer_response'
+  /buy_stocks.php:
+    post:
+      summary: Add stocks to your portfolio
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+           $ref: "#/definitions/stocks_request"
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/stocks_response'
+  /sell_stocks.php:
+    post:
+      summary: Sell stocks that you own
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+           $ref: "#/definitions/stocks_request"
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/stocks_response'
+  /get_transactions.php:
+    get:
+      summary: Get the latests transactions that have happened
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+           $ref: "#/definitions/stocks_request"
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/transactions'
+  /get_transfers.php:
+    get:
+      summary: Retrive the list of accounts with the latest balances
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/transfers'
+definitions:
+  transfer_response:
+    type: object
+    properties:
+      amount:
+        type: integer
+        description: Amount to be transfered.
+      name:
+        type: string
+        description: Name of the Friend that received the money
+      status:
+        type: string
+        description: Status of the transfer (success or fail)
+      msg:
+        type: string
+        description: Message of the transaction
+      currency:
+        type: string
+        description: Type of currency (Euro or British Pound) selected.        
+      transid:
+        type: integer
+        description: Unique transactions ID.  
+  transfer_request:
+    type: object
+    properties:
+      account:
+        type: integer
+        description: Selected account number that the transfer will take place.
+      amount:
+        type: integer
+        description: Amount to be transfered.
+      currency:
+        type: string
+        description: Type of currency (Euro or British Pound) selected.
+      friend:
+        type: string
+        description: Name of the Friend that will be receiving the money
+  stocks_request:
+    type: object
+    properties:
+      action:
+        type: string
+        description: Buy or Sell?
+      company:
+        type: string
+        description: Which stocks should be bought.
+      qty:
+        type: integer
+        description: Number of stocks to be bought
+      stock_price:
+        type: integer
+        description: Price of the stocks that are being bought
+      trans_value:
+        type: integer
+        description: Total value of the transactions
+  stocks_response:
+    type: object
+    properties:
+      status:
+        type: string
+        description: If the transaction is successfull or not?
+      name:
+        type: string
+        description: Name of the company that stocks have been bought.
+      qty:
+        type: integer
+        description: Number of stocks that have been bought
+      transid:
+        type: integer
+        description: Unique transactions ID.
+      amount:
+        type: integer
+        description: Amount of the transaction.
+  transfers:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the friend that recevied the money.  
+      amount:
+        type: string
+        description: Amount of money.
+      date:
+        type: string
+        description: date of transaction.
+  transactions:
+    type: object
+    properties:
+      date:
+        type: string
+        description: Date of the transactions
+      price:
+        type: string
+        description: Amount in the account.
+      name:
+        type: string
+        description: Name of the company that stocks have been bought.   
+      qty:
+        type: integer
+        description: Number of stocks that have been bought        
+      symbol:
+        type: string
+      action:
+        type: string

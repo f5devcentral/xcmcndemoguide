@@ -18,7 +18,7 @@ variable "api_ca_cert" {
 
 variable "api_url" {
   type = string
-  default = "https://console.ves.volterra.io/api"
+  default = "https://your_xc_tenant.console.ves.volterra.io/api"
 }
 
 variable "api_p12_file" {

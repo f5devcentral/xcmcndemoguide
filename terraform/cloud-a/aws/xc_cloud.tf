@@ -32,7 +32,6 @@ resource "volterra_aws_vpc_site" "aws_vpc_site" {
     aws_certified_hw = "aws-byol-multi-nic-voltmesh"
     az_nodes {
       aws_az_name = var.aws_availability_zones[0]
-      disk_size   = 100
       inside_subnet {
         existing_subnet_id = element(aws_subnet.private_subnet.*.id, 0)
       }
@@ -57,6 +56,7 @@ resource "volterra_aws_vpc_site" "aws_vpc_site" {
     ignore_changes = [labels]
   }
 
+  manual_routing           = false
   ssh_key                  = tls_private_key.key.public_key_openssh
   direct_connect_disabled  = true
   egress_gateway_default   = true
@@ -138,15 +138,3 @@ resource "aws_route" "private_xc_gateway" {
   network_interface_id              = data.aws_network_interface.xc_private_nic.id
 }
 
-output "xc_node_private_ip" {
-  value = data.aws_network_interface.xc_private_nic.private_ip
-}
-
-output "xc_private_key" {
-  value     = tls_private_key.key.private_key_pem
-  sensitive = true
-}
-
-output "xc_public_key" {
-  value = tls_private_key.key.public_key_openssh
-}
