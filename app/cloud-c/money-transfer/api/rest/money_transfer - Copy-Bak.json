@@ -1,0 +1,50 @@
+[
+{
+	"name":"Vincent",
+	"amount":"510",
+	"currency":"Pound",
+	"date":"12.12.2018"
+},
+{
+	"name":"Bart",
+	"amount":"480",
+	"currency":"Euro",
+	"date":"12.12.2018"
+},
+{
+	"name":"Or",
+	"amount":"740",
+	"currency":"Pound",
+	"date":"11.12.2018"
+},
+{	
+	"name":"Phillipe",
+	"amount":"200",
+	"currency":"Euro",
+	"date":"10.12.2018"
+},
+{
+	"name":"Alfredo",
+	"amount":"140",
+	"currency":"Pound",
+	"date":"10.12.2018"
+},
+{
+	"name":"Sven",
+	"amount":"300",
+	"currency":"Euro",
+	"date":"09.12.2018"
+},
+{	
+	"name":"Or",
+	"amount":"160",
+	"currency":"Pound",
+	"date":"09.12.2018"
+},
+{
+	"name":"Bart",
+	"amount":"70",
+	"currency":"Euro",
+	"date":"02.12.2018"
+}
+]

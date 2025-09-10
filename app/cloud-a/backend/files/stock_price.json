@@ -1,0 +1,26 @@
+{
+"FFIV":{
+	"name":"F5 Networks",
+	"symbol":"FFIV",
+	"stock_price":"165.78",
+	"diff":"2.48"
+}, 
+"MSFT":{
+	"name":"Microsoft",
+	"symbol":"MSFT",
+	"stock_price":"106.25",
+	"diff":"2.12"
+}, 
+"AMZN":{
+	"name":"Amazon",
+	"symbol":"AMZN",
+	"stock_price":"1590.22",
+	"diff":"1.93"
+}, 
+"GOOGL":{
+	"name":"Google",
+	"symbol":"GOOGL",
+	"stock_price":"1051.98",
+	"diff":"1.67"
+}
+}

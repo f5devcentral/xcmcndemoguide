@@ -1,0 +1,26 @@
+{
+"FFIV":{
+	"name":"F5 Networks",
+	"symbol":"FFIV",
+	"qty":"325",
+	"value":"53560"
+}, 
+"MSFT":{
+	"name":"Microsoft",
+	"symbol":"MSFT",
+	"qty":"676",
+	"value":"71680"
+}, 
+"AMZN":{
+	"name":"Amazon",
+	"symbol":"AMZN",
+	"qty":"26",
+	"value":"40340"
+}, 
+"GOOGL":{
+	"name":"Google",
+	"symbol":"GOOGL",
+	"qty":"21",
+	"value":"21160"
+}
+}

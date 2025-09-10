@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  fastcgi:
+    build: 
+      context: ./phpfpm
+    volumes:
+      - ./refer-a-friend/app3/:/usr/share/nginx/html/friends/app3/
+    restart: "unless-stopped"
+  refer-a-friend:
+    build: 
+      context: ./refer-a-friend
+    volumes:
+      - ./refer-a-friend/app3/:/usr/share/nginx/html/friends/app3/
+    ports: 
+      - 80:8080
+    restart: "unless-stopped"

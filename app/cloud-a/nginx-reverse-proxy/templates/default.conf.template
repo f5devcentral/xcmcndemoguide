@@ -1,0 +1,44 @@
+upstream mainapp {
+        server frontend:8080;
+}
+
+upstream backend {
+        server backend:8080;
+}
+
+server {
+    listen 8080 default_server;
+
+    client_max_body_size 100M;
+    client_body_buffer_size     32k;
+    client_header_buffer_size   8k;
+    large_client_header_buffers 4 32k;
+
+    access_log  /dev/stdout  main;
+
+    location / {
+        proxy_pass http://mainapp/;
+    }
+
+    location /files {
+        proxy_pass http://backend/files/;
+    }
+
+    location /api {
+        resolver 127.0.0.11;
+        set $transfer 192.168.100.100;
+        proxy_pass http://$transfer;
+    }
+
+    location /app3 {
+        resolver 127.0.0.11;
+        set $friend friends.${USER_ZONE};
+        proxy_pass http://$friend;
+    }
+
+    # location /mortgage {
+    #     resolver 127.0.0.11;
+    #     set $mortgage mortgage.${USER_ZONE}:8080;
+    #     proxy_pass http://$mortgage;
+    # }
+}

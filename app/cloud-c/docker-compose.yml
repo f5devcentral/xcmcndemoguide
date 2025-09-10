@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  fastcgi:
+    build: 
+      context: ./phpfpm
+    volumes:
+      - ./money-transfer/api/:/usr/share/nginx/html/transfer/api/
+    restart: "unless-stopped"
+  transfer:
+    build: 
+      context: ./money-transfer
+    volumes:
+      - ./money-transfer/api/:/usr/share/nginx/html/transfer/api/
+    ports: 
+      - 80:8080
+    restart: "unless-stopped"

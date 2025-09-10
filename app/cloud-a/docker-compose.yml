@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  fastcgi:
+    build: 
+      context: ./phpfpm
+    volumes:
+      - ./frontend/MainApp/:/usr/share/nginx/html/MainApp/
+      - ./backend/files/:/usr/share/nginx/html/backend/files/
+    restart: "unless-stopped"
+  frontend:
+    build: 
+      context: ./frontend
+    volumes:
+      - ./frontend/MainApp/:/usr/share/nginx/html/MainApp/
+    restart: "unless-stopped"
+    depends_on:
+      - fastcgi
+  backend:
+    build: 
+      context: ./backend
+    volumes:
+      - ./backend/files/:/usr/share/nginx/html/backend/files/
+    restart: "unless-stopped"
+    depends_on:
+      - fastcgi
+  reverse-proxy:
+    build:
+      context: ./nginx-reverse-proxy
+    ports:
+      - 80:8080
+    restart: "unless-stopped"
+    environment:
+      USER_ZONE: user_zone.f5-demo.com
+    depends_on:
+      - frontend
+      - backend
