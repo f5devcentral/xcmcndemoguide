@@ -1,0 +1,6 @@
+api_url                          = "https://your_xc_tenant.console.ves.volterra.io/api"
+azure_rg_location                = "centralus"
+azure_subscription_id            = "12345678-1234-1234-1234-123456789012"
+azure_subscription_tenant_id     = "12345678-1234-1234-1234-123456789012"
+azure_service_principal_password = "your_azure_service_principal_password"
+azure_service_principal_appid    = "your_azure_service_principal_appid"

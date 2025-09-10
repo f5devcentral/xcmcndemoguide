@@ -31,27 +31,26 @@ resource "volterra_cloud_credentials" "azure_cred" {
 }
 
 resource "volterra_azure_vnet_site" "azure_vnet_site" {
-  name      = local.environment
-  namespace = "system"
-
+  name                    = local.environment
+  namespace               = "system"
+  azure_region            = azurerm_resource_group.rg.location
+  resource_group          = "${azurerm_resource_group.rg.name}-xc"
+  logs_streaming_disabled = true
   default_blocked_services = true
+  disk_size                = 80
+  machine_type             = var.azure_xc_machine_type
+  ssh_key                  = tls_private_key.key.public_key_openssh
+  no_worker_nodes          = true
 
   azure_cred {
     name      = volterra_cloud_credentials.azure_cred.name
     namespace = "system"
   }
-  logs_streaming_disabled = true
-  azure_region   = azurerm_resource_group.rg.location
-  resource_group = "${azurerm_resource_group.rg.name}-xc"
-
-  disk_size = 80
-  machine_type = var.azure_xc_machine_type
 
   ingress_egress_gw {
     azure_certified_hw = "azure-byol-multi-nic-voltmesh"
     az_nodes {
       azure_az  = "1"
-      disk_size = "80"
       inside_subnet {
         subnet {
           subnet_name         = azurerm_subnet.private_subnet.name
@@ -81,8 +80,14 @@ resource "volterra_azure_vnet_site" "azure_vnet_site" {
   lifecycle {
     ignore_changes = [labels]
   }
+}
 
-  ssh_key = tls_private_key.key.public_key_openssh
+data "azurerm_network_interface" "xc_private_nic" {
+  name                = "master-0-sli"
+  resource_group_name = "${azurerm_resource_group.rg.name}-xc"
+	depends_on = [
+   	volterra_tf_params_action.action_apply
+  ]
 }
 
 resource "volterra_cloud_site_labels" "labels" {
@@ -101,13 +106,4 @@ resource "volterra_tf_params_action" "action_apply" {
   depends_on = [
     volterra_azure_vnet_site.azure_vnet_site
   ]
-}
-
-output "xc_private_key" {
-  value     = tls_private_key.key.private_key_pem
-  sensitive = true
-}
-
-output "xc_public_key" {
-  value = tls_private_key.key.public_key_openssh
 }
