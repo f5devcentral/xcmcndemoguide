@@ -196,7 +196,7 @@ Give this Load Balancer a name. For this use case, we will use **friends-module*
 
 ![Cloud B LB Metadata](assets/cloud_b_lb_metadata.png)
 
-Now we need to provide a domain name for our workload. In this use case, we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select the Load Balancer type - **HTTP** and check off the box to enable automatic managing of DNS records. Make sure port **80** is specified.
+Now we need to provide a domain name for our workload. In this use case, we will specify **friends.yawning-white-antelope.github.securelab.online**. Then open the drop-down menu to select **HTTP** Load Balancer type. Make sure port **80** is specified.
 
 ![Cloud B LB DNS](assets/cloud_b_lb_dns.png)
 
@@ -342,7 +342,7 @@ Apply the updated configuration to the Site by clicking **Apply**.
 
 ![Cloud C Azure 7](assets/cloud_c_azure_7.png)
 
-Take a look at the configuration and complete the updating by clicking **Add Azure VNET Site**.
+Take a look at the configuration and complete the updating by clicking **Save Azure VNET Site**.
 
 ![Cloud C Azure 8](assets/cloud_c_azure_8.png)
 
